@@ -345,14 +345,14 @@ function drawGraphic() {
         return y(d.category) + y.bandwidth()
       })
       .attr('dx', function(d) {
-        return (x(d.change) - x(0)) > chart_width / 10 ? -10 : 10
+        return (x(d.change) - x(0)) > chart_width / 8 ? -10 : 10
       })
       .attr('dy', -12)
       .attr('text-anchor', function(d) {
-        return (x(d.change) - x(0)) > chart_width / 10 ? "end" : "start"
+        return (x(d.change) - x(0)) > chart_width / 8 ? "end" : "start"
       })
       .attr('fill', function(d) {
-        return (x(d.change) - x(0)) > chart_width / 10 ? "#fff" : "#206095";
+        return (x(d.change) - x(0)) > chart_width / 8 ? "#fff" : "#206095";
       })
       .text(function(d) {
         return "£" + d3.format(",.2f")(d.change)
