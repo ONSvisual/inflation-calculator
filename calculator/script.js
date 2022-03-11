@@ -24,6 +24,7 @@ function drawGraphic() {
       size = "lg";
     }
     lineMargin = dvc.lineChartMargin[size];
+    barMargins = dvc.barChartMargin[size];
 
 
 
@@ -194,13 +195,13 @@ function drawGraphic() {
 
     overall_inflation = []
     for (i = 0; i < data["foodhotdrinks"].length; i++) {
-      var total = 0
-      var total_change = 0
-      var pir = 0
+      var total = 0;
+      var total_change = 0;
+      var pir = 0;
       Object.keys(category_data).forEach(function(category) {
-        total = total + category_data[category][i].input
-        total_change = total_change + category_data[category][i].change
-      })
+        total = total + category_data[category][i].input;
+        total_change = total_change + category_data[category][i].change;
+      });
       Object.keys(category_data).forEach(function(category) {
         category_data[category][i].weight = category_data[category][i].input / total
         category_data[category][i].weighted_index = category_data[category][i].inflation_rate * category_data[category][i].weight
@@ -211,124 +212,113 @@ function drawGraphic() {
           total: total,
           total_change: total_change,
           pir: pir
-        }
-      })
+        };
+      });
     }
-    // console.log(overall_inflation)
-    // console.log(category_data)
-    // drawBarChart();
-    // })
 
-    d3.select("#personalInflation").text(d3.format(".1f")(overall_inflation[0].pir) + "%")
-    d3.select("#inflationDifference").text(d3.format(".1f")(overall_inflation[0].pir - cpih[cpih.length - 1].pir) + "%")
+
+    d3.select("#personalInflation").text(d3.format(".1f")(overall_inflation[0].pir) + "%");
+    d3.select("#inflationDifference").text(d3.format(".1f")(overall_inflation[0].pir - cpih[cpih.length - 1].pir) + "%");
     d3.select("#overunder").text(function() {
-      return overall_inflation[0].pir - cpih[cpih.length - 1].pir > 0 ? "over" : "under"
-    })
-    d3.select("#currentInflationRate").text(d3.format(".1f")(cpih[cpih.length - 1].pir) + "%")
+      return overall_inflation[0].pir - cpih[cpih.length - 1].pir > 0 ? "over" : "under";
+    });
+    d3.select("#currentInflationRate").text(d3.format(".1f")(cpih[cpih.length - 1].pir) + "%");
 
-    d3.select("#increaseMonthlySpend").text("£" + d3.format(".2f")(overall_inflation[0].total_change))
-    d3.selectAll(".dateOneYearPrior").text(d3.timeFormat("%b %Y")(overall_inflation[12].date))
-    d3.selectAll(".currentDate").text(d3.timeFormat("%b %Y")(overall_inflation[0].date))
+    d3.select("#increaseMonthlySpend").text("£" + d3.format(".2f")(overall_inflation[0].total_change));
+    d3.selectAll(".dateOneYearPrior").text(d3.timeFormat("%b %Y")(overall_inflation[12].date));
+    d3.selectAll(".currentDate").text(d3.timeFormat("%b %Y")(overall_inflation[0].date));
 
-    drawLineChart(overall_inflation, cpih)
+    drawLineChart(overall_inflation, cpih);
 
-    categoryByWeight = []
-
-    console.log(category_data)
-    console.log(inflation_data)
+    categoryByWeight = [];
 
     Object.keys(category_data).forEach(function(category) {
-      var foo = category_data[category][0]
+      var foo = category_data[category][0];
       foo.category = inflation_data.filter(function(d) {
-        return d.cat_id == category
-      })[0].category
-      foo.cat_id = category
-      categoryByWeight.push(foo)
-    })
+        return d.cat_id == category;
+      })[0].category;
+      foo.cat_id = category;
+      categoryByWeight.push(foo);
+    });
     categoryByWeight.sort(function(a, b) {
       return b.weight - a.weight;
-    })
+    });
 
-    d3.select("#biggestCat").text(categoryByWeight[0].category)
-    d3.select("#propBiggestCat").text(d3.format(".0f")(categoryByWeight[0].weight * 100) + "%")
+    d3.select("#biggestCat").text(categoryByWeight[0].category);
+    d3.select("#propBiggestCat").text(d3.format(".0f")(categoryByWeight[0].weight * 100) + "%");
 
     d3.select("#avgPropBiggestCat").text(inflation_data.filter(function(d) {
-      return d.cat_id == categoryByWeight[0].cat_id
-    })[0].inf_values[0].weight / 10)
-    d3.select("#biggestCatInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate) + "%")
+      return d.cat_id == categoryByWeight[0].cat_id;
+    })[0].inf_values[0].weight / 10);
+    d3.select("#biggestCatInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate) + "%");
 
-    d3.select("#biggestCatDiffInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate - cpih[cpih.length - 1].pir) + "%")
+    d3.select("#biggestCatDiffInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate - cpih[cpih.length - 1].pir) + "%");
     d3.select("#biggestCatOverUnder").text(function() {
-      return categoryByWeight[0].inflation_rate - cpih[cpih.length - 1].pir > 0 ? "above" : "below"
-    })
+      return categoryByWeight[0].inflation_rate - cpih[cpih.length - 1].pir > 0 ? "above" : "below";
+    });
 
-    categoryByIncrease = []
+    categoryByIncrease = [];
 
     Object.keys(category_data).forEach(function(category) {
-      var foo = category_data[category][0]
+      var foo = category_data[category][0];
       foo.category = inflation_data.filter(function(d) {
-        return d.cat_id == category
-      })[0].category
-      foo.cat_id = category
-      categoryByIncrease.push(foo)
-    })
+        return d.cat_id == category;
+      })[0].category;
+      foo.cat_id = category;
+      categoryByIncrease.push(foo);
+    });
     categoryByIncrease.sort(function(a, b) {
       return b.change - a.change;
-    })
+    });
 
-    categoryByIncrease = categoryByIncrease.slice(0, 5)
-    console.log(categoryByIncrease)
+    categoryByIncrease = categoryByIncrease.slice(0, 5);
 
-    drawBarChart(categoryByIncrease.reverse())
+    drawBarChart(categoryByIncrease.reverse());
 
   } //end calculate function
 
   function drawBarChart(data) {
     var graphic = d3.select('#barchart');
     graphic.selectAll("*").remove();
-    var height = 300
-    var chart_width = parseInt(d3.select(".section-container").style("width"));
+    var height = 250;
+    var chart_width = parseInt(d3.select(".section-container").style("width"))-barMargins.left-barMargins.right;
 
     var x = d3.scaleLinear()
       .range([0, chart_width]);
 
     var y = d3.scaleBand()
       .range([height, 0])
-      .paddingInner(0.1);
+      .paddingInner(0.4);
 
     x.domain([0, d3.max(data, function(d) {
       return d.change;
     })]);
     y.domain(data.map(function(d) {
-      return d.category
-    }))
+      return d.category;
+    }));
 
-    var xAxis = d3.axisBottom(x).tickSize(-height)
+    var xAxis = d3.axisBottom(x).tickSize(-height).tickValues([0]).tickFormat("");
     var yAxis = d3.axisLeft(y);
 
     var svg = d3.select('#barchart').append('svg')
-      .style("background-color", "#fff")
-      .attr("width", chart_width + 20 + 20)
-      .attr("height", height + 10 + 10) //+30)
+      .attr("width", chart_width + barMargins.left + barMargins.right)
+      .attr("height", height + barMargins.top + barMargins.bottom)
       .append("g")
+      .attr("transform", "translate(" + barMargins.left + "," + barMargins.top + ")");
 
-    svg.append("rect")
-      .style("fill", "#fff")
-      .attr("width", chart_width)
-      .attr("height", height);
-
-    svg.append('g')
+      svg.append('g')
       .attr('class', 'y axis')
-      .attr("transform", "translate(" + 150 + "," + 0 + ")")
-      .call(yAxis);
+      .call(yAxis).selectAll("text").each(function(d,i){
+        console.log(this)
+        d3.select(this).call(wrap,25);
+      });
 
     svg.append('g')
       .attr('class', 'x axis')
-      .attr("transform", "translate(" + 150 + "," + height + ")")
+      .attr("transform", "translate(" + 0 + "," + height + ")")
       .call(xAxis);
 
     svg.append('g')
-      .attr("transform", "translate(" + 150 + "," + 0 + ")")
       .selectAll('rect').data(data)
       .enter()
       .append('rect')
@@ -342,7 +332,40 @@ function drawGraphic() {
       })
       .attr('fill', "#206095")
 
-  }
+
+
+      function wrap(text, width) {
+        console.log(text,text.text(),width)
+            text.each(function() {
+              var text = d3.select(this),
+                words = text.text().split(/\s+/).reverse(),
+                word,
+                line = [],
+                lineNumber = 0,
+                lineHeight = 1.1, // ems
+                // y = text.attr("y"),
+                x = text.attr("x"),
+                dy = parseFloat(text.attr("dy")),
+                tspan = text.text(null).append("tspan").attr('x',x);
+              while (word = words.pop()) {
+                line.push(word);
+                tspan.text(line.join(" "));
+                console.log(line)
+                console.log(tspan.node())
+                if (tspan.node().getComputedTextLength() > width) {
+                  line.pop();
+                  tspan.text(line.join(" "));
+                  line = [word];
+                  tspan = text.append("tspan").attr('x',x).attr("dy", lineHeight + "em").text(word);
+                }
+              }
+            });
+
+            var breaks = text.selectAll("tspan").size();
+            text.attr("y", function(){return (-6 * (breaks-1))});
+          }//ends wrap
+
+  }// ends drawBarChart
 
   function drawLineChart(overall_inflation, cpih) {
     var graphic = d3.select('#graphic');
@@ -646,6 +669,10 @@ function drawGraphic() {
     //once all files are loaded, execute ready function
     q.awaitAll(ready);
   } //end load data
+
+
+
+
 } //ends drawGraphic
 
 

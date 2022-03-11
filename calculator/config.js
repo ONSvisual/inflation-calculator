@@ -26,22 +26,22 @@ dvc = {
   },
   "barChartMargin": {
     "sm": {
-      "top": 20,
-      "right": 0,
-      "bottom": 35,
-      "left": 55
+      "top": 0,
+      "right": 10,
+      "bottom": 0,
+      "left": 150
     },
     "md": {
-      "top": 20,
-      "right": 0,
-      "bottom": 20,
-      "left": 55
+      "top": 0,
+      "right": 10,
+      "bottom": 0,
+      "left": 150
     },
     "lg": {
-      "top": 20,
-      "right": 90,
-      "bottom": 20,
-      "left": 55
+      "top": 0,
+      "right": 10,
+      "bottom": 0,
+      "left": 150
     }
   },
   "mobileBreakpoint": 414,
