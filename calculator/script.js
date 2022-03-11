@@ -57,6 +57,7 @@ function drawGraphic() {
     d3.select("#skipToEndButton").on('click', function() {
       showResults();
       prefill();
+      calculateSpending();
       calculate(final_data);
     });
 
@@ -346,7 +347,7 @@ function drawGraphic() {
         .attr('fill',function(d){
           return (x(d.change)-x(0))>chart_width/10 ? "#fff" : "#206095";
         })
-        .text(function(d){return d3.format(".1%")(d.change/100)})
+        .text(function(d){return "£"+d3.format(",.2f")(d.change)})
 
 
 
