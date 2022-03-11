@@ -7,7 +7,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L55P",
    "weight_cdid": "L5CZ",
-   "average": 89
+   "average": 89,
+   "average_spend": 276.03
  },
  {
    "cat_id": "spiritswinebeer",
@@ -17,7 +18,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L56I",
    "weight_cdid": "L5CZ",
-   "average": 18
+   "average": 18,
+   "average_spend": 40.30
  },
  {
    "cat_id": "tobacco",
@@ -27,7 +29,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L56M",
    "weight_cdid": "L5CZ",
-   "average": 17
+   "average": 17,
+   "average_spend": 15.60
  },
  {
    "cat_id": "personalcare",
@@ -37,7 +40,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58Y",
    "weight_cdid": "L5CZ",
-   "average": 19
+   "average": 19,
+   "average_spend": 4.33
  },
  {
    "cat_id": "nongrocery",
@@ -47,7 +51,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57G",
    "weight_cdid": "L5CZ",
-   "average": 3
+   "average": 3,
+   "average_spend": 11.70
  },
  {
    "cat_id": "ooh",
@@ -57,7 +62,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L5P7",
    "weight_cdid": "L5PA",
-   "average": 187
+   "average": 187,
+   "average_spend": 79.73
  },
  {
    "cat_id": "ooh",
@@ -67,7 +73,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L56T",
    "weight_cdid": "L5E6",
-   "average": 187
+   "average": 187,
+   "average_spend": 342.33
  },
  {
    "cat_id": "rent",
@@ -77,7 +84,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L56S",
    "weight_cdid": "L5CZ",
-   "average": 74
+   "average": 74,
+   "average_spend": 227.50
  },
  {
    "cat_id": "counciltax",
@@ -87,7 +95,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "DHYU",
    "weight_cdid": "L5CZ",
-   "average": 32
+   "average": 32,
+   "average_spend": 0
  },
  {
    "cat_id": "electricitygasfuels",
@@ -97,7 +106,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L56Z",
    "weight_cdid": "L5CZ",
-   "average": 26
+   "average": 26,
+   "average_spend": 106.17
  },
  {
    "cat_id": "water",
@@ -107,7 +117,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L56W",
    "weight_cdid": "L5CZ",
-   "average": 9
+   "average": 9,
+   "average_spend": 45.07
  },
  {
    "cat_id": "mobilephone",
@@ -117,7 +128,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3DK",
    "weight_cdid": "J4LW",
-   "average": 7.56
+   "average": 7.56,
+   "average_spend": 42.90
  },
  {
    "cat_id": "mobilephone",
@@ -127,7 +139,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3DM",
    "weight_cdid": "J4LZ",
-   "average": 7.56
+   "average": 7.56,
+   "average_spend": 42.90
  },
  {
    "cat_id": "internet",
@@ -137,7 +150,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L585",
    "weight_cdid": "L5FG",
-   "average": 11.44
+   "average": 11.44,
+   "average_spend": 39.00
  },
  {
    "cat_id": "internet",
@@ -147,7 +161,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3DJ",
    "weight_cdid": "J4LV",
-   "average": 11.44
+   "average": 11.44,
+   "average_spend": 39.00
  },
  {
    "cat_id": "internet",
@@ -157,7 +172,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3DL",
    "weight_cdid": "J4LY",
-   "average": 11.44
+   "average": 11.44,
+   "average_spend": 39.00
  },
  {
    "cat_id": "internet",
@@ -167,7 +183,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3DN",
    "weight_cdid": "J4M2",
-   "average": 11.44
+   "average": 11.44,
+   "average_spend": 39.00
  },
  {
    "cat_id": "internet",
@@ -177,7 +194,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3DO",
    "weight_cdid": "J4M3",
-   "average": 11.44
+   "average": 11.44,
+   "average_spend": 39.00
  },
  {
    "cat_id": "vehicles",
@@ -187,7 +205,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57P",
    "weight_cdid": "L5CZ",
-   "average": 33
+   "average": 33,
+   "average_spend": 113.97
  },
  {
    "cat_id": "petroldiesel",
@@ -197,7 +216,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57V",
    "weight_cdid": "L5CZ",
-   "average": 21
+   "average": 21,
+   "average_spend": 96.63
  },
  {
    "cat_id": "othermotoring",
@@ -207,7 +227,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57U",
    "weight_cdid": "L5F7",
-   "average": 37
+   "average": 37,
+   "average_spend": 49.40
  },
  {
    "cat_id": "othermotoring",
@@ -217,7 +238,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57W",
    "weight_cdid": "L5F9",
-   "average": 37
+   "average": 37,
+   "average_spend": 49.40
  },
  {
    "cat_id": "othermotoring",
@@ -227,7 +249,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57X",
    "weight_cdid": "L5FA",
-   "average": 37
+   "average": 37,
+   "average_spend": 49.40
  },
  {
    "cat_id": "trainfares",
@@ -237,7 +260,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57Z",
    "weight_cdid": "L5CZ",
-   "average": 5
+   "average": 5,
+   "average_spend": 19.93
  },
  {
    "cat_id": "busfares",
@@ -247,7 +271,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L582",
    "weight_cdid": "L5CZ",
-   "average": 8
+   "average": 8,
+   "average_spend": 6.50
  },
  {
    "cat_id": "electrical",
@@ -257,7 +282,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L587",
    "weight_cdid": "L5CZ",
-   "average": 23
+   "average": 23,
+   "average_spend": 19.50
  },
  {
    "cat_id": "tv",
@@ -267,7 +293,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3FL",
    "weight_cdid": "L5CZ",
-   "average": 4.4
+   "average": 4.4,
+   "average_spend": 20.37
  },
  {
    "cat_id": "games",
@@ -277,7 +304,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58G",
    "weight_cdid": "L5CZ",
-   "average": 21
+   "average": 21,
+   "average_spend": 13.87
  },
  {
    "cat_id": "entertainment",
@@ -287,7 +315,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58L",
    "weight_cdid": "L5CZ",
-   "average": 12.6
+   "average": 12.6,
+   "average_spend": 44.63
  },
  {
    "cat_id": "entertainment",
@@ -297,7 +326,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3FJ",
    "weight_cdid": "J4X9",
-   "average": 12.6
+   "average": 12.6,
+   "average_spend": 44.63
  },
  {
    "cat_id": "entertainment",
@@ -307,7 +337,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3FK",
    "weight_cdid": "J4XA",
-   "average": 12.6
+   "average": 12.6,
+   "average_spend": 44.63
  },
  {
    "cat_id": "entertainment",
@@ -317,7 +348,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3FM",
    "weight_cdid": "J4XC",
-   "average": 12.6
+   "average": 12.6,
+   "average_spend": 44.63
  },
  {
    "cat_id": "entertainment",
@@ -327,7 +359,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "J3FN",
    "weight_cdid": "J4XD",
-   "average": 12.6
+   "average": 12.6,
+   "average_spend": 44.63
  },
  {
    "cat_id": "pets",
@@ -337,7 +370,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58J",
    "weight_cdid": "L5CZ",
-   "average": 10
+   "average": 10,
+   "average_spend": 12.13
  },
  {
    "cat_id": "gardening",
@@ -347,7 +381,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58I",
    "weight_cdid": "L5CZ",
-   "average": 5
+   "average": 5,
+   "average_spend": 7.37
  },
  {
    "cat_id": "eatingout",
@@ -357,7 +392,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58S",
    "weight_cdid": "L5CZ",
-   "average": 57
+   "average": 57,
+   "average_spend": 178.97
  },
  {
    "cat_id": "holidays",
@@ -367,7 +403,9 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L583",
    "weight_cdid": "L5FE",
-   "average": 24
+   "average": 24,
+   "average_spend": 237.03
+
  },
  {
    "cat_id": "holidays",
@@ -377,7 +415,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L584",
    "weight_cdid": "L5FF",
-   "average": 24
+   "average": 24,
+   "average_spend": 237.03
  },
  {
    "cat_id": "holidays",
@@ -387,7 +426,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58R",
    "weight_cdid": "L5G4",
-   "average": 24
+   "average": 24,
+   "average_spend": 237.03
  },
  {
    "cat_id": "holidays",
@@ -397,7 +437,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58V",
    "weight_cdid": "L5G8",
-   "average": 24
+   "average": 24,
+   "average_spend": 237.03
  },
  {
    "cat_id": "otherleisure",
@@ -407,7 +448,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58D",
    "weight_cdid": "L5FO",
-   "average": 38
+   "average": 38,
+   "average_spend": 52.87
  },
  {
    "cat_id": "otherleisure",
@@ -417,7 +459,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58H",
    "weight_cdid": "L5FS",
-   "average": 38
+   "average": 38,
+   "average_spend": 52.87
  },
  {
    "cat_id": "otherleisure",
@@ -427,7 +470,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58N",
    "weight_cdid": "L5FY",
-   "average": 38
+   "average": 38,
+   "average_spend": 52.87
  },
  {
    "cat_id": "otherleisure",
@@ -437,7 +481,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58Z",
    "weight_cdid": "L5GC",
-   "average": 38
+   "average": 38,
+   "average_spend": 52.87
  },
  {
    "cat_id": "health",
@@ -447,7 +492,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L55U",
    "weight_cdid": "L5D6",
-   "average": 24
+   "average": 24,
+   "average_spend": 54.60
  },
  {
    "cat_id": "health",
@@ -457,7 +503,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L58X",
    "weight_cdid": "L5GA",
-   "average": 24
+   "average": 24,
+   "average_spend": 54.60
  },
  {
    "cat_id": "education",
@@ -467,7 +514,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L55Y",
    "weight_cdid": "L5CZ",
-   "average": 30
+   "average": 30,
+   "average_spend": 19.50
  },
  {
    "cat_id": "socialprotection",
@@ -477,7 +525,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L594",
    "weight_cdid": "L5CZ",
-   "average": 19
+   "average": 19,
+   "average_spend": 86.63
  },
  {
    "cat_id": "clothes",
@@ -487,7 +536,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L55R",
    "weight_cdid": "L5CZ",
-   "average": 59
+   "average": 59,
+   "average_spend": 101.40
  },
  {
    "cat_id": "furniture",
@@ -497,7 +547,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L576",
    "weight_cdid": "L5EH",
-   "average": 46
+   "average": 46,
+   "average_spend": 137.37
  },
  {
    "cat_id": "furniture",
@@ -507,7 +558,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L579",
    "weight_cdid": "L5EK",
-   "average": 46
+   "average": 46,
+   "average_spend": 137.37
  },
  {
    "cat_id": "furniture",
@@ -517,7 +569,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57A",
    "weight_cdid": "L5EL",
-   "average": 46
+   "average": 46,
+   "average_spend": 137.37
  },
  {
    "cat_id": "furniture",
@@ -527,7 +580,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57D",
    "weight_cdid": "L5EO",
-   "average": 46
+   "average": 46,
+   "average_spend": 137.37
  },
  {
    "cat_id": "furniture",
@@ -537,7 +591,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57E",
    "weight_cdid": "L5EP",
-   "average": 46
+   "average": 46,
+   "average_spend": 137.37
  },
  {
    "cat_id": "furniture",
@@ -547,7 +602,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L57H",
    "weight_cdid": "L5ES",
-   "average": 46
+   "average": 46,
+   "average_spend": 137.37
  },
  {
    "cat_id": "insurance",
@@ -557,7 +613,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L595",
    "weight_cdid": "L5GG",
-   "average": 30
+   "average": 30,
+   "average_spend": 24.30
  },
  {
    "cat_id": "insurance",
@@ -567,7 +624,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L599",
    "weight_cdid": "L5GK",
-   "average": 30
+   "average": 30,
+   "average_spend": 24.30
  },
  {
    "cat_id": "insurance",
@@ -577,7 +635,8 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L59B",
    "weight_cdid": "L5GM",
-   "average": 30
+   "average": 30,
+   "average_spend": 24.30
  },
  {
    "cat_id": "other",
@@ -587,6 +646,7 @@ inflation_data = [
    "inf_values": [],
    "inflation_cdid": "L55O",
    "weight_cdid": "L5CZ",
-   "average": 0
+   "average": 0,
+   "average_spend": 0
  }
 ]

@@ -1,55 +1,46 @@
-dvc = {
-  "time_period": "months",
+dvc={
+  "time_period" : "months",
   "time_format": "%B %Y",
   "cpih_time_format": "%Y %b",
-  "time_series_totalmnths": 36,
-  "lineColours":["#17A5A3","#206095"],
-  "lineChartMargin": {
-    "sm": {
-      "top": 20,
-      "right": 20,
-      "bottom": 20,
-      "left": 20
-    },
-    "md": {
-      "top": 20,
-      "right": 20,
-      "bottom": 20,
-      "left": 20
-    },
-    "lg": {
-      "top": 20,
-      "right": 20,
-      "bottom": 20,
-      "left": 20
-    }
+  "time_series_totalmnths": 60,
+  "essential": {
+    "colour_palette": [ "#27A0CC", "#003C57"],
+    "legendLabels": ["Spending less", "Spending more"]
   },
-  "barChartMargin": {
-    "sm": {
-      "top": 0,
-      "right": 10,
-      "bottom": 20,
-      "left": 150
+  "optional": {
+    "margin": {
+      "sm": {
+        "top": 20,
+        "right": 0,
+        "bottom": 35,
+        "left": 55
+      },
+      "md": {
+        "top": 20,
+        "right": 0,
+        "bottom": 20,
+        "left": 55
+      },
+      "lg": {
+        "top": 20,
+        "right": 90,
+        "bottom": 20,
+        "left": 55
+      }
     },
-    "md": {
-      "top": 0,
-      "right": 10,
-      "bottom": 20,
-      "left": 150
+    "aspectRatio": {
+      "sm": [16, 16],
+      "md": [16, 7],
+      "lg": [16, 10]
     },
-    "lg": {
-      "top": 0,
-      "right": 10,
-      "bottom": 20,
-      "left": 250
-    }
-  },
-  "mobileBreakpoint": 414,
-  "mediumBreakpoint": 600,
+    "mobileBreakpoint": 414,
+    "mediumBreakpoint":600,
 
-  "x_num_ticks": {
-    "sm": 3,
-    "md": 8,
-    "lg": 10
+    "x_num_ticks": {
+      "sm": 6,
+      "md": 8,
+      "lg": 10
+    }
+
   }
 };

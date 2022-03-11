@@ -47,10 +47,10 @@ h6 {
   background-color: #fff;
 }
 
-.progress {
+.progress{
   flex-grow: 1;
   margin-right: 10px;
-  margin-bottom: 20px;
+  margin-bottom:20px;
 }
 
 .section-container {
@@ -59,18 +59,13 @@ h6 {
   margin: 20px 0px 20px 0px
 }
 
-/* .axis {
+.axis {
   color: #707071;
-} */
-
-.axis .tick text{
-  fill:#666;
-  font-size:12px;
 }
 
 .grey-box-text {
   padding: 12px 12px 12px 12px;
-  background-color: #f5f5f6;
+  background-color: #eaeaea;
   margin: 10px 0px 10px 0px;
 }
 
@@ -78,7 +73,7 @@ h6 {
   padding-top: 4px;
 }
 
-.info-box {
+.info-box{
   padding: 20px;
 }
 
@@ -97,6 +92,10 @@ h6 {
   font-weight: 700;
   font-size: 18px;
   margin: 10px 0px 0px 0px;
+}
+
+.avgcompare{
+  font-size: 12px;
 }
 
 p {
@@ -205,14 +204,16 @@ button:focus, input:focus, select:focus {
   outline: 3px solid orange;
 }
 
-button.socialbutton {
-  height: 40px;
+button.socialbutton{
+  height:40px;
   background-color: white;
-  border: none;
-  margin-right: 8px;
+  border:none;
+  margin-right:8px;
 }
 
-button.socialbutton:focus {}
+button.socialbutton:focus{
+
+}
 
 .dropdown {
   height: 36px;
@@ -357,6 +358,7 @@ button.socialbutton:focus {}
   font-size: 14px;
 }
 
+
 .summary-description {
   width: 400px;
 }
@@ -433,8 +435,8 @@ input.disabled {
 }
 
 .x path.domain {
-  stroke: none;
-  fill: none;
+  stroke:none;
+  fill:none;
 }
 
 h3 {
@@ -442,18 +444,18 @@ h3 {
   color: #323132;
 }
 
-h4 {
-  margin-bottom: 8px;
+h4{
+  margin-bottom:8px;
   font-weight: 700;
   line-height: 32px;
-  font-size: 16px;
+  font-size:16px;
 }
 
-.bignumber {
+.bignumber{
   font-size: 2.5em;
   font-weight: 700;
   line-height: 2em;
-  margin-top: 22px;
+  margin-top:22px;
 }
 
 .graphic-heading {
@@ -490,7 +492,7 @@ h4 {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  flex-wrap: wrap;
+  flex-wrap:wrap;
   justify-content: flex-start;
   align-content: flex-start;
 }
@@ -500,43 +502,22 @@ h4 {
     font-size: 21px;
   }
 
-  .hidden-on-mobile {
-    display: none;
+  .hidden-on-mobile{
+    display:none;
   }
 
   .column-on-mobile {
     flex-direction: column
   }
 
-  .column-on-mobile div {
-    margin-bottom: 20px;
+  .column-on-mobile div{
+    margin-bottom:20px;
   }
 }
 
-.item {
-  flex-basis: 0;
+.item{
+  flex-basis:0;
   justify-content: space-between;
-}
-
-.legend-circle {
-  border-radius: 50%;
-  width: 15px;
-  height: 15px;
-  margin-right: 5px;
-}
-
-.legend-label {
-  font-size: 12px;
-  color: rgb(112, 112, 112);
-  margin-right: 10px;
-}
-
-.colour-matisse {
-  background-color: #206095;
-}
-
-.colour-teal {
-  background-color: #17A5A3;
 }
 
 .legend {
