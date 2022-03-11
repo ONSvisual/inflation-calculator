@@ -28,19 +28,19 @@ dvc = {
     "sm": {
       "top": 0,
       "right": 10,
-      "bottom": 0,
+      "bottom": 20,
       "left": 150
     },
     "md": {
       "top": 0,
       "right": 10,
-      "bottom": 0,
+      "bottom": 20,
       "left": 150
     },
     "lg": {
       "top": 0,
       "right": 10,
-      "bottom": 0,
+      "bottom": 20,
       "left": 150
     }
   },

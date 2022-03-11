@@ -65,6 +65,7 @@ h6 {
 
 .axis .tick text{
   fill:#666;
+  font-size:12px;
 }
 
 .grey-box-text {

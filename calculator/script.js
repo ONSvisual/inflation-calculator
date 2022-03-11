@@ -43,8 +43,8 @@ function drawGraphic() {
       if (counter < 5) {
         counter++;
       } else if (counter == 5) {
-        calculate(final_data);
         showResults();
+        calculate(final_data);
       }
       // if we're at the end show the results
 
@@ -55,9 +55,9 @@ function drawGraphic() {
 
     // skip to the end
     d3.select("#skipToEndButton").on('click', function() {
+      showResults();
       prefill();
       calculate(final_data);
-      showResults();
     });
 
     // back button front page
@@ -281,7 +281,7 @@ function drawGraphic() {
     var graphic = d3.select('#barchart');
     graphic.selectAll("*").remove();
     var height = 250;
-    var chart_width = parseInt(d3.select(".section-container").style("width"))-barMargins.left-barMargins.right;
+    var chart_width = parseInt(d3.select(".section-container").style("width")) - barMargins.left - barMargins.right;
 
     var x = d3.scaleLinear()
       .range([0, chart_width]);
@@ -298,7 +298,8 @@ function drawGraphic() {
     }));
 
     var xAxis = d3.axisBottom(x).tickSize(-height).tickValues([0]).tickFormat("");
-    var yAxis = d3.axisLeft(y);
+    var yAxis = d3.axisLeft(y).tickSize(0);
+
 
     var svg = d3.select('#barchart').append('svg')
       .attr("width", chart_width + barMargins.left + barMargins.right)
@@ -306,11 +307,10 @@ function drawGraphic() {
       .append("g")
       .attr("transform", "translate(" + barMargins.left + "," + barMargins.top + ")");
 
-      svg.append('g')
+    svg.append('g')
       .attr('class', 'y axis')
-      .call(yAxis).selectAll("text").each(function(d,i){
-        console.log(this)
-        d3.select(this).call(wrap,25);
+      .call(yAxis).selectAll("text").each(function(d, i) {
+        d3.select(this).call(wrap, barMargins.left - 10);
       });
 
     svg.append('g')
@@ -332,40 +332,25 @@ function drawGraphic() {
       })
       .attr('fill', "#206095")
 
+      //add text label
+    svg.append('g')
+        .selectAll('text.value')
+        .data(data)
+        .enter()
+        .append('text')
+        .attr('x',function(d){return x(d.change)})
+        .attr('y',function(d){return y(d.category)+y.bandwidth()})
+        .attr('dx',function(d){return (x(d.change)-x(0))>chart_width/10 ? -10 : 10})
+        .attr('dy',-12)
+        .attr('text-anchor',function(d){return (x(d.change)-x(0))>chart_width/10 ? "end" : "start"})
+        .attr('fill',function(d){
+          return (x(d.change)-x(0))>chart_width/10 ? "#fff" : "#206095";
+        })
+        .text(function(d){return d3.format(".1%")(d.change/100)})
 
 
-      function wrap(text, width) {
-        console.log(text,text.text(),width)
-            text.each(function() {
-              var text = d3.select(this),
-                words = text.text().split(/\s+/).reverse(),
-                word,
-                line = [],
-                lineNumber = 0,
-                lineHeight = 1.1, // ems
-                // y = text.attr("y"),
-                x = text.attr("x"),
-                dy = parseFloat(text.attr("dy")),
-                tspan = text.text(null).append("tspan").attr('x',x);
-              while (word = words.pop()) {
-                line.push(word);
-                tspan.text(line.join(" "));
-                console.log(line)
-                console.log(tspan.node())
-                if (tspan.node().getComputedTextLength() > width) {
-                  line.pop();
-                  tspan.text(line.join(" "));
-                  line = [word];
-                  tspan = text.append("tspan").attr('x',x).attr("dy", lineHeight + "em").text(word);
-                }
-              }
-            });
 
-            var breaks = text.selectAll("tspan").size();
-            text.attr("y", function(){return (-6 * (breaks-1))});
-          }//ends wrap
-
-  }// ends drawBarChart
+  } // ends drawBarChart
 
   function drawLineChart(overall_inflation, cpih) {
     var graphic = d3.select('#graphic');
@@ -464,41 +449,49 @@ function drawGraphic() {
         return line(d.value);
       });
 
-      //create lines
-      svg.append('g').attr('id', "pir").selectAll('path')
-        .data(d3.entries(lines[0]))
-        .enter()
-        .append('path')
-        //.attr('class', 'line')
-        .style("stroke", "#206095")
-        .style("fill", 'none')
-        .style("stroke-width", 3.5)
-        .style("stroke-linecap", 'round')
-        .style("stroke-linejoin", 'round')
-        .attr('d', function(d) {
-          // console.log(d)
-          return line(d.value);
-        });
+    //create lines
+    svg.append('g').attr('id', "pir").selectAll('path')
+      .data(d3.entries(lines[0]))
+      .enter()
+      .append('path')
+      //.attr('class', 'line')
+      .style("stroke", "#206095")
+      .style("fill", 'none')
+      .style("stroke-width", 3.5)
+      .style("stroke-linecap", 'round')
+      .style("stroke-linejoin", 'round')
+      .attr('d', function(d) {
+        // console.log(d)
+        return line(d.value);
+      });
 
 
-      // add dots
-      svg.append('g').selectAll('circle.cpih')
-      .data([cpih_line[0].values[cpih_line[0].values.length-1]])
+    // add dots
+    svg.append('g').selectAll('circle.cpih')
+      .data([cpih_line[0].values[cpih_line[0].values.length - 1]])
       .enter()
       .append('circle')
-      .attr('cy',function(d){return y(d.pir)})
-      .attr('cx',function(d){return x(d.date)})
-      .attr('r',5)
-      .attr('fill',dvc.lineColours[0])
+      .attr('cy', function(d) {
+        return y(d.pir)
+      })
+      .attr('cx', function(d) {
+        return x(d.date)
+      })
+      .attr('r', 5)
+      .attr('fill', dvc.lineColours[0])
 
-      svg.append('g').selectAll('circle.pir')
+    svg.append('g').selectAll('circle.pir')
       .data([lines[0].values[0]])
       .enter()
       .append('circle')
-      .attr('cy',function(d){return y(d.pir)})
-      .attr('cx',function(d){return x(d.date)})
-      .attr('r',5)
-      .attr('fill',dvc.lineColours[1])
+      .attr('cy', function(d) {
+        return y(d.pir)
+      })
+      .attr('cx', function(d) {
+        return x(d.date)
+      })
+      .attr('r', 5)
+      .attr('fill', dvc.lineColours[1])
 
   }
 
@@ -670,7 +663,35 @@ function drawGraphic() {
     q.awaitAll(ready);
   } //end load data
 
+  function wrap(text, width) {
+    text.each(function() {
+      var text = d3.select(this),
+        words = text.text().split(/\s+/).reverse(),
+        word,
+        line = [],
+        lineNumber = 0,
+        lineHeight = 1.1, // ems
+        // y = text.attr("y"),
+        x = text.attr("x"),
+        dy = parseFloat(text.attr("dy")),
+        tspan = text.text(null).append("tspan").attr('x', x);
+      while (word = words.pop()) {
+        line.push(word);
+        tspan.text(line.join(" "));
+        if (tspan.node().getComputedTextLength() > width) {
+          line.pop();
+          tspan.text(line.join(" "));
+          line = [word];
+          tspan = text.append("tspan").attr('x', x).attr("dy", lineHeight + "em").text(word);
+        }
+      }
+    });
 
+    var breaks = text.selectAll("tspan").size();
+    text.attr("y", function() {
+      return (-6 * (breaks - 1))
+    });
+  } //ends wrap
 
 
 } //ends drawGraphic
