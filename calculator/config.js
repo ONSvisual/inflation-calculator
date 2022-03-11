@@ -2,7 +2,7 @@ dvc = {
   "time_period": "months",
   "time_format": "%B %Y",
   "cpih_time_format": "%Y %b",
-  "time_series_totalmnths": 36,
+  "time_series_totalmnths": 60,
   "lineColours":["#17A5A3","#206095"],
   "lineChartMargin": {
     "sm": {
@@ -49,7 +49,7 @@ dvc = {
 
   "x_num_ticks": {
     "sm": 3,
-    "md": 8,
-    "lg": 10
+    "md": 5,
+    "lg": 5
   }
 };
