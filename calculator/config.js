@@ -1,4 +1,42 @@
 dvc = {
+  "deciles":[
+    {
+      "decile": "Bottom 10%",
+      "value": 988
+    },
+    {
+      "decile": "2nd",
+      "value": 1452
+    },
+    {
+      "decile": "3rd",
+      "value": 1933
+    },
+    {
+      "decile": "4th",
+      "value": 2461
+    },
+    {
+      "decile": "5th",
+      "value": 3068
+    },
+    {
+      "decile": "6th",
+      "value": 3783
+    },
+    {
+      "decile": "7th",
+      "value": 4554
+    },
+    {
+      "decile": "8th",
+      "value": 5616
+    },
+    {
+      "decile": "9th",
+      "value": 7510
+    },
+  ],
   "time_period": "months",
   "time_format": "%B %Y",
   "cpih_time_format": "%Y %b",

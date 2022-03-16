@@ -7,11 +7,13 @@ var allCategories = inflation_data.map(function(d) {
 })
 prevSpend = 0
 
-function drawGraphic() {
+function drawGraphic() {2
 
   loadData();
   getSize();
   enablePageButtons();
+  enableIncomePage();
+  addTooltips();
   updateRunningTotal();
 
   function getSize() {
@@ -38,11 +40,20 @@ function drawGraphic() {
       hide(d3.select('#inputs' + counter))
       if (counter == 0) {
         disableSkipToEnd();
+        if (d3.select('input[name="income"]:checked').node().value == "net-income"){
+          var decile = getDecile(d3.select("#netincome").property("value")*(d3.select("#netincome-time-period").property("value")/12));
+        }
+        else{
+          decile = 0
+        }
+        console.log(decile)
+        addAverages();
+        d3.select("#monthlyexpenditure").style("display","block")
       } //if on front page and next is clicked remove skip to end button and replace with back button
 
-      if (counter < 5) {
+      if (counter < 6) {
         counter++;
-      } else if (counter == 5) {
+      } else if (counter == 6) {
         showResults();
         calculate(final_data, cpih_selected);
       }
@@ -66,6 +77,7 @@ function drawGraphic() {
       hide(d3.select('#inputs' + counter))
       if (counter == 1) {
         enableSkipToEnd();
+        d3.select("#monthlyexpenditure").style("display","none")
         counter--;
       }
       if (counter > 1) {
@@ -82,11 +94,72 @@ function drawGraphic() {
 
     // back to start for results page
     d3.select("button#backToStartButton").on('click', function() {
+      d3.selectAll('input.spending').property("value",0)
+      calculateSpending()
       enableSkipToEnd()
       hideResults()
       hide(d3.select('#inputs' + counter));
       counter = 0;
       show(d3.select('#inputs' + counter))
+      d3.select("#monthlyexpenditure").style("display","none")
+    })
+  }
+
+  function enableIncomePage(){
+    tippy('#netincome-question',{
+      content: "This is the income of all the adults in your household (for example, earnings, benefits, pension), minus any taxes paid on that income (for example, income tax, national insurance).",
+      theme: "ons",
+      placement: "top"
+    })
+    d3.select("#net-income-radio").on('click', function() {
+      show(d3.select('#net-income-input'))
+      d3.select("#skipToEndButton").property("disabled",false).classed("disabled",false)
+      pymChild.sendHeight();
+    })
+    d3.select("#average-radio").on('click', function() {
+      hide(d3.select('#net-income-input'))
+      d3.select("#skipToEndButton").property("disabled",true).classed("disabled",true)
+      pymChild.sendHeight();
+    })
+  }
+
+  function getDecile(income){
+    var decile = 0;
+    // keep adding 1 to decile if income is still above current decile band. Also stop when we've exhausted deciles.
+    while (decile < dvc.deciles.length && income > dvc.deciles[decile]["value"]) {
+      decile++;
+    }
+    // decile is an index in the array, which starts at 0, but in practice deciles start from 1 so need to add 1 to adjust
+    decile++;
+    return decile;
+  }
+
+  function addAverages(){
+    inflation_data.forEach(function(category) {
+      if (d3.select('input[name="income"]:checked').node().value == "net-income"){
+        d3.select("#"+category.cat_id+"-avgcompare")
+          .text("UK average spend: £"+(d3.format(".2f")(category.average_spend*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+        }
+      else{
+        d3.select("#"+category.cat_id+"-avgcompare")
+          .text("UK average spend: £"+(d3.format(".2f")(category.average_spend*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+      }
+    })
+  }
+
+  function addTooltips(){
+    inflation_data.forEach(function(category) {
+      d3.select("#"+category.cat_id+"-question .question").text(category.category)
+      if (category.description != "Add description here..."){
+        tippy('#'+category.cat_id+'-question',{
+          content: category.description,
+          theme: "ons",
+          placement: "top"
+        })
+      }
+      else{
+        d3.select("#"+category.cat_id+"-question .information").remove()
+      }
     })
   }
 
@@ -102,12 +175,12 @@ function drawGraphic() {
   }
 
   function updateRunningTotal() {
-    d3.selectAll('input.money-input').on('change', function() {
+    d3.selectAll('input.spending').on('change', function() {
       calculateSpending();
       itemid = d3.select(this).attr("id")
       itemavg = inflation_data.filter(function(d) {
         return d.cat_id == itemid
-      })[0].average
+      })[0].average_spend
       input = +d3.select("#" + itemid).property("value") * d3.select("#" + itemid + "-time-period").property("value") / 12
       diff = ((input - itemavg) / itemavg) * 100
       if (diff > 0) {
@@ -116,7 +189,34 @@ function drawGraphic() {
         moreless = "less than"
         diff = diff * -1
       }
-      d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average")
+      if (d3.select("#" + itemid).property("value") != 0){
+        d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
+      }
+      else {
+        d3.select("#" + itemid + "-avgcompare").text("UK average spend: £"+(d3.format(".2f")(itemavg/(d3.select("#" + itemid + "-time-period").property("value") / 12))))
+      }
+    });
+
+    d3.selectAll('select.spending').on('change', function() {
+      calculateSpending();
+      itemid = d3.select(this).attr("id").split("-")
+      itemavg = inflation_data.filter(function(d) {
+        return d.cat_id == itemid[0]
+      })[0].average_spend
+      input = +d3.select("#" + itemid[0]).property("value") * d3.select("#" + itemid[0] + "-time-period").property("value") / 12
+      diff = ((input - itemavg) / itemavg) * 100
+      if (diff > 0) {
+        moreless = "more than"
+      } else {
+        moreless = "less than"
+        diff = diff * -1
+      }
+      if (d3.select("#" + itemid[0]).property("value") != 0){
+        d3.select("#" + itemid[0] + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
+      }
+      else {
+        d3.select("#" + itemid[0] + "-avgcompare").text("UK average spend: £"+(d3.format(".2f")(itemavg/(d3.select("#" + itemid[0] + "-time-period").property("value") / 12))))
+      }
     });
   }
 
@@ -176,10 +276,9 @@ function drawGraphic() {
     return d3.select("input#" + item).property('value') * d3.select("select#" + item + "-time-period").property('value') / 12
   }
 
-
   function prefill() {
     inflation_data.forEach(function(category) {
-      d3.select("#" + category.cat_id).property("value", category.average)
+      d3.select("#" + category.cat_id).property("value", category.average_spend)
     })
   }
 
@@ -258,6 +357,7 @@ function drawGraphic() {
     d3.select("#biggestCatOverUnder").text(function(){
       return categoryByWeight[0].inflation_rate-cpih[0].value > 0 ? "above" : "below"
     })
+    d3.select("#biggestCatOverallInflation").text(d3.format(".1f")(cpih[0].value)+"%")
 
     categoryByIncrease = []
 
@@ -674,18 +774,13 @@ function drawGraphic() {
 
 if (Modernizr.svg) {
 
-  // d3.csv("cpih.csv", function(error, csv) {
-  //   cpih = csv;
-  //   cpih.forEach(function(d) {
-  //     d.date = d3.timeParse(dvc.time_format)(d.date)
-  //     d.pir = +d.pir
-  //   })
-
+  d3.csv("deciles.csv", function(error, csv) {
+    deciles_data = csv;
     //use pym to create iframed chart dependent on specified variables
     pymChild = new pym.Child({
       renderCallback: drawGraphic
     })
-  // })
+  })
 
 } else {
   //use pym to create iframe containing fallback image (which is set as default)

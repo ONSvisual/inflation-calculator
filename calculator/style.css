@@ -6,6 +6,8 @@ body,
 tspan,
 label {
   font-family: 'Open Sans', sans-serif;
+  padding-top: 20px;
+  padding-left: 10px;
 }
 
 .link {
@@ -31,6 +33,9 @@ h6 {
   font-weight: 700;
 }
 
+.header{
+  width: 75%;
+}
 .chapter-line {
   background-color: #BCBCBD;
   height: 4px;
@@ -95,8 +100,8 @@ h6 {
 
 .question {
   font-weight: 700;
-  font-size: 18px;
-  margin: 10px 0px 0px 0px;
+  font-size: 13px;
+  margin: 10px 5px 0px 0px;
 }
 
 .avgcompare{
@@ -165,8 +170,27 @@ div.spending {
   position: relative;
 }
 
+.sidebar{
+  width: 3px;
+  height: 85px;
+  background-color: #BCBCBD;
+  margin-left: 15px;
+  margin-right:15px;
+}
+
+@media only screen and (max-width: 414px) {
+    .sidebar {
+        display: none;
+    }
+}
+
 input.money-input {
   width: 190px;
+  padding-left: 46px;
+}
+
+input.income {
+  width: 90px;
   padding-left: 46px;
 }
 
@@ -177,6 +201,11 @@ input.spending {
 
 select {
   width: 254px;
+  padding-left: 10px;
+}
+
+select.income {
+  width: 140px;
   padding-left: 10px;
 }
 
@@ -399,9 +428,15 @@ button.socialbutton:focus {}
 }
 
 button.disabled {
-  background-color: #6390b5;
-  border: #6390b5;
-  cursor: auto;
+  background-color: #d6d6d6;
+  color: #A6A6A6;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+.icon{
+  padding-top: 10px;
+  padding-right: 15px;
 }
 
 input.disabled {
@@ -554,60 +589,17 @@ h4 {
   vertical-align: baseline;
 }
 
-/* Popup container */
-.popup {
-  position: relative;
-  display: inline-block;
-  cursor: pointer;
+.tippy-box[data-theme~='ons'] {
+  background-color: #206095;
+  color: white;
 }
 
-/* The actual popup (appears on top) */
-.popup .popuptext {
-  visibility: hidden;
-  width: 160px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 8px 4px;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -80px;
-  font-size: 12px;
+.tippy-box[data-theme~='ons'][data-placement^='top'] > .tippy-arrow::before {
+  border-bottom-color: #206095;
 }
 
-/* Popup arrow */
-.popup .popuptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class when clicking on the popup container (hide and show the popup) */
-.popup .show {
-  visibility: visible;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
-  z-index: 9;
-}
-
-#groceries-tooltip-popup {
-  margin-left: -20px;
-}
-
-#transport-tooltip-popup {
-  margin-left: -20px;
-}
-
-#other-tooltip-popup {
-  margin-left: -20px;
+.tippy-box[data-theme~='ons'] > .tippy-svg-arrow {
+  fill: #206095;
 }
 
 /* Add animation (fade in the popup) */
