@@ -27,8 +27,6 @@ function drawGraphic() {
     }
     lineMargin = dvc.lineChartMargin[size];
     barMargins = dvc.barChartMargin[size];
-
-
   } //end initialise
 
 
@@ -213,68 +211,56 @@ function drawGraphic() {
     hide(d3.select("#results"));
   }
 
+  function updateSpendComparison(id,decile){
+    var category_spend = Object.values(deciles_data.filter(function(d){
+      return d.cat_id == id
+    })[0])
+
+    d3.select("input#"+id).property("value",function(){
+      return d3.select("input#"+id).property("value").replace(/^0+/, '')
+    })
+
+    input = +d3.select("#" + id).property("value") * d3.select("#" + id + "-time-period").property("value") / 12
+
+    diff = ((input - category_spend[decile + 1]) / category_spend[decile + 1]) * 100
+
+    if (diff > 0) {
+      moreless = "more than"
+    } else if (diff < 0) {
+      moreless = "less than"
+      diff = diff * -1
+    } else if (diff == 0) {
+      moreless = "Equal to"
+    }
+
+    if (d3.select("#" + id).property("value") != 0 && diff == 0 && decile > 0) {
+      d3.select("#" + id + "-avgcompare").text(moreless + " similar households")
+    } else if (d3.select("#" + itemid).property("value") != 0 && diff == 0 && decile == 0) {
+      d3.select("#" + id + "-avgcompare").text(moreless + " the average household")
+    } else if (d3.select("#" + itemid).property("value") != 0 && decile > 0) {
+      d3.select("#" + id + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " similar households")
+    } else if (d3.select("#" + itemid).property("value") != 0 && decile == 0) {
+      d3.select("#" + id + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
+    } else if (d3.select("#" + itemid).property("value") == 0 && decile > 0) {
+      d3.select("#" + id + "-avgcompare").text("Similar households spend on average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period").property("value") / 12))))
+    } else {
+      d3.select("#" + id + "-avgcompare").text("UK average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period").property("value") / 12))))
+    }
+  }
+
   function updateRunningTotal(decile) {
     d3.selectAll('input.spending').on('change', function() {
       calculateSpending();
       itemid = d3.select(this).attr("id")
-      category_spend = deciles_data.filter(function(d) {
-        return d.cat_id == itemid
-      })
-      category_spend = Object.values(category_spend[0])
-      d3.select(this).property("value", function() {
-        return d3.select(this).property("value").replace(/^0+/, '')
-      })
-      input = +d3.select("#" + itemid).property("value") * d3.select("#" + itemid + "-time-period").property("value") / 12
-      diff = ((input - category_spend[decile + 1]) / category_spend[decile + 1]) * 100
-      if (diff > 0) {
-        moreless = "more than"
-      } else if (diff < 0) {
-        moreless = "less than"
-        diff = diff * -1
-      } else if (diff == 0) {
-        moreless = "Equal to"
-      }
-
-      if (d3.select("#" + itemid).property("value") != 0 && diff == 0 && decile > 0) {
-        d3.select("#" + itemid + "-avgcompare").text(moreless + " similar households")
-      } else if (d3.select("#" + itemid).property("value") != 0 && diff == 0 && decile == 0) {
-        d3.select("#" + itemid + "-avgcompare").text(moreless + " the average household")
-      } else if (d3.select("#" + itemid).property("value") != 0 && decile > 0) {
-        d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " similar households")
-      } else if (d3.select("#" + itemid).property("value") != 0 && decile == 0) {
-        d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
-      } else if (d3.select("#" + itemid).property("value") == 0 && decile > 0) {
-        d3.select("#" + itemid + "-avgcompare").text("Similar households spend on average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + itemid + "-time-period").property("value") / 12))))
-      } else {
-        d3.select("#" + itemid + "-avgcompare").text("UK average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + itemid + "-time-period").property("value") / 12))))
-      }
+      updateSpendComparison(itemid,decile)
     });
 
     d3.selectAll('select.spending').on('change', function() {
       calculateSpending();
-      itemid = d3.select(this).attr("id").split("-")
-      itemavg = inflation_data.filter(function(d) {
-        return d.cat_id == itemid[0]
-      })[0].average_spend
-      input = +d3.select("#" + itemid[0]).property("value") * d3.select("#" + itemid[0] + "-time-period").property("value") / 12
-      diff = ((input - itemavg) / itemavg) * 100
-      if (diff > 0) {
-        moreless = "more than"
-      } else if(diff>0){
-        moreless = "less than"
-        diff = diff * -1
-      } else if(diff==0){
-        moreless = "Equal to"
-      }
 
-      if(d3.select("#" + itemid[0]).property("value") != 0 && diff==0){
-        d3.select("#" + itemid[0] + "-avgcompare").text(moreless + " the average household")
-      }
-      if (d3.select("#" + itemid[0]).property("value") != 0) {
-        d3.select("#" + itemid[0] + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
-      } else {
-        d3.select("#" + itemid[0] + "-avgcompare").text("UK average spend: £" + (d3.format(".2f")(itemavg / (d3.select("#" + itemid[0] + "-time-period").property("value") / 12))))
-      }
+      itemid = d3.select(this).attr("id").split("-")
+
+      updateSpendComparison(itemid[0],decile)
     });
   }
 
