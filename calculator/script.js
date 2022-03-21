@@ -123,7 +123,8 @@ function drawGraphic() {
       hide(d3.select('#inputs' + counter));
       counter = 0;
       show(d3.select('#inputs' + counter))
-      d3.select("#monthlyexpenditure").style("display","none")
+      hide(d3.select("#monthlyexpenditure"))
+      pymChild.sendHeight()
     })
   }
 
