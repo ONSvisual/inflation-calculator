@@ -47,19 +47,19 @@ dvc = {
       "top": 20,
       "right": 20,
       "bottom": 20,
-      "left": 20
+      "left": 25
     },
     "md": {
       "top": 20,
       "right": 20,
       "bottom": 20,
-      "left": 20
+      "left": 25
     },
     "lg": {
       "top": 20,
       "right": 20,
       "bottom": 20,
-      "left": 20
+      "left": 25
     }
   },
   "barChartMargin": {

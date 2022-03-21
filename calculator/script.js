@@ -39,10 +39,9 @@ function drawGraphic() {
       hide(d3.select('#inputs' + counter))
       if (counter == 0) {
         disableSkipToEnd();
-        if (d3.select('input[name="income"]:checked').node().value == "net-income"){
-          var decile = getDecile(d3.select("#netincome").property("value")*(d3.select("#netincome-time-period").property("value")/12));
-        }
-        else{
+        if (d3.select('input[name="income"]:checked').node().value == "net-income") {
+          var decile = getDecile(d3.select("#netincome").property("value") * (d3.select("#netincome-time-period").property("value") / 12));
+        } else {
           decile = 0
         }
         addAverages(decile);
@@ -53,21 +52,20 @@ function drawGraphic() {
       if (counter < 6) {
         counter++;
         show(d3.select('#inputs' + counter))
-          // show next page
+        // show next page
         pymChild.sendHeight();
       } else if (counter == 6) {
         inputtotal = 0;
-        inflation_data.forEach(function(category){
-          value = +d3.select("#"+category.cat_id).property("value")
+        inflation_data.forEach(function(category) {
+          value = +d3.select("#" + category.cat_id).property("value")
           inputtotal = inputtotal + value
         })
-        if (inputtotal > 0){
+        if (inputtotal > 0) {
           d3.select("#calculateError").text("")
           hide(d3.select("#calculateError"))
           showResults();
           calculate(final_data, cpih_selected);
-        }
-        else{
+        } else {
           show(d3.select("#calculateError"))
           d3.select("#calculateError").text("You must enter some spending for this calculator to estimate your personal inflation rate")
           pymChild.sendHeight()
@@ -76,17 +74,16 @@ function drawGraphic() {
       // if we're at the end show the results
 
       show(d3.select('#inputs' + counter))
-        // show next page
+      // show next page
       pymChild.sendHeight();
     });
 
     // skip to the end
     d3.select("#skipToEndButton").on('click', function() {
       showResults();
-      if (d3.select('input[name="income"]:checked').node().value == "net-income"){
-        var decile = getDecile(d3.select("#netincome").property("value")*(d3.select("#netincome-time-period").property("value")/12));
-      }
-      else{
+      if (d3.select('input[name="income"]:checked').node().value == "net-income") {
+        var decile = getDecile(d3.select("#netincome").property("value") * (d3.select("#netincome-time-period").property("value") / 12));
+      } else {
         decile = 0
       }
       prefill(decile);
@@ -99,7 +96,7 @@ function drawGraphic() {
       hide(d3.select('#inputs' + counter))
       if (counter == 1) {
         enableSkipToEnd();
-        d3.select("#monthlyexpenditure").style("display","none")
+        d3.select("#monthlyexpenditure").style("display", "none")
         counter--;
       }
       if (counter > 1) {
@@ -116,7 +113,7 @@ function drawGraphic() {
 
     // back to start for results page
     d3.select("button#backToStartButton").on('click', function() {
-      d3.selectAll('input.spending').property("value",0)
+      d3.selectAll('input.spending').property("value", 0)
       calculateSpending()
       enableSkipToEnd()
       hideResults()
@@ -128,25 +125,25 @@ function drawGraphic() {
     })
   }
 
-  function enableIncomePage(){
-    tippy('#netincome-question',{
+  function enableIncomePage() {
+    tippy('#netincome-question', {
       content: "This is the income of all the adults in your household (for example, earnings, benefits, pension), minus any taxes paid on that income (for example, income tax, national insurance).",
       theme: "ons",
       placement: "top"
     })
     d3.select("#net-income-radio").on('click', function() {
       show(d3.select('#net-income-input'))
-      d3.select("#skipToEndButton").property("disabled",false).classed("disabled",false)
+      d3.select("#skipToEndButton").property("disabled", false).classed("disabled", false)
       pymChild.sendHeight();
     })
     d3.select("#average-radio").on('click', function() {
       hide(d3.select('#net-income-input'))
-      d3.select("#skipToEndButton").property("disabled",true).classed("disabled",true)
+      d3.select("#skipToEndButton").property("disabled", true).classed("disabled", true)
       pymChild.sendHeight();
     })
   }
 
-  function getDecile(income){
+  function getDecile(income) {
     var decile = 0;
     // keep adding 1 to decile if income is still above current decile band. Also stop when we've exhausted deciles.
     while (decile < dvc.deciles.length && income > dvc.deciles[decile]["value"]) {
@@ -157,51 +154,49 @@ function drawGraphic() {
     return decile;
   }
 
-  function addAverages(decile){
+  function addAverages(decile) {
     inflation_data.forEach(function(category) {
       category_spend = deciles_data.filter(function(d) {
         return d.cat_id == category.cat_id
       })
       category_spend = Object.values(category_spend[0])
-      if (decile == 0){
-        d3.select("#"+category.cat_id+"-avgcompare")
-          .text("UK average spend: £"+(d3.format(".2f")(category_spend[decile+1]*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
-        }
-      else{
-        d3.select("#"+category.cat_id+"-avgcompare")
-          .text("Similar households spend on average: £"+(d3.format(".2f")(category_spend[decile+1]*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+      if (decile == 0) {
+        d3.select("#" + category.cat_id + "-avgcompare")
+          .text("UK average spend: £" + (d3.format(".2f")(category_spend[decile + 1] * (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+      } else {
+        d3.select("#" + category.cat_id + "-avgcompare")
+          .text("Similar households spend on average: £" + (d3.format(".2f")(category_spend[decile + 1] * (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
       }
     })
   }
 
-  function addTooltips(){
+  function addTooltips() {
     inflation_data.forEach(function(category) {
-      d3.select("#"+category.cat_id+"-question .question").text(category.category);
-      if (category.description != "Add description here..."){
-        tippy('#'+category.cat_id+'-question',{
+      d3.select("#" + category.cat_id + "-question .question").text(category.category);
+      if (category.description != "Add description here...") {
+        tippy('#' + category.cat_id + '-question', {
           content: category.description,
           theme: "ons",
           placement: "top"
         });
-      }
-      else{
-        d3.select("#"+category.cat_id+"-question .information").remove();
+      } else {
+        d3.select("#" + category.cat_id + "-question .information").remove();
       }
     });
 
     tippy('#copyToClipboard', {
-       placement: "top-start",
-       content: "Link copied to clipboard",
-       trigger: 'click',
-       theme: "ons",
-       duration: 1000
-     });
+      placement: "top-start",
+      content: "Link copied to clipboard",
+      trigger: 'click',
+      theme: "ons",
+      duration: 1000
+    });
 
   }
 
-  function addScreenReaderLabels(){
+  function addScreenReaderLabels() {
     inflation_data.forEach(function(category) {
-      d3.selectAll("#"+category.cat_id+"-label").text(category.category)
+      d3.selectAll("#" + category.cat_id + "-label").text(category.category)
     })
   }
 
@@ -226,28 +221,32 @@ function drawGraphic() {
         return d.cat_id == itemid
       })
       category_spend = Object.values(category_spend[0])
-      d3.select(this).property("value",function(){
+      d3.select(this).property("value", function() {
         return d3.select(this).property("value").replace(/^0+/, '')
       })
       input = +d3.select("#" + itemid).property("value") * d3.select("#" + itemid + "-time-period").property("value") / 12
-      diff = ((input - category_spend[decile+1]) / category_spend[decile+1]) * 100
+      diff = ((input - category_spend[decile + 1]) / category_spend[decile + 1]) * 100
       if (diff > 0) {
         moreless = "more than"
-      } else {
+      } else if (diff < 0) {
         moreless = "less than"
         diff = diff * -1
+      } else if (diff == 0) {
+        moreless = "Equal to"
       }
-      if (d3.select("#" + itemid).property("value") != 0 & decile > 0){
+
+      if (d3.select("#" + itemid).property("value") != 0 && diff == 0 && decile > 0) {
+        d3.select("#" + itemid + "-avgcompare").text(moreless + " similar households")
+      } else if (d3.select("#" + itemid).property("value") != 0 && diff == 0 && decile == 0) {
+        d3.select("#" + itemid + "-avgcompare").text(moreless + " the average household")
+      } else if (d3.select("#" + itemid).property("value") != 0 && decile > 0) {
         d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " similar households")
-      }
-      else if (d3.select("#" + itemid).property("value") != 0 & decile == 0){
+      } else if (d3.select("#" + itemid).property("value") != 0 && decile == 0) {
         d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
-      }
-      else if (d3.select("#" + itemid).property("value") == 0 & decile > 0) {
-        d3.select("#" + itemid + "-avgcompare").text("Similar households spend on average: £"+(d3.format(".2f")(category_spend[decile+1]/(d3.select("#" + itemid + "-time-period").property("value") / 12))))
-      }
-      else {
-        d3.select("#" + itemid + "-avgcompare").text("UK average: £"+(d3.format(".2f")(category_spend[decile+1]/(d3.select("#" + itemid + "-time-period").property("value") / 12))))
+      } else if (d3.select("#" + itemid).property("value") == 0 && decile > 0) {
+        d3.select("#" + itemid + "-avgcompare").text("Similar households spend on average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + itemid + "-time-period").property("value") / 12))))
+      } else {
+        d3.select("#" + itemid + "-avgcompare").text("UK average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + itemid + "-time-period").property("value") / 12))))
       }
     });
 
@@ -261,15 +260,20 @@ function drawGraphic() {
       diff = ((input - itemavg) / itemavg) * 100
       if (diff > 0) {
         moreless = "more than"
-      } else {
+      } else if(diff>0){
         moreless = "less than"
         diff = diff * -1
+      } else if(diff==0){
+        moreless = "Equal to"
       }
-      if (d3.select("#" + itemid[0]).property("value") != 0){
+
+      if(d3.select("#" + itemid[0]).property("value") != 0 && diff==0){
+        d3.select("#" + itemid[0] + "-avgcompare").text(moreless + " the average household")
+      }
+      if (d3.select("#" + itemid[0]).property("value") != 0) {
         d3.select("#" + itemid[0] + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
-      }
-      else {
-        d3.select("#" + itemid[0] + "-avgcompare").text("UK average spend: £"+(d3.format(".2f")(itemavg/(d3.select("#" + itemid[0] + "-time-period").property("value") / 12))))
+      } else {
+        d3.select("#" + itemid[0] + "-avgcompare").text("UK average spend: £" + (d3.format(".2f")(itemavg / (d3.select("#" + itemid[0] + "-time-period").property("value") / 12))))
       }
     });
   }
@@ -336,58 +340,64 @@ function drawGraphic() {
         return d.cat_id == category.cat_id
       })
       category_spend = Object.values(category_spend[0])
-      d3.select("#" + category.cat_id).property("value", category_spend[decile+1])
+      d3.select("#" + category.cat_id).property("value", category_spend[decile + 1])
     })
   }
 
-  function calculate(data, cpih){
+  function calculate(data, cpih) {
 
+    var total = 0
+    var total_change = 0
+    pir = 0
+    category_data = {}
+    Object.keys(data).forEach(function(category) {
+      category_data[category] = {}
+      for (i = 0; i < data[category].length; i++) {
+        var input = (d3.select("#" + category).property("value") * d3.select("#" + category + "-time-period").property("value")) / 12
+        var inflation_rate = data[category][i].index
+        var change = input - (input / (1 + (inflation_rate / 100)))
+        category_data[category][i] = {
+          date: data[category][i].key,
+          input: input,
+          inflation_rate: inflation_rate,
+          change: change,
+          weight: 0,
+          weighted_index: 0
+        }
+      }
+    })
+
+    overall_inflation = []
+    for (i = 0; i < data["foodhotdrinks"].length; i++) {
       var total = 0
       var total_change = 0
-      pir = 0
-      category_data = {}
-      Object.keys(data).forEach(function(category){
-        category_data[category] = {}
-        for (i = 0; i < data[category].length; i++){
-          var input = (d3.select("#"+category).property("value")*d3.select("#"+category+"-time-period").property("value"))/12
-          var inflation_rate = data[category][i].index
-          var change = input-(input/(1+(inflation_rate/100)))
-          category_data[category][i] = {
-            date: data[category][i].key,
-            input: input,
-            inflation_rate: inflation_rate,
-            change: change,
-            weight: 0,
-            weighted_index: 0
-          }
+      var pir = 0
+      Object.keys(category_data).forEach(function(category) {
+        total = total + category_data[category][i].input
+        total_change = total_change + category_data[category][i].change
+      })
+      Object.keys(category_data).forEach(function(category) {
+        category_data[category][i].weight = category_data[category][i].input / total
+        category_data[category][i].weighted_index = category_data[category][i].inflation_rate * category_data[category][i].weight
+        pir = pir + category_data[category][i].weighted_index
+        overall_inflation[i] = {
+          series: "overall_inflation",
+          date: category_data[category][i].date,
+          total: total,
+          total_change: total_change,
+          pir: pir
         }
       })
+    }
 
-      overall_inflation = []
-      for (i = 0; i < data["foodhotdrinks"].length; i++){
-        var total = 0
-        var total_change = 0
-        var pir = 0
-        Object.keys(category_data).forEach(function(category){
-          total = total+category_data[category][i].input
-          total_change = total_change+category_data[category][i].change
-        })
-        Object.keys(category_data).forEach(function(category){
-          category_data[category][i].weight = category_data[category][i].input/total
-          category_data[category][i].weighted_index = category_data[category][i].inflation_rate*category_data[category][i].weight
-          pir = pir + category_data[category][i].weighted_index
-          overall_inflation[i] = {series: "overall_inflation", date: category_data[category][i].date, total: total, total_change: total_change, pir: pir}
-        })
-      }
-
-    d3.select("#personalInflation").text(d3.format(".1f")(overall_inflation[0].pir)+"%")
-    d3.select("#inflationDifference").text(d3.format(".1f")(overall_inflation[0].pir-cpih[0].value)+" percentage points")
-    d3.select("#overunder").text(function(){
-      return overall_inflation[0].pir-cpih[0].value > 0 ? "over" : "under"
+    d3.select("#personalInflation").text(d3.format(".1f")(overall_inflation[0].pir) + "%")
+    d3.select("#inflationDifference").text(d3.format(".1f")(overall_inflation[0].pir - cpih[0].value) + " percentage points")
+    d3.select("#overunder").text(function() {
+      return overall_inflation[0].pir - cpih[0].value > 0 ? "over" : "under"
     })
-    d3.select("#currentInflationRate").text(d3.format(".1f")(cpih[0].value)+"%")
+    d3.select("#currentInflationRate").text(d3.format(".1f")(cpih[0].value) + "%")
 
-    d3.select("#increaseMonthlySpend").text("£"+d3.format(".2f")(overall_inflation[0].total_change))
+    d3.select("#increaseMonthlySpend").text("£" + d3.format(".2f")(overall_inflation[0].total_change))
     d3.selectAll(".dateOneYearPrior").text(d3.timeFormat("%B %Y")(overall_inflation[12].date))
     d3.selectAll(".dateFiveYearsPrior").text(d3.timeFormat("%B %Y")(overall_inflation[59].date))
     d3.selectAll(".currentDate").text(d3.timeFormat("%B %Y")(overall_inflation[0].date))
@@ -396,45 +406,51 @@ function drawGraphic() {
 
     categoryByWeight = []
 
-    Object.keys(category_data).forEach(function(category){
+    Object.keys(category_data).forEach(function(category) {
       var foo = category_data[category][0]
-      foo.category = inflation_data.filter(function(d){return d.cat_id == category})[0].category
+      foo.category = inflation_data.filter(function(d) {
+        return d.cat_id == category
+      })[0].category
       foo.cat_id = category
       categoryByWeight.push(foo)
     })
-    categoryByWeight.sort(function(a,b){
-      return b.weight-a.weight;
+    categoryByWeight.sort(function(a, b) {
+      return b.weight - a.weight;
     })
 
-    d3.select("#biggestCat").text("The largest share of your spending is on "+categoryByWeight[0].category.toLowerCase())
-    d3.select("#propBiggestCat").text(d3.format(".1f")(categoryByWeight[0].weight*100)+"%")
+    d3.select("#biggestCat").text("The largest share of your spending is on " + categoryByWeight[0].category.toLowerCase())
+    d3.select("#propBiggestCat").text(d3.format(".1f")(categoryByWeight[0].weight * 100) + "%")
 
-    d3.select("#avgPropBiggestCat").text(inflation_data.filter(function(d){return d.cat_id == categoryByWeight[0].cat_id})[0].inf_values[0].weight/10)
-    d3.select("#biggestCatInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate)+"%")
+    d3.select("#avgPropBiggestCat").text(inflation_data.filter(function(d) {
+      return d.cat_id == categoryByWeight[0].cat_id
+    })[0].inf_values[0].weight / 10)
+    d3.select("#biggestCatInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate) + "%")
 
-    d3.select("#biggestCatDiffInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate-cpih[0].value)+"%")
-    d3.select("#biggestCatOverUnder").text(function(){
-      return categoryByWeight[0].inflation_rate-cpih[0].value > 0 ? "above" : "below"
+    d3.select("#biggestCatDiffInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate - cpih[0].value) + "%")
+    d3.select("#biggestCatOverUnder").text(function() {
+      return categoryByWeight[0].inflation_rate - cpih[0].value > 0 ? "above" : "below"
     })
-    d3.select("#biggestCatOverallInflation").text(d3.format(".1f")(cpih[0].value)+"%")
+    d3.select("#biggestCatOverallInflation").text(d3.format(".1f")(cpih[0].value) + "%")
 
     categoryByIncrease = []
 
-    Object.keys(category_data).forEach(function(category){
+    Object.keys(category_data).forEach(function(category) {
       var foo = category_data[category][0]
-      foo.category = inflation_data.filter(function(d){return d.cat_id == category})[0].category
+      foo.category = inflation_data.filter(function(d) {
+        return d.cat_id == category
+      })[0].category
       foo.cat_id = category
       categoryByIncrease.push(foo)
     })
-    categoryByIncrease.sort(function(a,b){
-      return b.change-a.change;
+    categoryByIncrease.sort(function(a, b) {
+      return b.change - a.change;
     })
 
-    categoryByIncrease = categoryByIncrease.slice(0,5)
+    categoryByIncrease = categoryByIncrease.slice(0, 5)
 
     drawBarChart(categoryByIncrease.reverse())
 
-  }//end calculate function
+  } //end calculate function
 
   function drawBarChart(data) {
     var graphic = d3.select('#barchart');
@@ -555,11 +571,17 @@ function drawGraphic() {
         return y(d.pir);
       });
 
-      var line2 = d3.line()
-    .defined(function(d){return d.value!=null;}) // Right you scallywags, I'm going to tell you what this line does. This means that the line will not be drawn between any points a data point is NaN, or whatever function you want
-    .curve(d3.curveLinear)
-    .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.value); });
+    var line2 = d3.line()
+      .defined(function(d) {
+        return d.value != null;
+      }) // Right you scallywags, I'm going to tell you what this line does. This means that the line will not be drawn between any points a data point is NaN, or whatever function you want
+      .curve(d3.curveLinear)
+      .x(function(d) {
+        return x(d.date);
+      })
+      .y(function(d) {
+        return y(d.value);
+      });
 
 
     lines = d3.nest()
@@ -568,9 +590,11 @@ function drawGraphic() {
       })
       .entries(overall_inflation)
 
-      var cpih_line = d3.nest()
-        .key(function(d){return d.sourceDataset})
-        .entries(cpih)
+    var cpih_line = d3.nest()
+      .key(function(d) {
+        return d.sourceDataset
+      })
+      .entries(cpih)
 
     maxy = d3.max([d3.max(cpih_line[0].values, function(d) {
       return d.value
@@ -666,62 +690,74 @@ function drawGraphic() {
 
   }
 
-  function structureData(inflation, weights, cpih, final_data){
+  function structureData(inflation, weights, cpih, final_data) {
     parseTime = d3.timeParse(dvc.time_format)
     formatTime = d3.timeFormat("%B %Y");
 
-    for (var sc = 0; sc < inflation_data.length; sc++){
+    for (var sc = 0; sc < inflation_data.length; sc++) {
       subcategory = inflation_data[sc]
       inflation_subcategory = inflation[sc]
       weights_subcategory = d3.nest()
-        .key(function(d){return d.year})
+        .key(function(d) {
+          return d.year
+        })
         .entries(weights[sc].years)
 
       //loop through number of specified months and extract necessary data from inflation and weights dataset
-      for (var month = 1; month < dvc.time_series_totalmnths+1; month++){
+      for (var month = 1; month < dvc.time_series_totalmnths + 1; month++) {
         //get year from inflation data and filter weights data to specified year
-        year = inflation_subcategory[dvc.time_period][inflation_subcategory[dvc.time_period].length-month].year
+        year = inflation_subcategory[dvc.time_period][inflation_subcategory[dvc.time_period].length - month].year
         year = "" + year
-        selected_weight_data = weights_subcategory.filter(function (d){ return d.key == year})
+        selected_weight_data = weights_subcategory.filter(function(d) {
+          return d.key == year
+        })
 
         //get monts inflation data
-        selected_inf_data = inflation_subcategory[dvc.time_period][inflation_subcategory[dvc.time_period].length-month]
+        selected_inf_data = inflation_subcategory[dvc.time_period][inflation_subcategory[dvc.time_period].length - month]
 
         //combine date, inflation data and weights data for each month into one object
-        subcategory.inf_values.push({date: selected_inf_data.month+" "+selected_inf_data.year,index: +selected_inf_data.value, weight: +selected_weight_data[0].values[0].value})
+        subcategory.inf_values.push({
+          date: selected_inf_data.month + " " + selected_inf_data.year,
+          index: +selected_inf_data.value,
+          weight: +selected_weight_data[0].values[0].value
+        })
       }
     }
 
 
     //nest all data by category
     var nested_data = d3.nest()
-      .key(function(d){return d.category})
+      .key(function(d) {
+        return d.category
+      })
       .entries(inflation_data)
 
     //combine all subcategories and dates into one big long format dataset
-    nested_data.forEach(function(category){
+    nested_data.forEach(function(category) {
       var subcategory_inflation = []
-      for (var month = 0; month < dvc.time_series_totalmnths; month++){
-        category.values.forEach(function(subcategory){
+      for (var month = 0; month < dvc.time_series_totalmnths; month++) {
+        category.values.forEach(function(subcategory) {
           subcategory_inflation.push(subcategory.inf_values[month])
         })
       }
       //create nested data of long dataset by date
       subcategory_nested = d3.nest()
-        .key(function(d){return d.date})
+        .key(function(d) {
+          return d.date
+        })
         .entries(subcategory_inflation)
 
       //within each category, calculate the sum of subcateogry weights for each month
-      subcategory_nested.forEach(function(date){
+      subcategory_nested.forEach(function(date) {
         totalweight = 0
-        date.values.forEach(function(subcategory){
+        date.values.forEach(function(subcategory) {
           totalweight = totalweight + subcategory.weight
         })
         //use this total category weight to calculate the subcategory weight within the overall category
         index = 0
-        date.values.forEach(function(subcategory){
-          subcategory.adjweight = subcategory.weight/totalweight
-          subcategory.adjindex = subcategory.index*subcategory.adjweight
+        date.values.forEach(function(subcategory) {
+          subcategory.adjweight = subcategory.weight / totalweight
+          subcategory.adjindex = subcategory.index * subcategory.adjweight
           //use adjusted subcategory weights to calculated an index for the whole category
           index = index + subcategory.adjindex
         })
@@ -729,52 +765,60 @@ function drawGraphic() {
         date.index = index
       })
       //add this to a final dataset for use in the calculators
-      array_data.push({name: category.key, cat_id: category.values[0].cat_id, values: subcategory_nested})
+      array_data.push({
+        name: category.key,
+        cat_id: category.values[0].cat_id,
+        values: subcategory_nested
+      })
     })
 
     //convert dates into time format
-    array_data.forEach(function(category){
-      category.values.forEach(function(d){
+    array_data.forEach(function(category) {
+      category.values.forEach(function(d) {
         d.key = parseTime(d.key)
       })
     })
 
-    array_data.forEach(function(category){
+    array_data.forEach(function(category) {
       var itemkey = category.cat_id
       final_data[itemkey] = category.values
     })
 
     // structure CPIH headline data
     cpih_selected = []
-    for (var month = 1; month < dvc.time_series_totalmnths+1; month++){
-      cpih_selected.push(cpih[0].months[cpih[0].months.length-month])
+    for (var month = 1; month < dvc.time_series_totalmnths + 1; month++) {
+      cpih_selected.push(cpih[0].months[cpih[0].months.length - month])
     }
     var parseTime2 = d3.timeParse(dvc.cpih_time_format)
-    cpih_selected.forEach(function(d, i){
+    cpih_selected.forEach(function(d, i) {
       d.date = parseTime2(d.date)
       d.value = +d.value
       // cpih_final[i] = {series: "cpih", date: d.date, total: 0, total_change: 0, pir: +d.value}
     })
 
-  }//end structureData
+  } //end structureData
 
   //pass all data into ready function
-  function ready(error, everything){
+  function ready(error, everything) {
     //seperate out data into inflation and weights data
-    inflation=[]
-    weights=[]
-    cpih_new=[]
+    inflation = []
+    weights = []
+    cpih_new = []
 
     everything.forEach((item, i) => {
-      if(i%2){weights.push(item)}
-      else if(i == everything.length-1){cpih_new.push(item)}
-      else{inflation.push(item)}
+      if (i % 2) {
+        weights.push(item)
+      } else if (i == everything.length - 1) {
+        cpih_new.push(item)
+      } else {
+        inflation.push(item)
+      }
     });
     //pass these into structureData function to format for calculators
     array_data = []
     final_data = {}
     structureData(inflation, weights, cpih_new, final_data)
-  }//end ready
+  } //end ready
 
   function loadData() {
 
@@ -787,7 +831,7 @@ function drawGraphic() {
       q.defer(d3.json, "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/" + item.weight_cdid + "/data")
     })
 
-    q.defer(d3.json,"https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55o/mm23/data")
+    q.defer(d3.json, "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55o/mm23/data")
 
     //once all files are loaded, execute ready function
     q.awaitAll(ready);
