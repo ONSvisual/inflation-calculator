@@ -1,11 +1,12 @@
 body {
   max-width: 700px;
+  font-family: 'Open Sans', sans-serif;
 }
 
-body,
 tspan,
 label {
-  font-family: 'Open Sans', sans-serif;
+  padding-top: 20px;
+  padding-left: 10px;
 }
 
 .link {
