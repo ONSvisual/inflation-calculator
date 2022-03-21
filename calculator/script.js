@@ -1,11 +1,11 @@
 var pymChild = null;
 var counter = 0;
 var allCategories = inflation_data.map(function(d) {
-  return d.cat_id
+  return d.cat_id;
 }).filter(function(d, i, a) {
-  return a.indexOf(d) == i
-})
-prevSpend = 0
+  return a.indexOf(d) == i;
+});
+prevSpend = 0;
 
 function drawGraphic() {
 
@@ -28,7 +28,6 @@ function drawGraphic() {
     lineMargin = dvc.lineChartMargin[size];
     barMargins = dvc.barChartMargin[size];
 
-    d3.select("#UKlegend").style("background-color",dvc.lineColours[0])
 
   } //end initialise
 
@@ -48,7 +47,7 @@ function drawGraphic() {
         }
         addAverages(decile);
         updateRunningTotal(decile);
-        d3.select("#monthlyexpenditure").style("display","block")
+        show(d3.select("#monthlyexpenditure"))
       } //if on front page and next is clicked remove skip to end button and replace with back button
 
       if (counter < 6) {
@@ -64,11 +63,14 @@ function drawGraphic() {
         })
         if (inputtotal > 0){
           d3.select("#calculateError").text("")
+          hide(d3.select("#calculateError"))
           showResults();
           calculate(final_data, cpih_selected);
         }
         else{
+          show(d3.select("#calculateError"))
           d3.select("#calculateError").text("You must enter some spending for this calculator to estimate your personal inflation rate")
+          pymChild.sendHeight()
         }
       }
       // if we're at the end show the results
@@ -173,18 +175,27 @@ function drawGraphic() {
 
   function addTooltips(){
     inflation_data.forEach(function(category) {
-      d3.select("#"+category.cat_id+"-question .question").text(category.category)
+      d3.select("#"+category.cat_id+"-question .question").text(category.category);
       if (category.description != "Add description here..."){
         tippy('#'+category.cat_id+'-question',{
           content: category.description,
           theme: "ons",
           placement: "top"
-        })
+        });
       }
       else{
-        d3.select("#"+category.cat_id+"-question .information").remove()
+        d3.select("#"+category.cat_id+"-question .information").remove();
       }
-    })
+    });
+
+    tippy('#copyToClipboard', {
+       placement: "top-start",
+       content: "Link copied to clipboard",
+       trigger: 'click',
+       theme: "ons",
+       duration: 1000
+     });
+
   }
 
   function addScreenReaderLabels(){
@@ -329,8 +340,6 @@ function drawGraphic() {
   }
 
   function calculate(data, cpih){
-
-    console.log(data)
 
       var total = 0
       var total_change = 0

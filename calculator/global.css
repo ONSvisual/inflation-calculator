@@ -288,7 +288,6 @@ legend {
 .btn.active {
   background-color: #206095;
   color: white !important;
-  -webkit-box-shadow: none;
   box-shadow: 0 0 0pt 3pt orange; }
 
 .btn-group > .btn:active {
@@ -384,7 +383,9 @@ p {
   margin-top: 0.2rem; }
 
 .input--select {
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   width: 100%;
   max-width: 18em;
   min-width: 13em;
@@ -453,7 +454,7 @@ p {
     .select select:focus {
       outline: 3px solid #FFA23A; }
 
-@media all and (min-width: 0\0) and (min-resolution: 0.001dpcm) {
+@media all and (min-width: 0\0) and (-webkit-min-device-pixel-ratio: 0), all and (min-width: 0\0) and (min-resolution: 0.001dpcm) {
   .select select {
     padding-right: 0; }
   .select:after, .select:before {
@@ -462,7 +463,9 @@ p {
 .input--checkbox {
   width: 30px;
   height: 30px;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: 2px solid #206095;
   padding: 0.5rem;
   font-size: 1rem;
@@ -541,7 +544,9 @@ input[type=checkbox]:focus {
 .input--radio {
   width: 30px;
   height: 30px;
-  appearance: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
   border: 2px solid #206095;
   padding: 0.5rem;
   font-size: 1rem;
@@ -605,10 +610,7 @@ input[type=checkbox], input[type=radio] {
   background-image: none;
   border: 2px solid #1b5f97;
   border-radius: 0px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
-  -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
   transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s; }
 
 .search-group {
@@ -656,6 +658,18 @@ input:focus {
   height: 28px;
   width: 28px; }
 
+input[type=number]::-moz-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: inherit;
+  opacity: 1;
+  /* Firefox */ }
+
+input[type=number]:-ms-input-placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: inherit;
+  opacity: 1;
+  /* Firefox */ }
+
 input[type=number]::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: inherit;
@@ -685,7 +699,6 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 16px !important;
   font-size: 1rem;
   line-height: 1.25;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
   height: 45px;
@@ -824,9 +837,7 @@ button:focus {
   border: 2px solid #1b5f97;
   padding-left: 0px;
   padding-right: 0px;
-  display: -webkit-flex;
   display: flex;
-  -webkit-align-items: center;
   align-items: center;
   max-width: 160px;
   float: none; }
@@ -1006,7 +1017,8 @@ select:focus {
   border: solid 3px #D32F2F;
   margin-bottom: 30px;
   width: 60%; }
-  .error_message p {
+
+.error_message p {
     padding: 0;
     margin-top: 0; }
 

@@ -14,14 +14,56 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="global.css" />
 
+  <script>
+  function getUsageCookieValue() {
+      var cookiesPolicyCookie = document.cookie.match('(^|;) ?cookies_policy=([^;]*)(;|$)');
+      if (cookiesPolicyCookie) {
+          var decodedCookie = decodeURIComponent(cookiesPolicyCookie[2])
+          var cookieValue = JSON.parse(decodedCookie)
+          return !cookieValue.usage
+      }
+      return true
+  }
 
 
+  function htmlUnescape(str){
+      return str.replace(/&#x3D;/g, "=");
+  }
 
+  dataLayer = [{
+      "analyticsOptOut": getUsageCookieValue(),
+      "gtm.whitelist": ["google","hjtc","lcl"],
+      "gtm.blacklist": ["customScripts","sp","adm","awct","k","d","j"],
+      "contentTitle": htmlUnescape("Personal Inflation Calculator"),
+  }];
+
+  </script>
+
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer'
+          ? '&l=' + l
+          : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-MBCBVQS');
+  </script>
 </head>
 
-
-
 <body>
+  <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-MBCBVQS"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
   <div class="column-major">
 
     <!-- Each section consists of chapter-line and section-container,
@@ -991,7 +1033,9 @@
     <button class="button-calculate button-output" id="intro-next-button">Next &nbsp; ►</button>
     <button id="skipToEndButton" class="button-back disabled" disabled>Skip to the end using income averages</button>
     <button id="backButton-frontpage" style="display:none;" class="button-back">Back</button>
-    <span class="error" id="calculateError"></span>
+    <div>
+      <p class="error--message" style="display:none" id="calculateError" aria-live="assertive"></p>
+    </div>
 
   </div>
 
@@ -1027,7 +1071,7 @@
         <h4>Inflation rate change over the past 5 years, annual rate (%), from <span class="dateFiveYearsPrior"></span> to <span class="currentDate"></span></h4>
         <div class="row-buttons">
         <div class="row-buttons"><div class="legend-circle colour-matisse"></div><span class="legend-label">Your personal inflation rate</span></div>
-        <div class="row-buttons"><div class="legend-circle" id="UKlegend"></div><span class="legend-label">UK inflation rate</span></div>
+        <div class="row-buttons"><div class="legend-circle colour-darkgrey"></div><span class="legend-label">UK inflation rate</span></div>
         </div>
         <div id="graphic"></div>
       </div>
@@ -1058,11 +1102,11 @@
 
       <h3>Share this tool</h3>
       <div class="row-buttons">
-        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_URL_Large.svg"></button>
-        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Email_Large.svg"></button>
-        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Twitter_Small.svg"></button>
-        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_LinkedIn_Large.svg"></button>
-        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Facebook_Large.svg"></button>
+        <button onclick="navigator.clipboard.writeText(window.location.href);" id="copyToClipboard" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_URL_Large.svg"></button>
+        <a href="mailto:?subject=Personal%20inflation%20calculator&amp;body=I%20just%20completed%20the%20ONS%20personal%20inflation%20calculator.%20See%20what%20your%20personal%20inflation%20is%20at%20http://www.ons.gov.uk/"><button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Email_Large.svg"></button></a>
+        <a href="https://twitter.com/intent/tweet?text=I%20just%20completed%20the%20ONS%20personal%20inflation%20calculator&url=https://www.ons.gov.uk/."><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Twitter_Small.svg"></button></a>
+        <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.ons.gov.uk&title=I%20just%20completed%20the%20ONS%20personal%20inflation%20calculator.%20See%20what%20your%20personal%20inflation%20is%20at%20https://www.ons.gov.uk/"><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_LinkedIn_Large.svg"></button></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.ons.gov.uk/" target="_blank"><button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Facebook_Large.svg"></button></a>
       </div>
 
 
