@@ -41,7 +41,7 @@ dvc = {
   "time_format": "%B %Y",
   "cpih_time_format": "%Y %b",
   "time_series_totalmnths": 60,
-  "lineColours":["#17A5A3","#206095"],
+  "lineColours":["#871A5B","#206095"],
   "lineChartMargin": {
     "sm": {
       "top": 20,
@@ -79,7 +79,7 @@ dvc = {
       "top": 0,
       "right": 10,
       "bottom": 20,
-      "left": 250
+      "left": 230
     }
   },
   "mobileBreakpoint": 414,

@@ -36,6 +36,14 @@ h6 {
 .header{
   width: 75%;
 }
+
+.error{
+  color: red;
+  font-weight: 700;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
 .chapter-line {
   background-color: #BCBCBD;
   height: 4px;
@@ -106,6 +114,8 @@ h6 {
 
 .avgcompare{
   font-size: 12px;
+  margin-top: 5px;
+  margin-bottom: 15px;
 }
 
 p {
@@ -139,8 +149,8 @@ input[type="text"], input[type="number"], button, select {
 
 .number-input-container, .dropdown-container, .money-input-container {
   display: inline-block;
-  margin-bottom: 18px;
-  margin-top: 10px;
+  /*margin-bottom: 0px;*/
+  /*margin-top: 5px;*/
 }
 
 .number-input-container {
@@ -234,7 +244,7 @@ button:hover {
   background-color: #003C57;
 }
 
-button:focus, input:focus, select:focus {
+button:focus, input:focus, select:focus, button.socialbutton:focus {
   outline: 3px solid orange;
 }
 
@@ -244,8 +254,6 @@ button.socialbutton {
   border: none;
   margin-right: 8px;
 }
-
-button.socialbutton:focus {}
 
 .dropdown {
   height: 36px;

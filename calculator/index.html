@@ -28,9 +28,9 @@
     which contains some text that goes at the top, the output div
     (display: none at start), the input-section div, and the calculator button. -->
     <div class="chapter-line"></div>
-    <div class="section-container">
+    <div class="section-container heading">
       <h3 class="graphic-heading">What is my personal inflation rate?</h3>
-      <p>Adjust the proportion of your income you spend on each category of spending below to see how your inflation rate changes. </p>
+      <p>Adjust the proportion of your household income spent on each category of spending to see how your inflation rate changes.</p>
     </div>
 
     <div class="frontpage column grey-box-text">
@@ -49,19 +49,24 @@
         <div class="row-major">
           <div class="column header">
             <h3>Your household income</h3>
-            <p>In order to help you estimate your spending, we can use your income information to calculate the amount an average household with a similar income spends on each category within this calculator.</p>
+            <p>If you add details of your household income, the calculator will include how much the average household in your income group spends in each area, to help you estimate your spending.</p>
           </div>
           <div class="icon">
-            <img src="./images/1716_0-Income-icon.svg"/ height="75px" width="75px">
+            <img src="./images/1716_0-Income-icon.svg"/ alt="" height="75px" width="75px">
           </div>
           <div>
-            <p>If you do not want to enter in your income, you can continue using the spend of an average UK household.</p>
+            <p>If you do not give your income information, we will use spending information for the average UK household instead.</p>
           </div>
         </div>
 
         <div class="row-buttons">
+          <input type="radio" class="input--radio" id="average-radio" name="income" value="average" checked="checked">
+          <label for="average-radio">&nbsp;Use UK average spend <span id=UK-average-spend></span></label>
+        </div>
+
+        <div class="row-buttons">
           <input type="radio" class="input--radio" id="net-income-radio" name="income" value="net-income">
-          <label for="net-income">&nbsp;Enter my net income</label>
+          <label for="net-income-radio">&nbsp;Enter my household net income</label>
         </div>
         <div class="row-buttons" id="net-income-input" style="display:none">
           <div class="sidebar"></div>
@@ -74,7 +79,7 @@
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="netincome-time-period" class="visuallyhidden">Hosuehold net income time period</label>
+                  <label for="netincome-time-period" class="visuallyhidden">Household net income time period</label>
                   <select class="dropdown income" id="netincome-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -85,10 +90,7 @@
           </div>
 
         </div>
-        <div class="row-buttons">
-          <input type="radio" class="input--radio" id="average-radio" name="income" value="average" checked="checked">
-          <label for="average">&nbsp;Use UK average spend <span id=UK-average-spend></span></label>
-        </div>
+
       </div>
 
 
@@ -108,27 +110,26 @@
         <div class="row-major">
           <div class="column header">
             <h3>Groceries</h3>
-            <p>These are items bought for your home, rather than meals or drinks bought from restaurants or pubs. Pet food, and clothing and footwear items are covered elsewhere.</p>
+            <p>These are items bought for your home, rather than meals or drinks bought from restaurants or pubs. Spending on pet food, and clothing and footwear are covered elsewhere.</p>
           </div>
           <div class="icon">
             <img src="./images/1716_1-Groceries-icon.svg"/ height="75px" width="75px">
           </div>
-          <p>How much do you spend on...</p>
+          <p>How much does your household spend on:</p>
         </div>
 
         <div class="row-major">
 
           <div class="column item">
-            <p class="spendingquestion" id="foodhotdrinks-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="foodhotdrinks-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="foodhotdrinks-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="foodhotdrinks" class="visuallyhidden">Enter the amount you spend on food, and hot and soft drinks</label>
+                  <label for="foodhotdrinks" class="visuallyhidden">Enter the amount you spend on <span id="foodhotdrinks-label"></span></label>
                   <input type="number" id="foodhotdrinks" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="groceries-time-period" class="visuallyhidden">Food, and hot and soft drinks time period</label>
+                  <label for="groceries-time-period" class="visuallyhidden"><span id="foodhotdrinks-label"></span> time period</label>
                   <select class="dropdown spending" id="foodhotdrinks-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -136,19 +137,19 @@
                   </select>
                 </div>
               </div>
+              <span id="foodhotdrinks-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="spiritswinebeer-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="spiritswinebeer-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="spiritswinebeer-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="spiritswinebeer" class="visuallyhidden">Enter spending for Spirits, wine and beers</label>
+                  <label for="spiritswinebeer" class="visuallyhidden">Enter the amount you spend on <span id="spiritswinebeer-label"></span></label>
                   <input type="number" id="spiritswinebeer" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="spiritswinebeer-time-period" class="visuallyhidden">Spirits, wine and beers time period</label>
+                  <label for="spiritswinebeer-time-period" class="visuallyhidden"><span id="spiritswinebeer-label"></span> time period</label>
                   <select class="dropdown spending" id="spiritswinebeer-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -156,19 +157,19 @@
                   </select>
                 </div>
               </div>
+              <span id="spiritswinebeer-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="tobacco-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="tobacco-avgcompare" class="avgcompare">&nbsp;</span>
+            <p tabindex="0" class="spendingquestion" id="tobacco-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="tobacco" class="visuallyhidden">Enter spending for Tobacco products including e-cigarettes</label>
+                  <label for="tobacco" class="visuallyhidden">Enter the amount you spend on <span id="tobacco-label"></span></label>
                   <input type="number" id="tobacco" class="money-input spending" name="clothing" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="tobacco-time-period" class="visuallyhidden">Tobacco time period</label>
+                  <label for="tobacco-time-period" class="visuallyhidden"><span id="tobacco-label"></span> time period</label>
                   <select class="dropdown spending" id="tobacco-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -176,19 +177,19 @@
                   </select>
                 </div>
               </div>
+              <span id="tobacco-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="personalcare-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="personalcare-avgcompare" class="avgcompare">&nbsp;</span>
+            <p tabindex="0" class="spendingquestion" id="personalcare-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="personalcare" class="visuallyhidden">Enter spending for personal care</label>
+                  <label for="personalcare" class="visuallyhidden">Enter the amount you spend on <span id="personalcare-label"></span></label>
                   <input type="number" id="personalcare" class="money-input spending" name="clothing" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="personalcare-time-period" class="visuallyhidden">Personal care time period</label>
+                  <label for="personalcare-time-period" class="visuallyhidden"><span id="personalcare-label"></span> time period</label>
                   <select class="dropdown spending" id="personalcare-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -196,19 +197,19 @@
                   </select>
                 </div>
               </div>
+              <span id="personalcare-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="nongrocery-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="nongrocery-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="nongrocery-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="nongrocery" class="visuallyhidden">Enter spending for non-grocery items</label>
-                  <input type="number" id="nongrocery" class="money-input spending" name="clothing" value="0" min="0">
+                  <label for="nongrocery" class="visuallyhidden">Enter the amount you spend on <span id="nongrocery-label"></span></label>
+                  <input type="number" id="nongrocery" class="money-input spending" name="nongrocery" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="nongrocery-time-period" class="visuallyhidden">Non-grocery items time period</label>
+                  <label for="nongrocery-time-period" class="visuallyhidden"><span id="nongrocery-label"></span> time period</label>
                   <select class="dropdown spending" id="nongrocery-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -216,6 +217,7 @@
                   </select>
                 </div>
               </div>
+              <span id="nongrocery-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
         </div>
@@ -239,27 +241,26 @@
         <div class="row-major">
           <div class="column header">
             <h3>Housing</h3>
-            <p>Description of category</p>
+            <p>This category covers your spend on housing whether you are a homeowner or you rent. You can also enter your Council tax or rates, utility bills and how much you spend on items for the home. Landline and internet services are included under communications.</p>
           </div>
           <div class="icon">
             <img src="./images/1716_2-Housing-icon.svg"/ height="75px" width="75px">
           </div>
-          <p>How much do you spend on...</p>
+          <p>How much does your household spend on:</p>
         </div>
 
         <div class="row-major">
 
           <div class="column item">
-            <p class="spendingquestion" id="ooh-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="ooh-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="ooh-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="ooh" class="visuallyhidden">Enter the amount you spend on owner occupied housing costs</label>
+                  <label for="ooh" class="visuallyhidden">Enter the amount you spend on <span id="ooh-label"></span></label>
                   <input type="number" id="ooh" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="ooh-time-period" class="visuallyhidden">Owner occupied housing costs time period</label>
+                  <label for="ooh-time-period" class="visuallyhidden"><span id="ooh-label"></span> time period</label>
                   <select class="dropdown spending" id="ooh-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -267,19 +268,19 @@
                   </select>
                 </div>
               </div>
+              <span id="ooh-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="maintenance-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="maintenance-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="maintenance-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="ooh" class="visuallyhidden">Enter the amount you spend on home maintenance</label>
+                  <label for="ooh" class="visuallyhidden">Enter the amount you spend on <span id="maintenance-label"></span></label>
                   <input type="number" id="maintenance" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="maintenance-time-period" class="visuallyhidden">Home maintenance time period</label>
+                  <label for="maintenance-time-period" class="visuallyhidden"><span id="maintenance-label"></span> time period</label>
                   <select class="dropdown spending" id="maintenance-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -287,19 +288,19 @@
                   </select>
                 </div>
               </div>
+              <span id="maintenance-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="rent-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="rent-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="rent-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="rent" class="visuallyhidden">Enter the amount you spend on rent </label>
+                  <label for="rent" class="visuallyhidden">Enter the amount you spend on <span id="rent-label"></span></label>
                   <input type="number" id="rent" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="rent-time-period" class="visuallyhidden">Rent time period</label>
+                  <label for="rent-time-period" class="visuallyhidden"><span id="rent-label"></span> time period</label>
                   <select class="dropdown spending" id="rent-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -307,19 +308,19 @@
                   </select>
                 </div>
               </div>
+              <span id="rent-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="counciltax-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="counciltax-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="counciltax-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="counciltax" class="visuallyhidden">Enter spending for Council tax and rates</label>
+                  <label for="counciltax" class="visuallyhidden">Enter the amount you spend on <span id="counciltax-label"></span></label>
                   <input type="number" id="counciltax" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="counciltax-time-period" class="visuallyhidden">Council tax and rates time period</label>
+                  <label for="counciltax-time-period" class="visuallyhidden"><span id="counciltax-label"></span> time period</label>
                   <select class="dropdown spending" id="counciltax-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -327,19 +328,19 @@
                   </select>
                 </div>
               </div>
+              <span id="counciltax-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="electricitygasfuels-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="electricitygasfuels-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="electricitygasfuels-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="electricitygasfuels" class="visuallyhidden">Enter spending for Electricity, gas and other fuels</label>
+                  <label for="electricitygasfuels" class="visuallyhidden">Enter the amount you spend on <span id="electricitygasfuels-label"></span></label>
                   <input type="number" id="electricitygasfuels" class="money-input spending" name="clothing" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="electricitygasfuels-time-period" class="visuallyhidden">Electricity, gas and other fuels time period</label>
+                  <label for="electricitygasfuels-time-period" class="visuallyhidden"><span id="electricitygasfuels-label"></span> time period</label>
                   <select class="dropdown spending" id="electricitygasfuels-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -347,19 +348,19 @@
                   </select>
                 </div>
               </div>
+              <span id="electricitygasfuels-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="water-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="water-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="water-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="water" class="visuallyhidden">Enter spending for water and sewerage</label>
+                  <label for="water" class="visuallyhidden">Enter the amount you spend on <span id="water-label"></span></label>
                   <input type="number" id="water" class="money-input spending" name="clothing" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="water-time-period" class="visuallyhidden">Water and sewerage time period</label>
+                  <label for="water-time-period" class="visuallyhidden"><span id="water-label"></span> time period</label>
                   <select class="dropdown spending" id="water-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -367,19 +368,19 @@
                   </select>
                 </div>
               </div>
+              <span id="water-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="furniture-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="furniture-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="furniture-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="furniture" class="visuallyhidden">Enter spending for Furniture, furnishings, household equipment and tools</label>
+                  <label for="furniture" class="visuallyhidden">Enter the amount you spend on <span id="furniture-label"></span></label>
                   <input type="number" id="furniture" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="furniture-time-period" class="visuallyhidden">Furniture, furnishings, household equipment and tools time period</label>
+                  <label for="furniture-time-period" class="visuallyhidden"><span id="furniture-label"></span> time period</label>
                   <select class="dropdown spending" id="furniture-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -387,6 +388,7 @@
                   </select>
                 </div>
               </div>
+              <span id="furniture-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
         </div>
         <!-- end rows for inputs -->
@@ -410,27 +412,26 @@
         <div class="row-major">
           <div class="column header">
             <h3>Communication</h3>
-            <p>Description of category</p>
+            <p>This is where you can include the cost of your mobile phone, internet, and home telephone.</p>
           </div>
           <div class="icon">
             <img src="./images/1716_3-Communication-icon.svg"/ height="75px" width="75px">
           </div>
-          <p>How much do you spend on...</p>
+          <p>How much does your household spend on:</p>
         </div>
 
         <div class="row-major">
 
           <div class="column item">
-            <p class="spendingquestion" id="mobilephone-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="mobilephone-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="mobilephone-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="mobilephone" class="visuallyhidden">Enter the amount you spend on mobile phone charges</label>
+                  <label for="mobilephone" class="visuallyhidden">Enter the amount you spend on <span id="mobilephone-label"></span></label>
                   <input type="number" id="mobilephone" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="mobilephone-time-period" class="visuallyhidden">mobile phone charges time period</label>
+                  <label for="mobilephone-time-period" class="visuallyhidden"><span id="mobilephone-label"></span> time period</label>
                   <select class="dropdown spending" id="mobilephone-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -438,19 +439,19 @@
                   </select>
                 </div>
               </div>
+              <span id="mobilephone-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="internet-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="internet-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="internet-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="internet" class="visuallyhidden">Enter spending for Internet, landline and other communications costs</label>
+                  <label for="internet" class="visuallyhidden">Enter the amount you spend on <span id="internet-label"></span></label>
                   <input type="number" id="internet" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="internet-time-period" class="visuallyhidden">Internet, landline and other communications costs time period</label>
+                  <label for="internet-time-period" class="visuallyhidden"><span id="internet-label"></span> time period</label>
                   <select class="dropdown spending" id="internet-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -458,6 +459,7 @@
                   </select>
                 </div>
               </div>
+              <span id="internet-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
         </div>
@@ -481,27 +483,26 @@
         <div class="row-major">
           <div class="column header">
             <h3>Transport</h3>
-            <p>Description of category</p>
+            <p>This section covers your transport costs from the cost of purchasing, running and filling up your vehicle (vehicle insurance is covered in a later category) to bus and train fares. Spending on travelcards can be added under either train or bus fares.</p>
           </div>
           <div class="icon">
             <img src="./images/1716_4-Transport-icon.svg"/ height="75px" width="75px">
           </div>
-          <p>How much do you spend on...</p>
+          <p>How much does your household spend on:</p>
         </div>
 
         <div class="row-major">
 
           <div class="column item">
-            <p class="spendingquestion" id="vehicles-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="vehicles-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="vehicles-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="vehicles" class="visuallyhidden">Enter the amount you spend on Purchase of vehicles</label>
+                  <label for="vehicles" class="visuallyhidden">Enter the amount you spend on <span id="vehicles-label"></span></label>
                   <input type="number" id="vehicles" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="vehicles-time-period" class="visuallyhidden">Purchase of vehicles time period</label>
+                  <label for="vehicles-time-period" class="visuallyhidden"><span id="vehicles-label"></span> time period</label>
                   <select class="dropdown spending" id="vehicles-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -509,19 +510,19 @@
                   </select>
                 </div>
               </div>
+              <span id="vehicles-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="petroldiesel-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="petroldiesel-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="petroldiesel-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="petroldiesel" class="visuallyhidden">Enter spending for Petrol or diesel</label>
+                  <label for="petroldiesel" class="visuallyhidden">Enter the amount you spend on <span id="petroldiesel-label"></span></label>
                   <input type="number" id="petroldiesel" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="petroldiesel-time-period" class="visuallyhidden">Petrol or diesel time period</label>
+                  <label for="petroldiesel-time-period" class="visuallyhidden"><span id="petroldiesel-label"></span> time period</label>
                   <select class="dropdown spending" id="petroldiesel-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -529,19 +530,19 @@
                   </select>
                 </div>
               </div>
+              <span id="petroldiesel-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="othermotoring-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="othermotoring-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="othermotoring-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="othermotoring" class="visuallyhidden">Enter spending for Other motoring costs including repairs, parking costs and road tolls</label>
+                  <label for="othermotoring" class="visuallyhidden">Enter the amount you spend on <span id="othermotoring-label"></span></label>
                   <input type="number" id="othermotoring" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="othermotoring-time-period" class="visuallyhidden">Other motoring costs including repairs, parking costs and road tolls time period</label>
+                  <label for="othermotoring-time-period" class="visuallyhidden"><span id="othermotoring-label"></span> time period</label>
                   <select class="dropdown spending" id="othermotoring-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -549,19 +550,19 @@
                   </select>
                 </div>
               </div>
+            <span id="othermotoring-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="trainfares-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="trainfares-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="trainfares-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="trainfares" class="visuallyhidden">Enter the amount you spend on train fares</label>
+                  <label for="trainfares" class="visuallyhidden">Enter the amount you spend on <span id="trainfares-label"></span></label>
                   <input type="number" id="trainfares" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="trainfares-time-period" class="visuallyhidden">train fares time period</label>
+                  <label for="trainfares-time-period" class="visuallyhidden"><span id="trainfares-label"></span> time period</label>
                   <select class="dropdown spending" id="trainfares-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -569,19 +570,19 @@
                   </select>
                 </div>
               </div>
+              <span id="trainfares-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="busfares-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="busfares-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="busfares-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="busfares" class="visuallyhidden">Enter spending for Bus fares</label>
+                  <label for="busfares" class="visuallyhidden">Enter the amount you spend on <span id="busfares-label"></span></label>
                   <input type="number" id="busfares" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="busfares-time-period" class="visuallyhidden">Bus fare time period</label>
+                  <label for="busfares-time-period" class="visuallyhidden"><span id="busfares-label"></span> time period</label>
                   <select class="dropdown spending" id="busfares-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -589,6 +590,7 @@
                   </select>
                 </div>
               </div>
+              <span id="busfares-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
         </div>
@@ -612,47 +614,26 @@
         <div class="row-major">
           <div class="column header">
             <h3>Leisure</h3>
-            <p>Description of category</p>
+            <p>This is spending on a range of leisure activities including eating and drinking out, holidays, TV licence fees and subscriptions to online streaming services, entertainment, days out, pets and gardening.</p>
           </div>
           <div class="icon">
             <img src="./images/1716_5-Leisure-icon.svg"/ height="75px" width="75px">
           </div>
-          <p>How much do you spend on...</p>
+          <p>How much does your household spend on:</p>
         </div>
 
         <div class="row-major">
 
           <div class="column item">
-            <p class="spendingquestion" id="electrical-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="electrical-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="tv-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="electrical" class="visuallyhidden">Enter the amount you spend on Electrical items</label>
-                  <input type="number" id="electrical" class="money-input spending" value="0" min="0">
-                </div>
-
-                <div class="dropdown-container">
-                  <label for="electrical-time-period" class="visuallyhidden">Electrical items time period</label>
-                  <select class="dropdown spending" id="electrical-time-period">
-                    <option value="52">per week</option>
-                    <option value="12" selected>per month</option>
-                    <option value="1">per year</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-
-          <div class="column item">
-            <p class="spendingquestion" id="tv-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="tv-avgcompare" class="avgcompare">&nbsp;</span>
-              <div class="row-minor">
-                <div class="money-input-container spending">
-                  <label for="tv" class="visuallyhidden">Enter the amount you spend on Television licence fees and subscriptions</label>
+                  <label for="tv" class="visuallyhidden">Enter the amount you spend on <span id="tv-label"></span></label>
                   <input type="number" id="tv" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="tv-time-period" class="visuallyhidden">Television licence fees and subscriptions time period</label>
+                  <label for="tv-time-period" class="visuallyhidden"><span id="tv-label"></span> time period</label>
                   <select class="dropdown spending" id="tv-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -660,119 +641,19 @@
                   </select>
                 </div>
               </div>
+              <span id="tv-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="games-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="games-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="eatingout-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="games" class="visuallyhidden">Enter spending for Games, toys and hobbies</label>
-                  <input type="number" id="games" class="money-input spending" value="0" min="0">
-                </div>
-
-                <div class="dropdown-container">
-                  <label for="games-time-period" class="visuallyhidden">Games, toys and hobbies time period</label>
-                  <select class="dropdown spending" id="games-time-period">
-                    <option value="52">per week</option>
-                    <option value="12" selected selected>per month</option>
-                    <option value="1">per year</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-
-          <div class="column item">
-            <p class="spendingquestion" id="entertainment-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="entertainment-avgcompare" class="avgcompare">&nbsp;</span>
-              <div class="row-minor">
-                <div class="money-input-container spending">
-                  <label for="entertainment" class="visuallyhidden">Enter the amount you spend on Entertainment and days out</label>
-                  <input type="number" id="entertainment" class="money-input spending" value="0" min="0">
-                </div>
-
-                <div class="dropdown-container">
-                  <label for="entertainment-time-period" class="visuallyhidden">Entertainment and days out time period</label>
-                  <select class="dropdown spending" id="entertainment-time-period">
-                    <option value="52">per week</option>
-                    <option value="12" selected>per month</option>
-                    <option value="1">per year</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-
-          <div class="column item">
-            <p class="spendingquestion" id="pets-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="pets-avgcompare" class="avgcompare">&nbsp;</span>
-              <div class="row-minor">
-                <div class="money-input-container spending">
-                  <label for="pets" class="visuallyhidden">Enter the amount you spend on pets</label>
-                  <input type="number" id="pets" class="money-input spending" value="0" min="0">
-                </div>
-
-                <div class="dropdown-container">
-                  <label for="pets-time-period" class="visuallyhidden">pets time period</label>
-                  <select class="dropdown spending" id="pets-time-period">
-                    <option value="52">per week</option>
-                    <option value="12" selected>per month</option>
-                    <option value="1">per year</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-
-          <div class="column item">
-            <p class="spendingquestion" id="gardening-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="gardening-avgcompare" class="avgcompare">&nbsp;</span>
-              <div class="row-minor">
-                <div class="money-input-container spending">
-                  <label for="gardening" class="visuallyhidden">Enter the amount you spend on Gardening, plants and flowers</label>
-                  <input type="number" id="gardening" class="money-input spending" value="0" min="0">
-                </div>
-
-                <div class="dropdown-container">
-                  <label for="gardening-time-period" class="visuallyhidden">Gardening, plants and flowers time period</label>
-                  <select class="dropdown spending" id="gardening-time-period">
-                    <option value="52">per week</option>
-                    <option value="12" selected>per month</option>
-                    <option value="1">per year</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-
-          <div class="column item">
-            <p class="spendingquestion" id="holidays-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="holidays-avgcompare" class="avgcompare">&nbsp;</span>
-              <div class="row-minor">
-                <div class="money-input-container spending">
-                  <label for="holidays" class="visuallyhidden">Enter spending for Holidays</label>
-                  <input type="number" id="holidays" class="money-input spending" value="0" min="0">
-                </div>
-
-                <div class="dropdown-container">
-                  <label for="holidays-time-period" class="visuallyhidden">Holidays time period</label>
-                  <select class="dropdown spending" id="holidays-time-period">
-                    <option value="52">per week</option>
-                    <option value="12" selected selected>per month</option>
-                    <option value="1">per year</option>
-                  </select>
-                </div>
-              </div>
-          </div>
-
-          <div class="column item">
-            <p class="spendingquestion" id="eatingout-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="eatingout-avgcompare" class="avgcompare">&nbsp;</span>
-              <div class="row-minor">
-                <div class="money-input-container spending">
-                  <label for="eatingout" class="visuallyhidden">Enter spending for Eating and drinking out</label>
+                  <label for="eatingout" class="visuallyhidden">Enter the amount you spend on <span id="eatingout-label"></span></label>
                   <input type="number" id="eatingout" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="eatingout-time-period" class="visuallyhidden">Eating and drinking out time period</label>
+                  <label for="eatingout-time-period" class="visuallyhidden"><span id="eatingout-label"></span> time period</label>
                   <select class="dropdown spending" id="eatingout-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -780,19 +661,139 @@
                   </select>
                 </div>
               </div>
+              <span id="eatingout-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
-            <p class="spendingquestion" id="otherleisure-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="otherleisure-avgcompare" class="avgcompare">&nbsp;</span>
+            <p class="spendingquestion" id="entertainment-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="otherleisure" class="visuallyhidden">Enter spending for Other leisure including books, newspapers and sports equipment</label>
+                  <label for="entertainment" class="visuallyhidden">Enter the amount you spend on <span id="entertainment-label"></span></label>
+                  <input type="number" id="entertainment" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="entertainment-time-period" class="visuallyhidden"><span id="entertainment-label"></span> time period</label>
+                  <select class="dropdown spending" id="entertainment-time-period">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="entertainment-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="holidays-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="holidays" class="visuallyhidden">Enter the amount you spend on <span id="holidays-label"></span></label>
+                  <input type="number" id="holidays" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="holidays-time-period" class="visuallyhidden"><span id="holidays-label"></span> time period</label>
+                  <select class="dropdown spending" id="holidays-time-period">
+                    <option value="52">per week</option>
+                    <option value="12" selected selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="holidays-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="pets-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="pets" class="visuallyhidden">Enter the amount you spend on <span id="pets-label"></span></label>
+                  <input type="number" id="pets" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="pets-time-period" class="visuallyhidden"><span id="pets-label"></span> time period</label>
+                  <select class="dropdown spending" id="pets-time-period">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="pets-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="gardening-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="gardening" class="visuallyhidden">Enter the amount you spend on <span id="gardening-label"></span></label>
+                  <input type="number" id="gardening" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="gardening-time-period" class="visuallyhidden"><span id="gardening-label"></span> time period</label>
+                  <select class="dropdown spending" id="gardening-time-period">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="gardening-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="games-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="games" class="visuallyhidden">Enter the amount you spend on <span id="games-label"></span></label>
+                  <input type="number" id="games" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="games-time-period" class="visuallyhidden"><span id="games-label"></span> time period</label>
+                  <select class="dropdown spending" id="games-time-period">
+                    <option value="52">per week</option>
+                    <option value="12" selected selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="games-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="electrical-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="electrical" class="visuallyhidden">Enter the amount you spend on <span id="electrical-label"></span></label>
+                  <input type="number" id="electrical" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="electrical-time-period" class="visuallyhidden"><span id="electrical-label"></span> time period</label>
+                  <select class="dropdown spending" id="electrical-time-period">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="electrical-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="otherleisure-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="otherleisure" class="visuallyhidden">Enter the amount you spend on <span id="otherleisure-label"></span></label>
                   <input type="number" id="otherleisure" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="otherleisure-time-period" class="visuallyhidden">Other leisure including books, newspapers and sports equipment time period</label>
+                  <label for="otherleisure-time-period" class="visuallyhidden"><span id="otherleisure-label"></span> time period</label>
                   <select class="dropdown spending" id="otherleisure-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -800,6 +801,7 @@
                   </select>
                 </div>
               </div>
+              <span id="otherleisure-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
         </div>
@@ -823,28 +825,27 @@
 
         <div class="row-major">
           <div class="column header">
-            <h3>Other</h3>
-            <p>Description of category</p>
+            <h3>Other costs and expenditure</h3>
+            <p>Spending across of range of groupings including health, caring for others, education, clothing and footwear, and on insurance and financial services.</p>
           </div>
           <div class="icon">
             <img src="./images/1716_6-Other-icon.svg"/ height="75px" width="75px">
           </div>
-          <p>How much do you spend on...</p>
+          <p>How much does your household spend on:</p>
         </div>
 
         <div class="row-major">
 
           <div class="column item">
             <p class="spendingquestion" id="health-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="health-avgcompare" class="avgcompare">&nbsp;</span>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="health" class="visuallyhidden">Enter the amount you spend on Health and personal care</label>
+                  <label for="health" class="visuallyhidden">Enter the amount you spend on <span id="health-label"></span></label>
                   <input type="number" id="health" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="health-time-period" class="visuallyhidden">Health and personal care time period</label>
+                  <label for="health-time-period" class="visuallyhidden"><span id="health-label"></span> time period</label>
                   <select class="dropdown spending" id="health-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -852,19 +853,19 @@
                   </select>
                 </div>
               </div>
+              <span id="health-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
             <p class="spendingquestion" id="education-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="education-avgcompare" class="avgcompare">&nbsp;</span>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="education" class="visuallyhidden">Enter spending for University tuition fees, private school fees and part-time leisure classes</label>
+                  <label for="education" class="visuallyhidden">Enter the amount you spend on <span id="education-label"></span></label>
                   <input type="number" id="education" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="education-time-period" class="visuallyhidden">University tuition fees, private school fees and part-time leisure classes time period</label>
+                  <label for="education-time-period" class="visuallyhidden"><span id="education-label"></span> time period</label>
                   <select class="dropdown spending" id="education-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -872,19 +873,19 @@
                   </select>
                 </div>
               </div>
+              <span id="education-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
             <p class="spendingquestion" id="childcare-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="childcare-avgcompare" class="avgcompare">&nbsp;</span>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="childcare" class="visuallyhidden">Enter the amount you spend on childcare</label>
+                  <label for="childcare" class="visuallyhidden">Enter the amount you spend on <span id="childcare-label"></span></label>
                   <input type="number" id="childcare" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="childcare-time-period" class="visuallyhidden">Childcare time period</label>
+                  <label for="childcare-time-period" class="visuallyhidden"><span id="childcare-label"></span> time period</label>
                   <select class="dropdown spending" id="childcare-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -892,19 +893,19 @@
                   </select>
                 </div>
               </div>
+              <span id="childcare-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
             <p class="spendingquestion" id="residentialcare-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="residentialcare-avgcompare" class="avgcompare">&nbsp;</span>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="residentialcare" class="visuallyhidden">Enter the amount you spend on Residential care</label>
+                  <label for="residentialcare" class="visuallyhidden">Enter the amount you spend on <span id="residentialcare-label"></span></label>
                   <input type="number" id="residentialcare" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="residentialcare-time-period" class="visuallyhidden">Residential care time period</label>
+                  <label for="residentialcare-time-period" class="visuallyhidden"><span id="residentialcare-label"></span> time period</label>
                   <select class="dropdown spending" id="residentialcare-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected>per month</option>
@@ -912,19 +913,19 @@
                   </select>
                 </div>
               </div>
+              <span id="residentialcare-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
             <p class="spendingquestion" id="clothes-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="clothes-avgcompare" class="avgcompare">&nbsp;</span>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="clothes" class="visuallyhidden">Enter spending for Clothes and footwear</label>
+                  <label for="clothes" class="visuallyhidden">Enter the amount you spend on <span id="clothes-label"></span></label>
                   <input type="number" id="clothes" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="clothes-time-period" class="visuallyhidden">Clothes and footwear time period</label>
+                  <label for="clothes-time-period" class="visuallyhidden"><span id="clothes-label"></span> time period</label>
                   <select class="dropdown spending" id="clothes-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -932,19 +933,19 @@
                   </select>
                 </div>
               </div>
+              <span id="clothes-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
             <p class="spendingquestion" id="insurance-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="insurance-avgcompare" class="avgcompare">&nbsp;</span>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="insurance" class="visuallyhidden">Enter spending for Insurance and financial services</label>
+                  <label for="insurance" class="visuallyhidden">Enter the amount you spend on <span id="insurance-label"></span></label>
                   <input type="number" id="insurance" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="insurance-time-period" class="visuallyhidden">Insurance and financial services time period</label>
+                  <label for="insurance-time-period" class="visuallyhidden"><span id="insurance-label"></span> time period</label>
                   <select class="dropdown spending" id="insurance-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -952,19 +953,19 @@
                   </select>
                 </div>
               </div>
+              <span id="insurance-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
           <div class="column item">
             <p class="spendingquestion" id="other-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
-            <span id="other-avgcompare" class="avgcompare">&nbsp;</span>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="other" class="visuallyhidden">Enter spending for other</label>
+                  <label for="other" class="visuallyhidden">Enter the amount you spend on <span id="other-label"></span></label>
                   <input type="number" id="other" class="money-input spending" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
-                  <label for="other-time-period" class="visuallyhidden">Choose time period for other spending</label>
+                  <label for="other-time-period" class="visuallyhidden">Choose time period for <span id="other-label"></span></label>
                   <select class="dropdown spending" id="other-time-period">
                     <option value="52">per week</option>
                     <option value="12" selected selected>per month</option>
@@ -972,6 +973,7 @@
                   </select>
                 </div>
               </div>
+              <span id="other-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
           </div>
 
         </div>
@@ -989,12 +991,13 @@
     <button class="button-calculate button-output" id="intro-next-button">Next &nbsp; ►</button>
     <button id="skipToEndButton" class="button-back disabled" disabled>Skip to the end using income averages</button>
     <button id="backButton-frontpage" style="display:none;" class="button-back">Back</button>
+    <span class="error" id="calculateError"></span>
 
   </div>
 
   <div class="frontpage column info-box info-box-light" id="monthlyexpenditure" style="display:none">
-    <h3 class="graphic-heading">My monthly expenditure total</h3>
-    <p>Your personal monthly expenditure based on the categories above</p>
+    <h3 class="graphic-heading">Your household monthly expenditure total</h3>
+    <p>Your household monthly expenditure based on the categories so far</p>
     <p><span class="bignumber" id="currentSpend">£0</span></p>
   </div>
 
@@ -1024,7 +1027,7 @@
         <h4>Inflation rate change over the past 5 years, annual rate (%), from <span class="dateFiveYearsPrior"></span> to <span class="currentDate"></span></h4>
         <div class="row-buttons">
         <div class="row-buttons"><div class="legend-circle colour-matisse"></div><span class="legend-label">Your personal inflation rate</span></div>
-        <div class="row-buttons"><div class="legend-circle colour-teal"></div><span class="legend-label">UK inflation rate</span></div>
+        <div class="row-buttons"><div class="legend-circle" id="UKlegend"></div><span class="legend-label">UK inflation rate</span></div>
         </div>
         <div id="graphic"></div>
       </div>
@@ -1040,7 +1043,7 @@
       <!-- end info light box -->
 
       <div class="column">
-        <h3>Cost increases by category</h3>
+        <h3>Your biggest cost increases</h3>
         <h4>The biggest contributors to your cost of living increase from <span class="dateOneYearPrior">[insert date year prior]</span> to <span class="currentDate">[insert current date]</span></h4>
         <div id="barchart"></div>
       </div>
@@ -1053,11 +1056,13 @@
         <button class="button-back" id="backToStartButton">Start over</button>
       </div>
 
-      <h3>Share</h3>
+      <h3>Share this tool</h3>
       <div class="row-buttons">
+        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_URL_Large.svg"></button>
+        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Email_Large.svg"></button>
         <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Twitter_Small.svg"></button>
-        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_LinkedIn_Small.svg"></button>
-        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Facebook_Small.svg"></button>
+        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_LinkedIn_Large.svg"></button>
+        <button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Facebook_Large.svg"></button>
       </div>
 
 
@@ -1067,8 +1072,8 @@
 
   <div class="chapter-line"></div>
 
-  <script src="https://unpkg.com/@popperjs/core@2"></script>
-  <script src="https://unpkg.com/tippy.js@6"></script>
+  <script src="../lib/popper.min.js"></script>
+  <script src="../lib/tippy-bundle.umd.min.js"></script>
 
   <script src="https://cdn.ons.gov.uk/vendor/d3/4.13.0/d3.min.js" type="text/javascript"></script>
   <script src="../lib/modernizr.svg.min.js" type="text/javascript"></script>

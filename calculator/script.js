@@ -7,14 +7,14 @@ var allCategories = inflation_data.map(function(d) {
 })
 prevSpend = 0
 
-function drawGraphic() {2
+function drawGraphic() {
 
   loadData();
   getSize();
   enablePageButtons();
   enableIncomePage();
   addTooltips();
-  updateRunningTotal();
+  addScreenReaderLabels();
 
   function getSize() {
     var someContainer = d3.select(".section-container");
@@ -28,7 +28,7 @@ function drawGraphic() {2
     lineMargin = dvc.lineChartMargin[size];
     barMargins = dvc.barChartMargin[size];
 
-
+    d3.select("#UKlegend").style("background-color",dvc.lineColours[0])
 
   } //end initialise
 
@@ -46,28 +46,48 @@ function drawGraphic() {2
         else{
           decile = 0
         }
-        console.log(decile)
-        addAverages();
+        addAverages(decile);
+        updateRunningTotal(decile);
         d3.select("#monthlyexpenditure").style("display","block")
       } //if on front page and next is clicked remove skip to end button and replace with back button
 
       if (counter < 6) {
         counter++;
+        show(d3.select('#inputs' + counter))
+          // show next page
+        pymChild.sendHeight();
       } else if (counter == 6) {
-        showResults();
-        calculate(final_data, cpih_selected);
+        inputtotal = 0;
+        inflation_data.forEach(function(category){
+          value = +d3.select("#"+category.cat_id).property("value")
+          inputtotal = inputtotal + value
+        })
+        if (inputtotal > 0){
+          d3.select("#calculateError").text("")
+          showResults();
+          calculate(final_data, cpih_selected);
+        }
+        else{
+          d3.select("#calculateError").text("You must enter some spending for this calculator to estimate your personal inflation rate")
+        }
       }
       // if we're at the end show the results
 
       show(d3.select('#inputs' + counter))
-      // show next page
+        // show next page
       pymChild.sendHeight();
     });
 
     // skip to the end
     d3.select("#skipToEndButton").on('click', function() {
       showResults();
-      prefill();
+      if (d3.select('input[name="income"]:checked').node().value == "net-income"){
+        var decile = getDecile(d3.select("#netincome").property("value")*(d3.select("#netincome-time-period").property("value")/12));
+      }
+      else{
+        decile = 0
+      }
+      prefill(decile);
       calculateSpending();
       calculate(final_data, cpih_selected);
     });
@@ -134,15 +154,19 @@ function drawGraphic() {2
     return decile;
   }
 
-  function addAverages(){
+  function addAverages(decile){
     inflation_data.forEach(function(category) {
-      if (d3.select('input[name="income"]:checked').node().value == "net-income"){
+      category_spend = deciles_data.filter(function(d) {
+        return d.cat_id == category.cat_id
+      })
+      category_spend = Object.values(category_spend[0])
+      if (decile == 0){
         d3.select("#"+category.cat_id+"-avgcompare")
-          .text("UK average spend: £"+(d3.format(".2f")(category.average_spend*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+          .text("UK average spend: £"+(d3.format(".2f")(category_spend[decile+1]*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
         }
       else{
         d3.select("#"+category.cat_id+"-avgcompare")
-          .text("UK average spend: £"+(d3.format(".2f")(category.average_spend*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+          .text("Similar households spend on average: £"+(d3.format(".2f")(category_spend[decile+1]*(d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
       }
     })
   }
@@ -163,37 +187,55 @@ function drawGraphic() {2
     })
   }
 
+  function addScreenReaderLabels(){
+    inflation_data.forEach(function(category) {
+      d3.selectAll("#"+category.cat_id+"-label").text(category.category)
+    })
+  }
+
   function showResults() {
     hide(d3.selectAll(".frontpage"));
+    hide(d3.select(".heading"))
     show(d3.select("#results"));
     pymChild.sendHeight();
   }
 
   function hideResults() {
     show(d3.selectAll(".frontpage"));
+    show(d3.select(".heading"))
     hide(d3.select("#results"));
   }
 
-  function updateRunningTotal() {
+  function updateRunningTotal(decile) {
     d3.selectAll('input.spending').on('change', function() {
       calculateSpending();
       itemid = d3.select(this).attr("id")
-      itemavg = inflation_data.filter(function(d) {
+      category_spend = deciles_data.filter(function(d) {
         return d.cat_id == itemid
-      })[0].average_spend
+      })
+      category_spend = Object.values(category_spend[0])
+      d3.select(this).property("value",function(){
+        return d3.select(this).property("value").replace(/^0+/, '')
+      })
       input = +d3.select("#" + itemid).property("value") * d3.select("#" + itemid + "-time-period").property("value") / 12
-      diff = ((input - itemavg) / itemavg) * 100
+      diff = ((input - category_spend[decile+1]) / category_spend[decile+1]) * 100
       if (diff > 0) {
         moreless = "more than"
       } else {
         moreless = "less than"
         diff = diff * -1
       }
-      if (d3.select("#" + itemid).property("value") != 0){
+      if (d3.select("#" + itemid).property("value") != 0 & decile > 0){
+        d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " similar households")
+      }
+      else if (d3.select("#" + itemid).property("value") != 0 & decile == 0){
         d3.select("#" + itemid + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
       }
+      else if (d3.select("#" + itemid).property("value") == 0 & decile > 0) {
+        d3.select("#" + itemid + "-avgcompare").text("Similar households spend on average: £"+(d3.format(".2f")(category_spend[decile+1]/(d3.select("#" + itemid + "-time-period").property("value") / 12))))
+      }
       else {
-        d3.select("#" + itemid + "-avgcompare").text("UK average spend: £"+(d3.format(".2f")(itemavg/(d3.select("#" + itemid + "-time-period").property("value") / 12))))
+        d3.select("#" + itemid + "-avgcompare").text("UK average: £"+(d3.format(".2f")(category_spend[decile+1]/(d3.select("#" + itemid + "-time-period").property("value") / 12))))
       }
     });
 
@@ -276,13 +318,20 @@ function drawGraphic() {2
     return d3.select("input#" + item).property('value') * d3.select("select#" + item + "-time-period").property('value') / 12
   }
 
-  function prefill() {
+  function prefill(decile) {
     inflation_data.forEach(function(category) {
-      d3.select("#" + category.cat_id).property("value", category.average_spend)
+      category_spend = deciles_data.filter(function(d) {
+        return d.cat_id == category.cat_id
+      })
+      category_spend = Object.values(category_spend[0])
+      d3.select("#" + category.cat_id).property("value", category_spend[decile+1])
     })
   }
 
   function calculate(data, cpih){
+
+    console.log(data)
+
       var total = 0
       var total_change = 0
       pir = 0
@@ -322,16 +371,16 @@ function drawGraphic() {2
       }
 
     d3.select("#personalInflation").text(d3.format(".1f")(overall_inflation[0].pir)+"%")
-    d3.select("#inflationDifference").text(d3.format(".1f")(overall_inflation[0].pir-cpih[0].value)+"%")
+    d3.select("#inflationDifference").text(d3.format(".1f")(overall_inflation[0].pir-cpih[0].value)+" percentage points")
     d3.select("#overunder").text(function(){
       return overall_inflation[0].pir-cpih[0].value > 0 ? "over" : "under"
     })
     d3.select("#currentInflationRate").text(d3.format(".1f")(cpih[0].value)+"%")
 
     d3.select("#increaseMonthlySpend").text("£"+d3.format(".2f")(overall_inflation[0].total_change))
-    d3.selectAll(".dateOneYearPrior").text(d3.timeFormat("%b %Y")(overall_inflation[12].date))
-    d3.selectAll(".dateFiveYearsPrior").text(d3.timeFormat("%b %Y")(overall_inflation[59].date))
-    d3.selectAll(".currentDate").text(d3.timeFormat("%b %Y")(overall_inflation[0].date))
+    d3.selectAll(".dateOneYearPrior").text(d3.timeFormat("%B %Y")(overall_inflation[12].date))
+    d3.selectAll(".dateFiveYearsPrior").text(d3.timeFormat("%B %Y")(overall_inflation[59].date))
+    d3.selectAll(".currentDate").text(d3.timeFormat("%B %Y")(overall_inflation[0].date))
 
     drawLineChart(overall_inflation, cpih)
 
@@ -347,7 +396,7 @@ function drawGraphic() {2
       return b.weight-a.weight;
     })
 
-    d3.select("#biggestCat").text(categoryByWeight[0].category)
+    d3.select("#biggestCat").text("The largest share of your spending is on "+categoryByWeight[0].category.toLowerCase())
     d3.select("#propBiggestCat").text(d3.format(".1f")(categoryByWeight[0].weight*100)+"%")
 
     d3.select("#avgPropBiggestCat").text(inflation_data.filter(function(d){return d.cat_id == categoryByWeight[0].cat_id})[0].inf_values[0].weight/10)
@@ -381,7 +430,7 @@ function drawGraphic() {2
     var graphic = d3.select('#barchart');
     graphic.selectAll("*").remove();
     var height = 250;
-    var chart_width = parseInt(d3.select(".section-container").style("width")) - barMargins.left - barMargins.right;
+    var chart_width = parseInt(d3.select(".results-input").style("width")) - barMargins.left - barMargins.right;
 
     var x = d3.scaleLinear()
       .range([0, chart_width]);
@@ -466,7 +515,7 @@ function drawGraphic() {2
     var graphic = d3.select('#graphic');
     graphic.selectAll("*").remove();
     var height = 300 - lineMargin.top - lineMargin.bottom
-    var width = parseInt(d3.select(".section-container").style("width"));
+    var width = parseInt(d3.select(".results-input").style("width"));
     var chart_width = width - lineMargin.left - lineMargin.right
 
     var x = d3.scaleTime()
@@ -554,13 +603,12 @@ function drawGraphic() {2
       .data(d3.entries(cpih_line[0]))
       .enter()
       .append('path')
-      .style("stroke", "#17A5A3")
+      .style("stroke", "#871A5B")
       .style("fill", 'none')
       .style("stroke-width", 3.5)
       .style("stroke-linecap", 'round')
       .style("stroke-linejoin", 'round')
       .attr('d', function(d) {
-        // console.log(d)
         return line2(d.value);
       });
 
@@ -569,14 +617,12 @@ function drawGraphic() {2
       .data(d3.entries(lines[0]))
       .enter()
       .append('path')
-      //.attr('class', 'line')
       .style("stroke", "#206095")
       .style("fill", 'none')
       .style("stroke-width", 3.5)
       .style("stroke-linecap", 'round')
       .style("stroke-linejoin", 'round')
       .attr('d', function(d) {
-        // console.log(d)
         return line(d.value);
       });
 
