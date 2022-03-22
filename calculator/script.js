@@ -92,7 +92,7 @@ function drawGraphic() {
 
     // back button front page
     d3.select("button#backButton-frontpage").on('click', function() {
-      if(!checkIfInputsAreBlank()){hide(d3.select("#calculateError"))}
+      if(!checkIfInputsAreBlank()){hide(d3.select("#calculateError"));pymChild.sendHeight();}
 
       hide(d3.select('#inputs' + counter))
       if (counter == 1) {
