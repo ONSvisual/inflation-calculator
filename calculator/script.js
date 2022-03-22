@@ -27,6 +27,13 @@ function drawGraphic() {
     }
     lineMargin = dvc.lineChartMargin[size];
     barMargins = dvc.barChartMargin[size];
+
+    d3.selectAll('input.money-input').on('focus',function(){
+      if(d3.select(this).property('value')==0){d3.select(this).property('value',"")}
+    }).on('blur',function(){
+      if(d3.select(this).property('value')==""){d3.select(this).property('value',0)}
+    })
+
   } //end initialise
 
 
