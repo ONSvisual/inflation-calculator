@@ -111,6 +111,8 @@ function drawGraphic() {
     // back button for results page
     d3.select("button#backButton-results").on('click', function() {
       hideResults();
+      if(counter==0){hide(d3.select("#monthlyexpenditure"))}
+      pymChild.sendHeight()
     })
 
     // back to start for results page
