@@ -79,15 +79,16 @@ function drawGraphic() {
 
     // skip to the end
     d3.select("#skipToEndButton").on('click', function() {
-      showResults();
       if (d3.select('input[name="income"]:checked').node().value == "net-income") {
         var decile = getDecile(d3.select("#netincome").property("value") * (d3.select("#netincome-time-period").property("value") / 12));
       } else {
         decile = 0
       }
       prefill(decile);
+      showResults();
       calculateSpending();
       calculate(final_data, cpih_selected);
+      pymChild.sendHeight();
     });
 
     // back button front page
@@ -212,6 +213,7 @@ function drawGraphic() {
 
   function showResults() {
     hide(d3.selectAll(".frontpage"));
+    hide(d3.select("#monthlyexpenditure"))
     hide(d3.select(".heading"))
     show(d3.select("#results"));
     pymChild.sendHeight();
