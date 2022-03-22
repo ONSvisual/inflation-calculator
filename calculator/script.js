@@ -48,6 +48,7 @@ function drawGraphic() {
       } //if on front page and next is clicked remove skip to end button and replace with back button
 
       if (counter < 6) {
+        if(!checkIfInputsAreBlank()){hide(d3.select("#calculateError"))}
         counter++;
         show(d3.select('#inputs' + counter))
         // show next page
@@ -58,7 +59,7 @@ function drawGraphic() {
           value = +d3.select("#" + category.cat_id).property("value")
           inputtotal = inputtotal + value
         })
-        if (inputtotal > 0) {
+        if (!checkIfInputsAreBlank()) {
           d3.select("#calculateError").text("")
           hide(d3.select("#calculateError"))
           showResults();
@@ -91,6 +92,8 @@ function drawGraphic() {
 
     // back button front page
     d3.select("button#backButton-frontpage").on('click', function() {
+      if(!checkIfInputsAreBlank()){hide(d3.select("#calculateError"))}
+
       hide(d3.select('#inputs' + counter))
       if (counter == 1) {
         enableSkipToEnd();
@@ -160,10 +163,10 @@ function drawGraphic() {
       category_spend = Object.values(category_spend[0])
       if (decile == 0) {
         d3.select("#" + category.cat_id + "-avgcompare")
-          .text("UK average spend: £" + (d3.format(".2f")(category_spend[decile + 1] * (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+          .text("UK average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
       } else {
         d3.select("#" + category.cat_id + "-avgcompare")
-          .text("Similar households spend on average: £" + (d3.format(".2f")(category_spend[decile + 1] * (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+          .text("Similar households spend on average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
       }
     })
   }
@@ -190,6 +193,15 @@ function drawGraphic() {
       duration: 1000
     });
 
+  }
+
+  function checkIfInputsAreBlank(){
+    inputtotal = 0;
+    inflation_data.forEach(function(category) {
+      value = +d3.select("#" + category.cat_id).property("value")
+      inputtotal = inputtotal + value
+    })
+    if(inputtotal==0){return true}else{return false};
   }
 
   function addScreenReaderLabels() {
@@ -243,7 +255,7 @@ function drawGraphic() {
       d3.select("#" + id + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average household")
     } else if (d3.select("#" + itemid).property("value") == 0 && decile > 0) {
       d3.select("#" + id + "-avgcompare").text("Similar households spend on average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period").property("value") / 12))))
-    } else {
+    } else if(d3.select("#" + itemid).property("value") == 0 && decile == 0){
       d3.select("#" + id + "-avgcompare").text("UK average: £" + (d3.format(".2f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period").property("value") / 12))))
     }
   }
@@ -404,7 +416,7 @@ function drawGraphic() {
       return b.weight - a.weight;
     })
 
-    d3.select("#biggestCat").text("The largest share of your spending is on " + categoryByWeight[0].category.toLowerCase())
+    d3.select("#biggestCat").text("The largest share of your spending is on " + categoryByWeight[0].category.toLowerCase()+".")
     d3.select("#propBiggestCat").text(d3.format(".1f")(categoryByWeight[0].weight * 100) + "%")
 
     d3.select("#avgPropBiggestCat").text(inflation_data.filter(function(d) {
@@ -412,7 +424,7 @@ function drawGraphic() {
     })[0].inf_values[0].weight / 10)
     d3.select("#biggestCatInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate) + "%")
 
-    d3.select("#biggestCatDiffInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate - cpih[0].value) + "%")
+    d3.select("#biggestCatDiffInflation").text(d3.format(".1f")(categoryByWeight[0].inflation_rate - cpih[0].value))
     d3.select("#biggestCatOverUnder").text(function() {
       return categoryByWeight[0].inflation_rate - cpih[0].value > 0 ? "above" : "below"
     })
