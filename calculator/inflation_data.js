@@ -58,7 +58,7 @@ inflation_data = [
    "cat_id": "ooh",
    "page": "Housing",
    "category": "Homeowner housing costs",
-   "description": "For the purposes of this calculator, you can use your monthly mortgage. If you rent your home do not enter a value.",
+   "description": "For the purposes of this calculator, you can use your monthly mortgage. If you do not pay a mortgage, do not enter a value.",
    "inf_values": [],
    "inflation_cdid": "L5P7",
    "weight_cdid": "L5PA",

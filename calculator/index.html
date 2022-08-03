@@ -64,7 +64,7 @@
         style="display:none;visibility:hidden"></iframe>
     </noscript>
 
-  <div class="column-major">
+  <div id="graphic-container" class="column-major">
 
     <!-- Each section consists of chapter-line and section-container,
     which contains some text that goes at the top, the output div
@@ -75,7 +75,30 @@
       <p>Adjust the proportion of your household income spent on each of the product categories to see how your inflation rate changes.</p>
     </div>
 
-    <div class="frontpage column grey-box-text">
+    <!-- <div class="frontpage column grey-box-text">
+      <div id="launchpage" style="display:none">
+        <div class="row-major">
+          <button class="button-select" id="full-button" name="detailed" value="detailed">
+            <p class="bold button-select-header">Detailed</p>
+            <p>Enter in detailed information about your spending in all<tspan class="bold underline">35 categories</tspan> for the best results.</p>
+            <p>Approx. time: 5-10 mins</p>
+
+          </button>
+          <button class="button-select" id="quick-button" name="quick" value="quick">
+            <p class="bold button-select-header">Quick</p>
+            <p> Adjust your spending for <tspan class="bold underline">8 key categories</tspan> of spending, the calculator will estimate the rest based on your income.</p>
+            <p> Approx. time: 1-2 mins</p>
+          </button>
+          <button class="button-select" id="superfast-button" name="superfast" value="superfast">
+            <p class="bold button-select-header">Superfast</p>
+            <p> Let the calculator predict all of your spending based on your income and housing situation.</p>
+            <p> Approx. time: 30 secs</p>
+          </button>
+
+        </div>
+      </div> -->
+
+
       <div id="inputs0">
         <div class="hidden-on-mobile row-major">
           <div class="chapter-line progress"></div>
@@ -90,23 +113,48 @@
 
         <div class="row-major">
           <div class="column header">
-            <h3>Your household income</h3>
-            <p>If you add details of your household income, the calculator will include how much the average household in your income group spends in each category, to help you estimate your spending.</p>
+            <h3>Your household</h3>
+            <p class="description">Add details of your housing situation, and your household income, to show how much similar households spend in each category and help you estimate your spending.</p>
           </div>
           <div class="icon">
             <img src="./images/1716_0-Income-icon.svg"/ alt="" height="75px" width="75px">
           </div>
-          <div>
-            <p>If you do not provide your income information, we will use spending information for the average UK household instead.</p>
-          </div>
+        </div>
+
+        <div>
+          <p class="description bold">Which of the following most accurately describes your current housing situation?</p>
         </div>
 
         <div class="row-buttons">
+          <input type="radio" class="input--radio" id="mortgage-radio" name="housing" value="mortgage" checked="checked">
+          <label for="mortgage-radio">&nbsp;I am currently repaying a mortgage on at least one property</label>
+        </div>
+
+        <div class="row-buttons">
+          <input type="radio" class="input--radio" id="rent-radio" name="housing" value="rent">
+          <label for="rent-radio">&nbsp;I am currently paying rent on at least one property</label>
+        </div>
+
+        <div class="row-buttons">
+          <input type="radio" class="input--radio" id="mortgagerent-radio" name="housing" value="mortgagerent">
+          <label for="mortgagerent-radio">&nbsp;I am currently paying both a mortgage on at least one property, and rent for another property</label>
+        </div>
+
+        <div class="row-buttons">
+          <input type="radio" class="input--radio" id="nohcost-radio" name="housing" value="nohcost">
+          <label for="nohcost-radio">&nbsp;I am not currently paying any mortgage or rent</label>
+        </div>
+
+        <div>
+          <p id="income-description" class="description bold">Input your income information,  or chose to use spending information for the average UK household instead.</p>
+        </div>
+
+        <div class="row-buttons" id="averagespend">
           <input type="radio" class="input--radio" id="average-radio" name="income" value="average" checked="checked">
           <label for="average-radio">&nbsp;Use UK average spend <span id=UK-average-spend></span></label>
         </div>
 
-        <div class="row-buttons">
+        <div class="row-buttons" id="netincome">
           <input type="radio" class="input--radio" id="net-income-radio" name="income" value="net-income">
           <label for="net-income-radio">&nbsp;Enter my household net income</label>
         </div>
@@ -117,7 +165,7 @@
               <div class="row-minor">
                 <div class="money-input-container spending">
                   <label for="netincome" class="visuallyhidden">Enter your household net income</label>
-                  <input type="number" id="netincome" class="money-input income" value="0" min="0">
+                  <input type="number" id="netincome-input" class="money-input income" value="0" min="0">
                 </div>
 
                 <div class="dropdown-container">
@@ -135,6 +183,200 @@
 
       </div>
 
+      <div id="inputs-quick" style="display:none;">
+        <div class="row-major">
+          <div class="column header">
+            <h3>Your spending</h3>
+            <p>Enter how much you spend on these key categories of spending. The calculator will estimate what you spend on other types of spending based on the income information you provided.</p>
+          </div>
+          <div class="icon">
+            <img src="./images/1716_1-Groceries-icon.svg"/ height="75px" width="75px">
+          </div>
+          <p class="mobile-fit">How much does your household spend on:</p>
+        </div>
+
+          <div class="row-major">
+          <div class="column item">
+            <p class="spendingquestion" id="foodhotdrinks-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="foodhotdrinks" class="visuallyhidden">Enter the amount you spend on <span id="foodhotdrinks-label"></span></label>
+                  <input type="number" id="foodhotdrinks-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="groceries-time-period" class="visuallyhidden"><span id="foodhotdrinks-label"></span> time period</label>
+                  <select class="dropdown spending" id="foodhotdrinks-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="foodhotdrinks-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div id="ooh-quickinput" class="column item">
+            <p class="spendingquestion" id="ooh-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="ooh" class="visuallyhidden">Enter the amount you spend on <span id="ooh-label"></span></label>
+                  <input type="number" id="ooh-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="ooh-time-period" class="visuallyhidden"><span id="ooh-label"></span> time period</label>
+                  <select class="dropdown spending" id="ooh-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="ooh-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div id="rent-quickinput" class="column item">
+            <p class="spendingquestion" id="rent-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="rent" class="visuallyhidden">Enter the amount you spend on <span id="rent-label"></span></label>
+                  <input type="number" id="rent-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="rent-time-period" class="visuallyhidden"><span id="rent-label"></span> time period</label>
+                  <select class="dropdown spending" id="rent-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="rent-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="electricitygasfuels-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="electricitygasfuels" class="visuallyhidden">Enter the amount you spend on <span id="electricitygasfuels-label"></span></label>
+                  <input type="number" id="electricitygasfuels-quick" class="money-input spending" name="clothing" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="electricitygasfuels-time-period" class="visuallyhidden"><span id="electricitygasfuels-label"></span> time period</label>
+                  <select class="dropdown spending" id="electricitygasfuels-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="electricitygasfuels-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="petroldiesel-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="petroldiesel" class="visuallyhidden">Enter the amount you spend on <span id="petroldiesel-label"></span></label>
+                  <input type="number" id="petroldiesel-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="petroldiesel-time-period" class="visuallyhidden"><span id="petroldiesel-label"></span> time period</label>
+                  <select class="dropdown spending" id="petroldiesel-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="petroldiesel-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="eatingout-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="eatingout" class="visuallyhidden">Enter the amount you spend on <span id="eatingout-label"></span></label>
+                  <input type="number" id="eatingout-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="eatingout-time-period" class="visuallyhidden"><span id="eatingout-label"></span> time period</label>
+                  <select class="dropdown spending" id="eatingout-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="eatingout-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="childcare-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="childcare" class="visuallyhidden">Enter the amount you spend on <span id="childcare-label"></span></label>
+                  <input type="number" id="childcare-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="childcare-time-period" class="visuallyhidden"><span id="childcare-label"></span> time period</label>
+                  <select class="dropdown spending" id="childcare-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="childcare-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="holidays-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="holidays" class="visuallyhidden">Enter the amount you spend on <span id="holidays-label"></span></label>
+                  <input type="number" id="holidays-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="clothes-time-period" class="visuallyhidden"><span id="holidays-label"></span> time period</label>
+                  <select class="dropdown spending" id="holidays-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="holidays-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+
+          <div class="column item">
+            <p class="spendingquestion" id="clothes-question"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
+              <div class="row-minor">
+                <div class="money-input-container spending">
+                  <label for="clothes" class="visuallyhidden">Enter the amount you spend on <span id="clothes-label"></span></label>
+                  <input type="number" id="clothes-quick" class="money-input spending" value="0" min="0">
+                </div>
+
+                <div class="dropdown-container">
+                  <label for="clothes-time-period" class="visuallyhidden"><span id="clothes-label"></span> time period</label>
+                  <select class="dropdown spending" id="clothes-time-period-quick">
+                    <option value="52">per week</option>
+                    <option value="12" selected>per month</option>
+                    <option value="1">per year</option>
+                  </select>
+                </div>
+              </div>
+              <span id="clothes-avgcompare" class="avgcompare" aria-live="assertive">&nbsp;</span>
+          </div>
+        </div>
+      </div>
 
       <div id="inputs1" style="display:none;">
         <!-- groceries inputs -->
@@ -317,7 +559,7 @@
             <p class="spendingquestion" id="maintenance-question" tabindex="0"><span class="question">&nbsp;</span><img class="information" width="15px" height="15px" src="./images/information.svg" alt=""></p>
               <div class="row-minor">
                 <div class="money-input-container spending">
-                  <label for="ooh" class="visuallyhidden">Enter the amount you spend on <span id="maintenance-label"></span></label>
+                  <label for="maintenance" class="visuallyhidden">Enter the amount you spend on <span id="maintenance-label"></span></label>
                   <input type="number" id="maintenance" class="money-input spending" value="0" min="0">
                 </div>
 
@@ -1025,20 +1267,34 @@
 
     </div>
     <!-- end grey box -->
+  <div id="option-select" class="frontpage row-buttons" style="display:none;">
+    <p class="bold">Want more accurate results?</p>
+    <button id="option-button" class="button-clear"  value="quick">
+      <p>Why not use our detailed calculator</p>
+    </button>
+  </div>
 
-    <div class="frontpage column info-box info-box-light" id="monthlyexpenditure" style="display:none">
-      <h3 class="graphic-heading">Your household monthly expenditure total</h3>
-      <p>Your household monthly expenditure based on the categories so far</p>
-      <p><span class="bignumber" id="currentSpend">£0</span></p>
+    <div class="row-major">
+      <div class="frontpage column info-box info-box-light info-base" id="inflationrate-summary" style="display:none">
+        <h3 class="graphic-heading">Your personal inflation rate</h3>
+        <p>Your inflation rate based on the categories so far is:</p>
+        <p><span class="bignumber" id="currentinflation">0%</span></p>
+      </div>
+
+      <div class="frontpage column info-box info-box-light info-base" id="monthlyexpenditure" style="display:none">
+        <h3 class="graphic-heading">Your household monthly expenditure total</h3>
+        <p>Your household monthly expenditure based on the categories so far:</p>
+        <p><span class="bignumber" id="currentSpend">£0</span></p>
+      </div>
     </div>
 
   </div>
   <!-- ends first div -->
 
 
-  <div class="frontpage row-buttons">
+  <div id="navbuttons" class="frontpage row-buttons">
     <button class="button-calculate button-output" id="intro-next-button">Next &nbsp; ►</button>
-    <button id="skipToEndButton" class="button-back disabled" disabled>Skip to the end using income averages</button>
+    <button id="skipToEndButton" class="button-skiptoend">Skip to the end using income averages</button>
     <button id="backButton-frontpage" style="display:none;" class="button-back">Back</button>
     <div>
       <p class="error--message" style="display:none" id="calculateError" aria-live="assertive"></p>
@@ -1074,51 +1330,80 @@
         <h4>Inflation rate change over the past five years, annual rate (%), from <span class="dateFiveYearsPrior"></span> to <span class="currentDate"></span></h4>
         <div class="row-buttons">
         <div class="row-buttons"><div class="legend-circle colour-matisse"></div><span class="legend-label">Your personal inflation rate</span></div>
-        <div class="row-buttons"><div class="legend-circle colour-darkgrey"></div><span class="legend-label">UK inflation rate</span></div>
+        <div class="row-buttons"><div class="legend-circle colour-green"></div><span class="legend-label">UK inflation rate (CPIH)</span></div>
         </div>
         <div id="graphic"></div>
       </div>
 
+      <div class="chapter-line"></div>
 
-      <div class="column info-box info-box-light">
-        <h3 class="graphic-heading" id="biggestCat">[Category] costs</h3>
-        <div class="chapter-line chapter-line-info"></div>
-
-        <div class="bold"><p>You spent <span id="propBiggestCat">[X%]</span> of your monthly spend on this category, compared with <span id="avgPropBiggestCat">[X%]</span>% by the average household.</p></div>
-        <div>The inflation rate for this category was <span id="biggestCatInflation">[X%]</span> from <span class="dateOneYearPrior">[insert date year prior]</span> to <span class="currentDate">[insert current date]</span>. This was <span id="biggestCatDiffInflation"></span> percentage points <span id="biggestCatOverUnder">[higher/lower]</span> the overall inflation rate of <span id="biggestCatOverallInflation"></span>.</div>
+      <div class="column">
+        <h3>What is driving your personal inflation rate?</h3>
+        <h4>How different types of spending contributed to your inflation rate between <span class="dateOneYearPrior">[insert date year prior]</span> to <span class="currentDate">[insert current date]</span></h4>
+        <div id="proportionchart"></div>
       </div>
+
+      <div class="chapter-line"></div>
+
+      <!-- <div class="column info-box info-box-light">
+        <h3 class="graphic-heading" id="biggestCat">[Category] costs</h3>
+        <div class="chapter-line chapter-line-light"></div>
+
+        <div class="bold"><p>You spent £<span id="propBiggestCat">[X%]</span> of your monthly spend on this category, compared with £<span id="avgPropBiggestCat">[X%]</span> by <span id="avgorsimHousehold"></span>.</p></div>
+        <div>The inflation rate for this category was <span id="biggestCatInflation">[X%]</span> from <span class="dateOneYearPrior">[insert date year prior]</span> to <span class="currentDate">[insert current date]</span>. This was <span id="biggestCatDiffInflation"></span> percentage points <span id="biggestCatOverUnder">[higher/lower]</span> the overall inflation rate of <span id="biggestCatOverallInflation"></span>.</div>
+      </div> -->
       <!-- end info light box -->
 
       <div class="column">
         <h3>Your biggest cost increases</h3>
-        <h4>The biggest contributors to your cost-of-living increase from <span class="dateOneYearPrior">[insert date year prior]</span> to <span class="currentDate">[insert current date]</span></h4>
+        <h4>The biggest contributors to your cost-of-living increase from <span class="dateOneYearPrior">[insert date year prior]</span> to <span class="currentDate">[insert current date]</span> (£s/month)</h4>
+        <div class="row-buttons"><div class="legend-circle colour-lightblue"></div><span class="legend-label">Estimated monthly spend in <span class="dateOneYearPrior">[insert date year prior]</span></span></div>
+        <div class="row-buttons"><div class="legend-circle colour-matisse"></div><span class="legend-label">Estimated increase in monthly spend <span class="dateOneYearPrior">[insert date year prior]</span> - <span class="currentDate">[insert current date]</span></span></div>
+        <div class="row-buttons"><div class="legend-circle colour-darkred"></div><span class="legend-label">Estimated decrease in monthly spend <span class="dateOneYearPrior">[insert date year prior]</span> - <span class="currentDate">[insert current date]</span></span></div>
+
         <div id="barchart"></div>
       </div>
 
+      <div class="row-buttons">
+        <button class="button-calculate button-output" id="seemore-button"><tspan id="seemore">See more &nbsp;</tspan></button>
+      </div>
 
       <div class="chapter-line"></div>
 
+      <div class="row-buttons" id="backtoDetailed">
+        <p class="bold">Have we estimated your spending wrong?</p>
+        <button class="button-clear" id="results-detailed"><p class="toDetailed">Why not try our more detailed calculator for more accurate results</p></button>
+      </div>
+
+
       <div class="row-buttons">
         <button class="button-calculate button-output" id="backButton-results">◀ Back</button>
+        <button class="button-option" id="downloadcsv">Download your results</button>
         <button class="button-back" id="backToStartButton">Start over</button>
       </div>
 
       <h3>Share this tool</h3>
       <div class="row-buttons">
-        <button onclick="navigator.clipboard.writeText('https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23');" id="copyToClipboard" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_URL_Large.svg"></button>
+        <button onclick="navigator.clipboard.writeText(https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23);" id="copyToClipboard" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_URL_Large.svg"></button>
         <a href="mailto:?subject=Personal%20inflation%20calculator&amp;body=I%20just%20found%20out%20my%20personal%20inflation%20rate%20using%20the%20ONS&#39;s%20new%20calculator%20at%20https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23"><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Email_Large.svg"></button></a>
-        <a href="https://twitter.com/intent/tweet?text=I%20just%20found%20out%20my%20personal%20inflation%20rate%20using%20the%20@ONS's%20new%20calculator&url=https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23"><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Twitter_Small.svg"></button></a>
-        <a href="http://www.linkedin.com/shareArticle?mini=true&url=https://www.ons.gov.uk&title=I%20just%20found%20out%20my%20personal%20inflation%20rate%20using%20the%20ONS&#39;s%20new%20calculator%20at%20https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23"><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_LinkedIn_Large.svg"></button></a>
-        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23&quote=I%20just%20found%20out%20my%20personal%20inflation%20rate%20using%20the%20ONS's%20new%20calculator%20" target="_blank"><button onclick="location.href=''" class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Facebook_Large.svg"></button></a>
+        <a href="https://twitter.com/intent/tweet?text=I%20just%20found%20out%20my%20personal%20inflation%20rate%20using%20the%20@ONS's%20new%20calculator&url=https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23" target="_blank"><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Twitter_Small.svg"></button></a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.ons.gov.uk&title=I%20just%20found%20out%20my%20personal%20inflation%20rate%20using%20the%20ONS&#39;s%20new%20calculator%20at%20https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23" target="_blank"><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_LinkedIn_Large.svg"></button></a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.ons.gov.uk/economy/inflationandpriceindices/articles/howisinflationaffectingyourhouseholdcosts/2022-03-23&quote=I%20just%20found%20out%20my%20personal%20inflation%20rate%20using%20the%20ONS's%20new%20calculator%20" target="_blank"><button class="socialbutton"><img alt="" width="40px;" height='40px;' src="./images/Social-media_Facebook_Large.svg"></button></a>
       </div>
 
     </div>
+
+    </div>
+      <p class="updatetext" id="inflation-updated"></p>
+      <p class="updatetext" id="spend-updated">Estimated spend data last updated: 17 Aug 2022</p>
+    </div>
     <!-- ends results -->
 
-  <div class="chapter-line"></div>
+  <!-- <div class="scroll-option"></div> -->
 
   <script src="../lib/popper.min.js"></script>
   <script src="../lib/tippy-bundle.umd.min.js"></script>
+    <script src="../lib/jquery.js"></script>
 
   <script src="https://cdn.ons.gov.uk/vendor/d3/4.13.0/d3.min.js" type="text/javascript"></script>
   <script src="../lib/modernizr.svg.min.js" type="text/javascript"></script>

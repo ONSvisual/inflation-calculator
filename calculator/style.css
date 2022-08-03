@@ -9,9 +9,48 @@ label {
   padding-left: 10px;
 }
 
+.button-select{
+  min-width: 200px;;
+  display: block;
+  height: 100px;
+  padding: 10px;
+}
+
+/*@media only screen and (max-width: 600px) {
+  .button-select{
+    width:60%;
+  }*/
+
+.button-select-header{
+  font-size: 18px;
+}
+
+.scroll-option{
+  height: 1000px;
+  width: 500px;
+}
+
 .link {
   color: #206095;
   text-decoration: underline;
+}
+
+.propgraph-label{
+    fill: #666;
+  /*fill: white;*/
+  font-size: 16px;
+  text-anchor: middle;
+  width: 100%;
+  display: inline-flex;
+}
+
+.propgraph-label span{
+  display: inline-block;
+}
+
+.propgraph-cat-label{
+  fill: #666;
+  font-size: 16px;
 }
 
 h3 {
@@ -30,6 +69,10 @@ h6 {
 
 .bold {
   font-weight: 700;
+}
+
+.underline {
+  text-decoration: underline;
 }
 
 .header{
@@ -77,7 +120,7 @@ h6 {
 
 .axis .tick text{
   fill:#666;
-  font-size:12px;
+  font-size:16px;
 }
 
 .grey-box-text {
@@ -106,14 +149,18 @@ h6 {
   color: white;
 }
 
+.info-base{
+  width: 45%;
+}
+
 .question {
   font-weight: 700;
-  font-size: 13px;
+  font-size: 16px;
   margin: 10px 5px 0px 0px;
 }
 
 .avgcompare{
-  font-size: 12px;
+  font-size: 16px;
   margin-top: 5px;
   margin-bottom: 15px;
 }
@@ -142,9 +189,13 @@ input[type="text"], input[type="number"], button, select {
   border: 2px solid #206095;
   color: #206095;
   font-size: 16px;
-  line-height: 0;
+  /*line-height: 0;*/
   cursor: pointer;
   pointer-events: all;
+}
+
+button{
+  line-height: 0;
 }
 
 .number-input-container, .dropdown-container, .money-input-container {
@@ -255,11 +306,49 @@ button.socialbutton {
   margin-right: 8px;
 }
 
+.button-clear {
+  display: inline-block;
+  margin: 0px 10px;
+  background-color: white;
+  padding: 0px;
+  border: none;
+  color: #206095;
+  text-decoration: underline;
+  text-align: center;
+  overflow-x: hidden
+}
+
+.button-clear:hover {
+  background-color: white;
+}
+
+#backtoDetailed{
+  justify-content: center;
+}
+
+
+#option-select{
+  justify-content: center;
+  height: 100px;
+}
+
+.toDetailed{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.updatetext{
+  font-size: 16px;
+  padding-bottom: 0px;
+}
+
 .dropdown {
   height: 36px;
   border: 2px solid #206095;
   color: #206095;
   background-color: #fff;
+  -webkit-appearance:none;
 }
 
 /* ::before, ::after {
@@ -281,6 +370,7 @@ button.socialbutton {
 .dropdown-container::after {
   content: '';
   position: absolute;
+  top: 0px;
   z-index: 2;
   right: 12px;
   margin: 16px 0 0 0;
@@ -319,6 +409,20 @@ button.socialbutton {
   background-color: #004F10;
 }
 
+.button-option {
+  display: block;
+  margin: 20px 20px 20px 0px;
+  background-color: #206095;
+  color: white;
+  padding: 15px;
+  border: none;
+  font-weight: 700;
+}
+
+.button-option:hover {
+  background-color: #003C57;
+}
+
 .button-reset {
   display: block;
   margin: 20px 0px;
@@ -340,9 +444,25 @@ button.socialbutton {
   border: none;
   color: black;
   font-weight: 700;
+  white-space: normal;
 }
 
 .button-back:hover {
+  background-color: #8A8A8A;
+}
+
+.button-skiptoend {
+  display: block;
+  margin: 20px 0px;
+  background-color: #A6A6A6;
+  padding: 15px;
+  border: none;
+  color: black;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.button-skiptoend:hover {
   background-color: #8A8A8A;
 }
 
@@ -368,7 +488,7 @@ button.socialbutton {
   border: none;
   color: #206095;
   text-decoration: underline;
-  font-size: 14px;
+  font-size: 16px;
   height: 24px;
 }
 
@@ -395,7 +515,7 @@ button.socialbutton {
   max-width: 450px;
   margin-right: auto;
   padding: 6px 0 0px 0;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .summary-description {
@@ -403,7 +523,7 @@ button.socialbutton {
 }
 
 .decile-houses-text {
-  font-size: 12px;
+  font-size: 16px;
   color: #707071;
 }
 
@@ -458,25 +578,25 @@ input.disabled {
 }
 
 .decile-label {
-  font-size: 12px;
+  font-size: 16px;
   color: #206095;
   background-color: white;
 }
 
 .decile-label text {
-  font-size: 12px;
+  font-size: 16px;
   color: #206095;
   background-color: white;
 }
 
 .decile-label tspan {
-  font-size: 12px;
+  font-size: 16px;
   color: #206095;
   background-color: white;
 }
 
 .source {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .x path.domain {
@@ -505,6 +625,10 @@ h4 {
 
 .graphic-heading {
   color: #206095;
+}
+
+.graphic-heading-white {
+  color: white;
 }
 
 .column-major {
@@ -558,12 +682,21 @@ h4 {
   .column-on-mobile div {
     margin-bottom: 20px;
   }
+
+  .header{
+    width: 100%
+  }
+
+  label{
+    width: 75%;
+  }
 }
 
 .item {
   flex-basis: 0;
   justify-content: space-between;
 }
+
 
 .legend-circle {
   border-radius: 50%;
@@ -573,17 +706,34 @@ h4 {
 }
 
 .legend-label {
-  font-size: 12px;
+  font-size: 16px;
   color: rgb(112, 112, 112);
   margin-right: 10px;
+  width: 75%;
 }
 
 .colour-matisse {
   background-color: #206095;
 }
 
+.colour-green {
+  background-color: #118C7B;
+}
+
 .colour-teal {
   background-color: #17A5A3;
+}
+
+.colour-lightblue {
+  background-color: #27A0CC;
+}
+
+.colour-darkred {
+  background-color: #871A5B;
+}
+
+.colour-lightred {
+  background-color: #F66068;
 }
 
 .colour-darkgrey {
@@ -591,13 +741,13 @@ h4 {
 }
 
 .legend {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .spendingquestion {
   width: 300;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   vertical-align: baseline;
 }
 
