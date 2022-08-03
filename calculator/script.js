@@ -74,6 +74,7 @@ function drawGraphic() {
         updateRunningTotal(decile);
         hide(d3.select('#inputs' + counter))
         counter++
+        show(d3.select("#option-select"))
         show(d3.select("#monthlyexpenditure"))
         hide(d3.select("#currentinflation"))
         // show(d3.select("#inflationrate-summary"))
@@ -162,7 +163,8 @@ function drawGraphic() {
     d3.select("#option-button").on('click',function(){
       // d3.select(this).text(option.charAt(0).toUpperCase() + option.slice(1))
       if (option == "quick"){
-        d3.select(this).text("Too many categories? Click here to go back to our quick calculator")
+        d3.select("#option-button-text").text("Too many categories?")
+        d3.select(this).text("Click here to go back to our quick calculator")
         d3.select(this).property("value","detailed")
         option = d3.select(this).property("value")
         counter = 0
@@ -189,7 +191,8 @@ function drawGraphic() {
         document.getElementById("graphic-container").scrollIntoView(true)
       }
       else{
-        d3.select(this).text("Want more accurate results? Why not use our detailed calculator")
+        d3.select("#option-button-text").text("Want more accurate results?")
+        d3.select(this).text("Why not use our detailed calculator")
         d3.select(this).property("value","quick")
         option = d3.select(this).property("value")
         counter = 0
