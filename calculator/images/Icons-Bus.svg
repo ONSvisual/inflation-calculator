@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.4.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 400 400" style="enable-background:new 0 0 400 400;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#D3D8DD;}
+	.st1{fill:#F5F5F6;}
+	.st2{fill:#3D6092;}
+	.st3{fill:#6390B5;}
+	.st4{fill:#00A3A6;}
+	.st5{fill:#99B1BC;}
+	.st6{fill:#FFFFFF;}
+	.st7{fill:none;}
+	.st8{fill-rule:evenodd;clip-rule:evenodd;fill:#3D6092;}
+	.st9{fill:none;stroke:#99B1BC;stroke-width:6.7328;stroke-linecap:round;stroke-miterlimit:10;}
+	.st10{fill:none;stroke:#99B1BC;stroke-width:7.5168;stroke-linecap:round;stroke-miterlimit:10;}
+	.st11{fill:#E2E2E3;}
+	.st12{fill:#A7B2BC;}
+	.st13{fill:#233E57;}
+	.st14{fill:#B2BFD3;}
+	.st15{fill:#707071;}
+	.st16{fill:#657889;}
+	.st17{fill:#5EA77D;}
+	.st18{fill:#A8BC45;}
+	.st19{fill:#198145;}
+	.st20{fill:#E9ECEE;}
+	.st21{fill:none;stroke:#198145;stroke-miterlimit:10;}
+</style>
+<path class="st5" d="M50.9,138.5c-2.1-2-5-3.3-8.2-3.3h-8c-9.9,0-18,8.1-18,18v46c0,6.6,5.4,12,12,12h14c6.6,0,12-5.4,12-12v-51.8
+	h7.9v-8.9L50.9,138.5z"/>
+<path class="st5" d="M350.2,138.5c2.1-2,5-3.3,8.2-3.3h8c9.9,0,18,8.1,18,18v46c0,6.6-5.4,12-12,12h-14c-6.6,0-12-5.4-12-12v-51.8
+	h-7.9v-8.9L350.2,138.5z"/>
+<path class="st2" d="M323.4,320.1h-23.9c-6.6,0-12,5.4-12,12v47.9c0,6.6,5.4,12,12,12h23.9c6.6,0,12-5.4,12-12v-47.9
+	C335.4,325.5,330.1,320.1,323.4,320.1z"/>
+<path class="st2" d="M100.5,320.1H76.6c-6.6,0-12,5.4-12,12v47.9c0,6.6,5.4,12,12,12h23.9c6.6,0,12-5.4,12-12v-47.9
+	C112.6,325.5,107.2,320.1,100.5,320.1z"/>
+<g>
+	<path class="st2" d="M171.9,4.8h56.2c62,0,112.3,50.3,112.3,112.3v189.4c0,31-25.1,56.2-56.2,56.2H115.8c-31,0-56.2-25.1-56.2-56.2
+		V117.2C59.6,55.1,109.9,4.8,171.9,4.8z"/>
+	<path class="st6" d="M312.3,82.1c4.5,10.8,7,22.7,7,35.1v189.4c0,19.4-15.7,35.1-35.1,35.1H115.8c-19.4,0-35.1-15.7-35.1-35.1
+		V117.2c0-12.4,2.5-24.3,7-35.1H312.3z"/>
+	<path class="st5" d="M340.4,249v57.6c0,31-25.1,56.2-56.2,56.2H115.8c-31,0-56.2-25.1-56.2-56.2V249H340.4z"/>
+	<circle class="st6" cx="254.8" cy="297.1" r="10.5"/>
+	<circle class="st6" cx="145.2" cy="297.1" r="10.5"/>
+	<circle class="st6" cx="104.1" cy="294.1" r="24"/>
+	<circle class="st6" cx="295.9" cy="294.1" r="24"/>
+	<rect x="163.8" y="324.6" class="st6" width="72.4" height="18.1"/>
+</g>
+<rect x="143" y="32.6" class="st6" width="114" height="28.5"/>
+</svg>

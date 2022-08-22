@@ -24,7 +24,7 @@ inflation_data = [
  {
    "cat_id": "tobacco",
    "page": "Groceries",
-   "category": "Tobacco products including e-cigarettes",
+   "category": "Tobacco products",
    "description": "Add description here...",
    "inf_values": [],
    "inflation_cdid": "L56M",
@@ -58,7 +58,7 @@ inflation_data = [
    "cat_id": "ooh",
    "page": "Housing",
    "category": "Homeowner housing costs",
-   "description": "For the purposes of this calculator, you can use your monthly mortgage. If you rent your home do not enter a value.",
+   "description": "For the purposes of this calculator, you can use your monthly mortgage. If you do not pay a mortgage, do not enter a value.",
    "inf_values": [],
    "inflation_cdid": "L5P7",
    "weight_cdid": "L5PA",
@@ -68,7 +68,7 @@ inflation_data = [
  {
    "cat_id": "maintenance",
    "page": "Housing",
-   "category": "Home maintainance costs",
+   "category": "Home maintenance costs",
    "description": "This includes costs for home repairs, decorating, and improvements.",
    "inf_values": [],
    "inflation_cdid": "L56T",
@@ -123,7 +123,7 @@ inflation_data = [
  {
    "cat_id": "furniture",
    "page": "Housing",
-   "category": "Homewares",
+   "category": "Furniture and appliances",
    "description": "This includes items such as furniture, household appliances and tools.",
    "inf_values": [],
    "inflation_cdid": "L576",
@@ -134,7 +134,7 @@ inflation_data = [
  {
    "cat_id": "furniture",
    "page": "Housing",
-   "category": "Homewares",
+   "category": "Furniture and appliances",
    "description": "This includes items such as furniture, household appliances and tools.",
    "inf_values": [],
    "inflation_cdid": "L579",
@@ -145,7 +145,7 @@ inflation_data = [
  {
    "cat_id": "furniture",
    "page": "Housing",
-   "category": "Homewares",
+   "category": "Furniture and appliances",
    "description": "This includes items such as furniture, household appliances and tools.",
    "inf_values": [],
    "inflation_cdid": "L57A",
@@ -156,7 +156,7 @@ inflation_data = [
  {
    "cat_id": "furniture",
    "page": "Housing",
-   "category": "Homewares",
+   "category": "Furniture and appliances",
    "description": "This includes items such as furniture, household appliances and tools.",
    "inf_values": [],
    "inflation_cdid": "L57D",
@@ -167,7 +167,7 @@ inflation_data = [
  {
    "cat_id": "furniture",
    "page": "Housing",
-   "category": "Homewares",
+   "category": "Furniture and appliances",
    "description": "This includes items such as furniture, household appliances and tools.",
    "inf_values": [],
    "inflation_cdid": "L57E",
@@ -178,7 +178,7 @@ inflation_data = [
  {
    "cat_id": "furniture",
    "page": "Housing",
-   "category": "Homewares",
+   "category": "Furniture and appliances",
    "description": "This includes items such as furniture, household appliances and tools.",
    "inf_values": [],
    "inflation_cdid": "L57H",
@@ -608,7 +608,7 @@ inflation_data = [
  {
    "cat_id": "childcare",
    "page": "Other",
-   "category": "Childcare costs",
+   "category": "Childcare",
    "description": "Add description here...",
    "inf_values": [],
    "inflation_cdid": "J3GL",

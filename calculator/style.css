@@ -5,14 +5,77 @@ body {
 
 tspan,
 label {
-  padding-top: 20px;
+  padding-top: 12px;
   padding-left: 10px;
+  font-size: 16px !important;
+}
+
+.button-select{
+  min-width: 200px;;
+  display: block;
+  height: 100px;
+  padding: 10px;
+}
+
+.visuallyhidden{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+/*@media only screen and (max-width: 600px) {
+  .button-select{
+    width:60%;
+  }*/
+
+.button-select-header{
+  font-size: 18px;
+}
+
+.scroll-option{
+  height: 1000px;
+  width: 500px;
+}
+
+.grey-box-text {
+  padding: 12px 12px 12px 12px;
+  background-color: #eaeaea;
+  margin: 10px 0px 10px 0px;
+  justify-content: flex-start !important;
+}
+
+.security{
+  padding-top: 4px;
 }
 
 .link {
   color: #206095;
   text-decoration: underline;
 }
+
+.propgraph-label{
+    fill: #666;
+  /*fill: white;*/
+  font-size: 16px;
+  text-anchor: middle;
+  width: 100%;
+  display: inline-flex;
+}
+
+.propgraph-label span{
+  display: inline-block;
+}
+
+.propgraph-cat-label{
+  fill: #666;
+  font-size: 16px;
+}
+
 
 h3 {
   font-size: 24px;
@@ -32,8 +95,45 @@ h6 {
   font-weight: 700;
 }
 
+.underline {
+  text-decoration: underline;
+}
+
 .header{
-  width: 75%;
+  margin-top: 10px;
+  width: 65%;
+  max-width: 366px;
+}
+
+@media only screen and (max-width: 600px){
+  .header{
+    width: 100%;
+    max-width: 600px;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .desktop-till{
+    display: none;
+  }
+  .desktop{
+    display: none;
+  }
+  .item{
+    margin-left: 10px;
+  }
+  .big-padding-bottom-mobile{
+    padding-bottom:30px !important;
+  }
+}
+
+@media only screen and (min-width: 601px){
+  .mobile-till{
+    display: none;
+  }
+  .mobile{
+    display: none;
+  }
 }
 
 .error{
@@ -59,6 +159,22 @@ h6 {
   background-color: #fff;
 }
 
+.mobile-blue-line {
+  background-color: #003C57;
+  height: 4px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.mobile-green-line {
+  background-color: #57A77B;
+  height: 4px;
+  margin-top: 0px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .progress {
   flex-grow: 1;
   margin-right: 10px;
@@ -71,23 +187,42 @@ h6 {
   margin: 20px 0px 20px 0px
 }
 
+.intro-container{
+  position: relative;
+  padding: 10px 20px 0px 20px;
+  margin-top: 20px;
+}
+
+.intro-container2{
+  position: relative;
+  padding: 20px 20px 20px 20px;
+  margin-top: 0px;
+}
+
+.intro-container3{
+  position: relative;
+  padding: 0px 0px 0px 00px;
+  margin-top: 0px;
+}
+
 /* .axis {
   color: #707071;
 } */
 
 .axis .tick text{
   fill:#666;
-  font-size:12px;
+  font-size:16px;
 }
 
 .grey-box-text {
-  padding: 12px 12px 12px 12px;
+  padding: 6px 8px 6px 8px;
   background-color: #f5f5f6;
   margin: 10px 0px 10px 0px;
 }
 
 .security {
   padding-top: 4px;
+  padding-right: 5px;
 }
 
 .info-box {
@@ -101,21 +236,30 @@ h6 {
   color: #206095;
 }
 
+.info-box-superlight{
+  background-color: #F4F7FA;
+  color: #206095;
+}
+
 .info-box-blue {
   background-color: #206095;
   color: white;
 }
 
+.info-base{
+  width: 45%;
+}
+
 .question {
   font-weight: 700;
-  font-size: 13px;
+  font-size: 16px;
   margin: 10px 5px 0px 0px;
 }
 
 .avgcompare{
-  font-size: 12px;
-  margin-top: 5px;
-  margin-bottom: 15px;
+  font-size: 16px;
+  /*margin-top: 5px;*/
+  margin-bottom: 5px;
 }
 
 p {
@@ -133,6 +277,11 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+input[type="radio"]{
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
 input[type="text"], input[type="number"], button, select {
   position: relative;
   margin: 2px 0;
@@ -142,9 +291,13 @@ input[type="text"], input[type="number"], button, select {
   border: 2px solid #206095;
   color: #206095;
   font-size: 16px;
-  line-height: 0;
+  /*line-height: 0;*/
   cursor: pointer;
   pointer-events: all;
+}
+
+button{
+  line-height: 0;
 }
 
 .number-input-container, .dropdown-container, .money-input-container {
@@ -205,8 +358,9 @@ input.income {
 }
 
 input.spending {
-  width: 90px;
+  width: 110px;
   padding-left: 46px;
+  margin-bottom: 10px;
 }
 
 select {
@@ -220,8 +374,9 @@ select.income {
 }
 
 select.spending {
-  width: 140px;
+  width: 150px;
   padding-left: 10px;
+  margin-bottom: 10px;
 }
 
 button {
@@ -255,11 +410,89 @@ button.socialbutton {
   margin-right: 8px;
 }
 
+.button-clear {
+  display: inline-block;
+  margin: 0px 10px;
+  background-color: white;
+  padding: 0px;
+  border: none;
+  color: #206095;
+  text-decoration: underline;
+  text-align: center;
+  overflow-x: hidden
+}
+
+.button-clear:hover {
+  background-color: white;
+}
+
+.button-grey {
+  display: inline-block;
+  margin: 0px 0px;
+  background-color: #f5f5f6;
+  padding: 0px;
+  border: none;
+  color: #206095;
+  text-decoration: underline;
+  text-align: center;
+  overflow-x: hidden;
+  font-weight: 700;
+  height: 20px;
+}
+
+.button-grey:hover{
+  background-color: #f5f5f6;
+}
+
+#backtoDetailed{
+  justify-content: center;
+}
+
+#monthlyexpenditure{
+  padding-bottom: 40px;
+}
+
+
+#option-select{
+  justify-content: center;
+  margin-bottom: 20px;
+  /*height: 100px;*/
+}
+
+#barchart{
+  margin-top: 10px;
+}
+
+#monthlyexpenditure{
+  margin-top: 10px;
+}
+
+.option-select-minor{
+  width:100%;
+}
+
+#option-button-text{
+  justify-content: center;
+}
+
+.toDetailed{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.updatetext{
+  font-size: 16px;
+  padding-bottom: 0px;
+  height: 40px;
+}
+
 .dropdown {
   height: 36px;
   border: 2px solid #206095;
   color: #206095;
   background-color: #fff;
+  -webkit-appearance:none;
 }
 
 /* ::before, ::after {
@@ -281,6 +514,7 @@ button.socialbutton {
 .dropdown-container::after {
   content: '';
   position: absolute;
+  top: 0px;
   z-index: 2;
   right: 12px;
   margin: 16px 0 0 0;
@@ -308,15 +542,29 @@ button.socialbutton {
 
 .button-calculate {
   display: block;
-  margin: 20px 20px 20px 0px;
+  margin: 10px 20px 20px 10px;
   background-color: #0F8243;
-  padding: 15px;
+  padding: 20px;
   border: none;
   font-weight: 700;
 }
 
 .button-calculate:hover {
   background-color: #004F10;
+}
+
+.button-option {
+  display: block;
+  margin: 0px 20px 0px 20px;
+  background-color: #206095;
+  color: white;
+  padding: 15px;
+  border: none;
+  font-weight: 700;
+}
+
+.button-option:hover {
+  background-color: #003C57;
 }
 
 .button-reset {
@@ -334,15 +582,31 @@ button.socialbutton {
 
 .button-back {
   display: block;
+  margin: 10px 0px;
+  background-color: #A6A6A6;
+  padding: 20px;
+  border: none;
+  color: black;
+  font-weight: 700;
+  white-space: normal;
+}
+
+.button-back:hover {
+  background-color: #8A8A8A;
+}
+
+.button-skiptoend {
+  display: block;
   margin: 20px 0px;
   background-color: #A6A6A6;
   padding: 15px;
   border: none;
   color: black;
   font-weight: 700;
+  white-space: normal;
 }
 
-.button-back:hover {
+.button-skiptoend:hover {
   background-color: #8A8A8A;
 }
 
@@ -368,7 +632,7 @@ button.socialbutton {
   border: none;
   color: #206095;
   text-decoration: underline;
-  font-size: 14px;
+  font-size: 16px;
   height: 24px;
 }
 
@@ -395,7 +659,7 @@ button.socialbutton {
   max-width: 450px;
   margin-right: auto;
   padding: 6px 0 0px 0;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .summary-description {
@@ -403,7 +667,7 @@ button.socialbutton {
 }
 
 .decile-houses-text {
-  font-size: 12px;
+  font-size: 16px;
   color: #707071;
 }
 
@@ -444,7 +708,7 @@ button.disabled {
 
 .icon{
   padding-top: 10px;
-  padding-right: 15px;
+  padding-right: 10px;
 }
 
 input.disabled {
@@ -458,25 +722,25 @@ input.disabled {
 }
 
 .decile-label {
-  font-size: 12px;
+  font-size: 16px;
   color: #206095;
   background-color: white;
 }
 
 .decile-label text {
-  font-size: 12px;
+  font-size: 16px;
   color: #206095;
   background-color: white;
 }
 
 .decile-label tspan {
-  font-size: 12px;
+  font-size: 16px;
   color: #206095;
   background-color: white;
 }
 
 .source {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .x path.domain {
@@ -492,19 +756,57 @@ h3 {
 h4 {
   margin-bottom: 8px;
   font-weight: 700;
-  line-height: 32px;
+  line-height: 24px;
   font-size: 16px;
 }
 
 .bignumber {
-  font-size: 2.5em;
+  font-size: 2.3em;
   font-weight: 700;
   line-height: 2em;
   margin-top: 22px;
 }
 
+.bignumber-blue{
+  color: #206095
+}
+
+.results-inflation{
+  left: 90px !important;
+  top: -5px !important;
+}
+
+.results-monthlychange{
+  left: 70px !important;
+  top: 15px !important;
+}
+
+.extra-topmargin{
+  margin-top:30px;
+}
+
+@media only screen and (max-width: 600px){
+  .results-inflation{
+    top: -15px !important;
+    /*bottom: 120px !important;*/
+    left: 35px !important;
+    font-size: 22px !important;
+  }
+  .results-monthlychange{
+    top: 60px !important;
+    /*bottom: 120px !important;*/
+    left: 30px !important;
+    font-size: 22px !important;
+  }
+}
+
 .graphic-heading {
+  margin-top: 10px;
   color: #206095;
+}
+
+.graphic-heading-white {
+  color: white;
 }
 
 .column-major {
@@ -514,7 +816,7 @@ h4 {
 .column {
   display: flex;
   flex-direction: column;
-  /* align-items: flex-start; */
+   /*align-items: flex-start;*/
   margin-right: 10px;
 }
 
@@ -525,6 +827,21 @@ h4 {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+
+.row-on-mobile {
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 600px){
+  .row-on-mobile {
+    flex-direction: row;
+    justify-content: flex-start !important;
+  }
+}
+
 
 .row-minor {
   display: flex;
@@ -540,6 +857,55 @@ h4 {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-content: flex-start;
+}
+
+.column-buttons{
+    display: flex;
+    flex-direction: column;
+    align-items: center;;
+    flex-wrap: wrap;
+    justify-content: center;;
+    align-content: center;
+}
+
+.halfscreen{
+  width:45%;
+  margin-right: 20px;
+}
+
+
+.overlaycontainer{
+  position: relative;
+}
+
+.overlay{
+  position: absolute;
+}
+
+.reciept{
+  top: -25px;
+}
+
+.runninginf{
+  top: 40px;
+  left: 50px;
+}
+
+
+
+@media only screen and (max-width: 600px){
+  label{
+    width: 75%;
+  }
+
+  .runninginf{
+    top: 60px;
+    left: 25px;
+  }
+
+  .halfscreen{
+    width:40%;
+  }
 }
 
 @media only screen and (max-width: 414px) {
@@ -558,12 +924,41 @@ h4 {
   .column-on-mobile div {
     margin-bottom: 20px;
   }
+  .threequarter-width-mobile{
+    width: 75%
+  }
+  .security {
+    padding-top: 12px;
+  }
+  .big-margin-top-mobile{
+    margin-top: 40px !important;
+  }
+  #inflationrate-summary{
+    padding-bottom: 20px !important;
+  }
+  .runninginf-text-mobile{
+    font-size: 24px;
+    font-weight: 700;
+  }
+}
+
+@media only screen and (max-width: 340px){
+  .runninginf{
+    top: 60px;
+    left: 25px;
+  }
 }
 
 .item {
   flex-basis: 0;
   justify-content: space-between;
 }
+
+.footnote{
+  font-size: 14px;
+}
+
+
 
 .legend-circle {
   border-radius: 50%;
@@ -573,31 +968,60 @@ h4 {
 }
 
 .legend-label {
-  font-size: 12px;
+  font-size: 16px;
   color: rgb(112, 112, 112);
   margin-right: 10px;
+  width: 75%;
+}
+
+.last-legend{
+  margin-bottom: 10px !important;
 }
 
 .colour-matisse {
   background-color: #206095;
 }
 
+.colour-green {
+  background-color: #A8BD3A;
+}
+
 .colour-teal {
   background-color: #17A5A3;
+}
+
+.colour-lightblue {
+  background-color: #A6BFD5;
+}
+
+.colour-darkred {
+  background-color: #902092;
+}
+
+.colour-blue{
+  background-color: #206095;
+}
+
+.colour-lightred {
+  background-color: #F66068;
 }
 
 .colour-darkgrey {
   background-color: #871A5B;
 }
 
+.colour-grey{
+  background-color: #F5F5F6;
+}
+
 .legend {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .spendingquestion {
   width: 300;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   vertical-align: baseline;
 }
 

@@ -37,49 +37,72 @@ dvc = {
       "value": 7510
     },
   ],
+  "quickcategories": ["foodhotdrinks","rent","ooh","electricitygasfuels","petroldiesel","eatingout","childcare","holidays","clothes","trainfares","busfares"],
   "time_period": "months",
   "time_format": "%B %Y",
   "cpih_time_format": "%Y %b",
   "time_series_totalmnths": 60,
-  "lineColours":["#871A5B","#206095"],
+  "prop_colour_palette": ["#206095", "#27A0CC", "#003C57", "#118C7B", "#A8BD3A"],
+  "prop_colour_palette_text": ["#206095", "#27A0CC", "#003C57", "#118C7B", "#8A9B2E"],
+  "lineColours":["#A8BD3A","#206095"],
   "lineChartMargin": {
     "sm": {
-      "top": 20,
+      "top": 10,
       "right": 20,
       "bottom": 20,
-      "left": 25
+      "left": 30
     },
     "md": {
-      "top": 20,
+      "top": 10,
       "right": 20,
       "bottom": 20,
-      "left": 25
+      "left": 30
     },
     "lg": {
-      "top": 20,
+      "top": 10,
       "right": 20,
       "bottom": 20,
-      "left": 25
+      "left": 30
+    }
+  },
+  "propChartMargin": {
+    "sm": {
+      "top": 0,
+      "right": 20,
+      "bottom": 20,
+      "left": 10
+    },
+    "md": {
+      "top": 0,
+      "right": 20,
+      "bottom": 20,
+      "left": 10
+    },
+    "lg": {
+      "top": 10,
+      "right": 20,
+      "bottom": 20,
+      "left": 10
     }
   },
   "barChartMargin": {
     "sm": {
-      "top": 0,
-      "right": 10,
-      "bottom": 20,
-      "left": 150
+      "top": 10,
+      "right": 100,
+      "bottom": 40,
+      "left": 120
     },
     "md": {
-      "top": 0,
-      "right": 10,
-      "bottom": 20,
+      "top": 10,
+      "right": 120,
+      "bottom": 40,
       "left": 150
     },
     "lg": {
-      "top": 0,
-      "right": 10,
-      "bottom": 20,
-      "left": 230
+      "top": 10,
+      "right": 120,
+      "bottom": 40,
+      "left": 200
     }
   },
   "mobileBreakpoint": 414,
