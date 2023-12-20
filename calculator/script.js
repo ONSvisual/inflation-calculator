@@ -9,6 +9,7 @@ prevSpend = 0;
 
 function drawGraphic() {
 
+  calls = 0
   loadData();
   getSize();
 
@@ -452,24 +453,30 @@ function drawGraphic() {
         return d.cat_id == category.cat_id
       })
       category_spend = Object.values(category_spend[0])
-      if (category.cat_id == "rent" & (housingsit == "mortgage" | housingsit == "nohcost")){
-        d3.selectAll("#" + category.cat_id + "-avgcompare")
-          .text("Similar households spend: £0")
+      if (category.cat_id != "childcare" & category.cat_id != "residentialcare"){
+        if (category.cat_id == "rent" & (housingsit == "mortgage" | housingsit == "nohcost")){
+          d3.selectAll("#" + category.cat_id + "-avgcompare")
+            .text("Similar households spend: £0")
+        }
+        else if (category.cat_id == "ooh" & (housingsit == "rent" | housingsit == "nohcost")){
+          d3.selectAll("#" + category.cat_id + "-avgcompare")
+            .text("Similar households spend: £0")
+        }
+        else if (category.cat_id == "ooh" | category.cat_id == "rent"){
+          d3.selectAll("#" + category.cat_id + "-avgcompare")
+            .text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+        }
+        else if (decile == 0 & category.cat_id != "other") {
+          d3.selectAll("#" + category.cat_id + "-avgcompare")
+            .text("UK average spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+        } else if (decile > 0 & category.cat_id != "other") {
+          d3.selectAll("#" + category.cat_id + "-avgcompare")
+            .text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+        }
       }
-      else if (category.cat_id == "ooh" & (housingsit == "rent" | housingsit == "nohcost")){
+      else{
         d3.selectAll("#" + category.cat_id + "-avgcompare")
-          .text("Similar households spend: £0")
-      }
-      else if (category.cat_id == "ooh" | category.cat_id == "rent"){
-        d3.selectAll("#" + category.cat_id + "-avgcompare")
-          .text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
-      }
-      else if (decile == 0 & category.cat_id != "other") {
-        d3.selectAll("#" + category.cat_id + "-avgcompare")
-          .text("UK average spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
-      } else if (decile > 0 & category.cat_id != "other") {
-        d3.selectAll("#" + category.cat_id + "-avgcompare")
-          .text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + category.cat_id + "-time-period").property("value") / 12))))
+          .text("Average spend not shown")
       }
       // else if (category.cat_id != "other") {
       //   d3.select("#" + category.cat_id + "-avgcompare")
@@ -551,45 +558,47 @@ function drawGraphic() {
       return d.cat_id == id
     })[0])
 
-    if (option == "detailed"){
-      d3.select("input#"+id).property("value",function(){
-        return d3.select("input#"+id).property("value").replace(/^0+/, '')
-      })
-      input = +d3.select("#" + id).property("value") * d3.select("#" + id + "-time-period").property("value") / 12
-      var idoption = ""
-    }
-    else{
-      d3.select("input#"+id+"-quick").property("value",function(){
-        return d3.select("input#"+id+"-quick").property("value").replace(/^0+/, '')
-      })
-      input = +d3.select("#" + id+"-quick").property("value") * d3.select("#" + id + "-time-period-quick").property("value") / 12
-      var idoption = "-quick"
-    }
+    if (id != "childcare" & id != "residentialcare"){
+      if (option == "detailed"){
+        d3.select("input#"+id).property("value",function(){
+          return d3.select("input#"+id).property("value").replace(/^0+/, '')
+        })
+        input = +d3.select("#" + id).property("value") * d3.select("#" + id + "-time-period").property("value") / 12
+        var idoption = ""
+      }
+      else{
+        d3.select("input#"+id+"-quick").property("value",function(){
+          return d3.select("input#"+id+"-quick").property("value").replace(/^0+/, '')
+        })
+        input = +d3.select("#" + id+"-quick").property("value") * d3.select("#" + id + "-time-period-quick").property("value") / 12
+        var idoption = "-quick"
+      }
 
-    diff = ((input - category_spend[decile + 1]) / category_spend[decile + 1]) * 100
-    if (diff > 0) {
-      moreless = "more than"
-    } else if (diff < 0) {
-      moreless = "less than"
-      diff = diff * -1
-    } else if (diff == 0) {
-      moreless = "Equal to"
-    }
+      diff = ((input - category_spend[decile + 1]) / category_spend[decile + 1]) * 100
+      if (diff > 0) {
+        moreless = "more than"
+      } else if (diff < 0) {
+        moreless = "less than"
+        diff = diff * -1
+      } else if (diff == 0) {
+        moreless = "Equal to"
+      }
 
-    if (input != 0 && diff == 0 && decile > 0 && id != "other") {
-      d3.selectAll("#" + id + "-avgcompare").text(moreless + " similar households")
-    } else if (input != 0 && diff == 0 && decile == 0 && id != "other") {
-      d3.selectAll("#" + id + "-avgcompare").text(moreless + " the average")
-    } else if (input != 0 && decile > 0 && id != "other") {
-      d3.selectAll("#" + id + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " similar households")
-    } else if (input != 0 && decile == 0 && id != "other") {
-      d3.selectAll("#" + id + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average")
-    } else if (input == 0 && decile > 0 && id != "other") {
-      d3.selectAll("#" + id + "-avgcompare").text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period" + idoption).property("value") / 12))))
-    } else if(input == 0 && decile == 0 && id != "other" && id != "rent" && id != "ooh"){
-      d3.selectAll("#" + id + "-avgcompare").text("UK average spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period" + idoption).property("value") / 12))))
-    } else if (input == 0 && decile == 0 && id != "other") {
-      d3.selectAll("#" + id + "-avgcompare").text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period" + idoption).property("value") / 12))))
+      if (input != 0 && diff == 0 && decile > 0 && id != "other") {
+        d3.selectAll("#" + id + "-avgcompare").text(moreless + " similar households")
+      } else if (input != 0 && diff == 0 && decile == 0 && id != "other") {
+        d3.selectAll("#" + id + "-avgcompare").text(moreless + " the average")
+      } else if (input != 0 && decile > 0 && id != "other") {
+        d3.selectAll("#" + id + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " similar households")
+      } else if (input != 0 && decile == 0 && id != "other") {
+        d3.selectAll("#" + id + "-avgcompare").text(d3.format(".0f")(diff) + "% " + moreless + " the average")
+      } else if (input == 0 && decile > 0 && id != "other") {
+        d3.selectAll("#" + id + "-avgcompare").text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period" + idoption).property("value") / 12))))
+      } else if(input == 0 && decile == 0 && id != "other" && id != "rent" && id != "ooh"){
+        d3.selectAll("#" + id + "-avgcompare").text("UK average spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period" + idoption).property("value") / 12))))
+      } else if (input == 0 && decile == 0 && id != "other") {
+        d3.selectAll("#" + id + "-avgcompare").text("Similar households spend: £" + (d3.format(".0f")(category_spend[decile + 1] / (d3.select("#" + id + "-time-period" + idoption).property("value") / 12))))
+      }
     }
   }
 
@@ -1780,14 +1789,21 @@ function drawGraphic() {
     parseTime = d3.timeParse(dvc.time_format)
     formatTime = d3.timeFormat("%B %Y");
 
+    weights_nested = d3.nest()
+      .key(function(d){
+        return d.description
+      })
+      .entries(weights[0])
+
     for (var sc = 0; sc < inflation_data.length; sc++) {
       subcategory = inflation_data[sc]
       inflation_subcategory = inflation[sc]
-      weights_subcategory = d3.nest()
-        .key(function(d) {
-          return d.year
-        })
-        .entries(weights[sc].years)
+      // weights_subcategory = d3.nest()
+      //   .key(function(d) {
+      //     return d.year
+      //   })
+      //   .entries(weights[sc].years)
+      weights_subcategory = weights_nested[sc].values
 
       //loop through number of specified months and extract necessary data from inflation and weights dataset
       for (var month = 1; month < dvc.time_series_totalmnths + 1; month++) {
@@ -1795,17 +1811,17 @@ function drawGraphic() {
         year = inflation_subcategory[dvc.time_period][inflation_subcategory[dvc.time_period].length - month].year
         year = "" + year
         selected_weight_data = weights_subcategory.filter(function(d) {
-          return d.key == year
+          return d.year == year
         })
 
-        //get monts inflation data
+        //get months inflation data
         selected_inf_data = inflation_subcategory[dvc.time_period][inflation_subcategory[dvc.time_period].length - month]
 
         //combine date, inflation data and weights data for each month into one object
         subcategory.inf_values.push({
           date: selected_inf_data.month + " " + selected_inf_data.year,
           index: +selected_inf_data.value,
-          weight: +selected_weight_data[0].values[0].value
+          weight: +selected_weight_data[0].value
         })
       }
     }
@@ -1833,7 +1849,7 @@ function drawGraphic() {
         })
         .entries(subcategory_inflation)
 
-      //within each category, calculate the sum of subcateogry weights for each month
+      //within each category, calculate the sum of subcategory weights for each month
       subcategory_nested.forEach(function(date) {
         totalweight = 0
         date.values.forEach(function(subcategory) {
@@ -1892,10 +1908,10 @@ function drawGraphic() {
     cpih_new = []
 
     everything.forEach((item, i) => {
-      if (i % 2) {
-        weights.push(item)
-      } else if (i == everything.length - 1) {
+      if (i == everything.length - 1) {
         cpih_new.push(item)
+      } else if (i == everything.length - 2){
+        weights.push(item)
       } else {
         inflation.push(item)
       }
@@ -1913,11 +1929,15 @@ function drawGraphic() {
     q = d3.queue()
 
     inflation_data.forEach(function(item) {
+      // calls = calls + 2
       q.defer(d3.json, "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/" + item.inflation_cdid + "/data")
-      q.defer(d3.json, "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/" + item.weight_cdid + "/data")
+      // q.defer(d3.json, "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/" + item.weight_cdid + "/data")
+      // console.log(item,calls)
     })
 
+    q.defer(d3.csv, "https://raw.githubusercontent.com/ONSvisual/automatic-cpi-weights/main/data.csv")
     q.defer(d3.json, "https://www.ons.gov.uk/economy/inflationandpriceindices/timeseries/l55o/mm23/data")
+
 
     //once all files are loaded, execute ready function
     q.awaitAll(ready);
